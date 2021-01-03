@@ -1,0 +1,25 @@
+.main-content {
+  height: calc(100vh - 120px - 80px);
+  display: flex;
+  justify-content: center;
+  padding: 30px;
+  background-color: #ffebcd;
+}
+
+.manual-create, .mypage {
+  width: 350px;
+  height: 150px;
+  text-decoration: none;
+  font-size: 30px;
+  margin: 0 10px 0 10px;
+}
+
+.main-item {
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: 20px;
+  background-color: #dcdcdc;
+}
