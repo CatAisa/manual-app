@@ -7,21 +7,24 @@
   <div class="user-content">
   
     <%# ログアウトなら以下を表示 %>
-    <div class="user-list">
-      <%= link_to 'ログイン', "#", class: "user-item" %>
-      <%= link_to '新規登録', "#", class: "user-item" %>
-    </div>
+    <% if !user_signed_in? %>
+      <div class="user-list">
+        <%= link_to 'ログイン', new_user_session_path, class: "user-item" %>
+        <%= link_to '新規登録', new_user_registration_path, class: "user-item" %>
+      </div>
 
     <%# ログインなら以下を表示 %>
-    <div class="user-list">
-      <span class="user-item">▲ユーザー名
-        <ul>
-          <li><%= link_to '編集', "#", class: "user-edit" %></li>
-          <li><%= link_to 'マイページ', "#", class: "user-mypage" %></li>
-        </ul>
-      </span>
-      <%= link_to 'ログアウト', "#", class: "user-item" %>
-    </div>
+    <% else %>
+      <div class="user-list">
+        <span class="user-item">▲ユーザー名
+          <ul>
+            <li><%= link_to '編集', edit_user_registration_path, class: "user-edit" %></li>
+            <li><%= link_to 'マイページ', "#", class: "user-mypage" %></li>
+          </ul>
+        </span>
+        <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "user-item" %>
+      </div>
+    <% end %>
 
   </div>
 
