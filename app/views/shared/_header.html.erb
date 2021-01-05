@@ -1,0 +1,28 @@
+<header class="header-content">
+
+  <div>
+    <%= link_to 'マニュアル作成アプリ', "/", class: "header-title" %>
+  </div>
+
+  <div class="user-content">
+  
+    <%# ログアウトなら以下を表示 %>
+    <div class="user-list">
+      <%= link_to 'ログイン', "#", class: "user-item" %>
+      <%= link_to '新規登録', "#", class: "user-item" %>
+    </div>
+
+    <%# ログインなら以下を表示 %>
+    <div class="user-list">
+      <span class="user-item">▲ユーザー名
+        <ul>
+          <li><%= link_to '編集', "#", class: "user-edit" %></li>
+          <li><%= link_to 'マイページ', "#", class: "user-mypage" %></li>
+        </ul>
+      </span>
+      <%= link_to 'ログアウト', "#", class: "user-item" %>
+    </div>
+
+  </div>
+
+</header>
