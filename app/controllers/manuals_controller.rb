@@ -3,6 +3,7 @@ class ManualsController < ApplicationController
   end
 
   def new
+    @manual = Manual.new
   end
 
   def create
