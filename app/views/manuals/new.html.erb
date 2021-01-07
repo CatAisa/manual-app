@@ -1,1 +1,23 @@
-<h1>新規マニュアル投稿画面</h1>
+<%= link_to 'トップ画面に戻る', root_path %>
+<h1 style="font-size: 30px;">新規マニュアル投稿画面</h1>
+<%= form_with model: @manual, local: true do |f| %>
+  <div>
+    <%= f.label :title %>
+    <%= f.text_field :title, placeholder: "(例)" %>
+  </div>
+
+  <div>
+    <%= f.collection_select(:category_id, Category.all, :id, :name, {}, {class: ""}) %>
+  </div>
+
+  <div>
+    <%= f.label :image %>
+    <%= f.file_field :image %>
+  </div>
+
+  <div>
+    <%= f.label :description %>
+    <%= f.text_area :description, placeholder: "", rows: 5, cols: 30 %>
+  </div>
+
+<% end %>
