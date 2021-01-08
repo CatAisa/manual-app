@@ -7,6 +7,6 @@ class Manual < ApplicationRecord
 
   with_options presence: true do
     validates :title
-    validates :category_id, numericality: {other_than: 0, message: "is invalid. Select status"}
+    validates :category_id, numericality: { other_than: 0, message: 'is invalid. Select status' }
   end
 end

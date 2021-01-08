@@ -18,6 +18,7 @@ class ManualsController < ApplicationController
   end
 
   private
+
   def manual_params
     params.require(:manual).permit(:title, :category_id, :description, :image).merge(user_id: current_user.id)
   end
