@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :manual do
-    title {Faker::Lorem.sentences(number: 1)}
-    category_id {Faker::Number.between(from: 1, to: 10)}
-    description {Faker::Lorem.sentences}
+    title { Faker::Lorem.sentences(number: 1) }
+    category_id { Faker::Number.between(from: 1, to: 10) }
+    description { Faker::Lorem.sentences }
 
     association :user
 
