@@ -2,7 +2,7 @@ class Manual < ApplicationRecord
   belongs_to :user
 
   extend ActiveHash::Associations::ActiveRecordExtensions
-  belongs_to :category_id
+  belongs_to :category
 
   with_options presence: true do
     validates :title
