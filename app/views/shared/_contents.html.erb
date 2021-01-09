@@ -1,13 +1,13 @@
 <div style="border: 1px solid blue;">
   <div style="width: 305px; height: 305px; border: 1px solid red;">
     <% if manual.image.attached? %>
-      <%= link_to image_tag(manual.image.variant(resize: '300x300')), "#" %>
+      <%= link_to image_tag(manual.image.variant(resize: '300x300')), manual_path(manual) %>
     <% else %>
-      <%= image_tag("no_image.png", size: '300x300') %>
+      <%= link_to image_tag("no_image.png", size: '300x300'), manual_path(manual) %>
     <% end %>
   </div>
   <div>
-    <%= link_to manual.title, "#" %>
+    <%= link_to manual.title, manual_path(manual) %>
     <%= manual.category.name %>
   </div>
   <div>
