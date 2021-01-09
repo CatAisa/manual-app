@@ -3,7 +3,7 @@
     <% if manual.image.attached? %>
       <%= link_to image_tag(manual.image.variant(resize: '300x300')), "#" %>
     <% else %>
-      <%= image_tag("/assets/no_image.png", size: '300x300') %>
+      <%= image_tag("no_image.png", size: '300x300') %>
     <% end %>
   </div>
   <div>
