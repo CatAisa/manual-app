@@ -2,6 +2,11 @@ class ManualsController < ApplicationController
   before_action :authenticate_user!, except: :index
 
   def index
+    if user_signed_in?
+      @user = current_user
+    else
+      @user = 0
+    end
   end
 
   def new
