@@ -22,6 +22,9 @@ class ManualsController < ApplicationController
     end
   end
 
+  def show
+  end
+
   private
 
   def manual_params
