@@ -1,2 +1,16 @@
 <%= link_to 'トップ画面に戻る', root_path %>
-<h1>テスト表示</h1>
+<%= link_to 'マイページに戻る', user_path(current_user) %>
+<div>
+  <%= image_tag(@manual.image.variant(resize: '300x300')) %>
+  <%= @manual.title %>
+  <%= @manual.category.name %>
+  <%= @manual.description %>
+</div>
+<div>
+  <ul>
+    <li>手順１</li>
+    <li>手順２</li>
+    <li>手順３</li>
+    <li><%= link_to '新規手順を作成', "#" %></li>
+  </ul>
+</div>

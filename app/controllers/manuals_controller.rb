@@ -23,6 +23,7 @@ class ManualsController < ApplicationController
   end
 
   def show
+    @manual = Manual.find(params[:id])
   end
 
   private
