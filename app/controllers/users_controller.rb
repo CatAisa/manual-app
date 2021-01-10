@@ -8,8 +8,6 @@ class UsersController < ApplicationController
   private
 
   def login_judge
-    if !user_signed_in?
-      redirect_to root_path
-    end
+    redirect_to root_path unless user_signed_in?
   end
 end
