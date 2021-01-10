@@ -9,6 +9,7 @@
 ### Association
 
 - has_many :manuals
+- has_many :procedures
 
 ## manualsテーブル
 
@@ -31,7 +32,9 @@
 | title       | string     | null: false                    |
 | description | text       | -                              |
 | manual      | references | null: false, foreign_key: true |
+| user        | references | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :manual
+- belongs_to :user

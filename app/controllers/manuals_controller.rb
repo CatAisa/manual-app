@@ -22,6 +22,11 @@ class ManualsController < ApplicationController
     end
   end
 
+  def show
+    @manual = Manual.find(params[:id])
+    @procedures = @manual.procedures.includes(:user)
+  end
+
   private
 
   def manual_params

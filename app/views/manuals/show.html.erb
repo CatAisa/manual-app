@@ -1,0 +1,26 @@
+<%= link_to 'トップ画面に戻る', root_path %>
+<%= link_to 'マイページに戻る', user_path(current_user) %>
+<div>
+  <% if @manual.image.attached? %>
+    <%= image_tag(@manual.image.variant(resize: '300x300')) %>
+  <% else %>
+    <%= image_tag("no_image.png", size: '300x300') %>
+  <% end %>
+  <%= @manual.title %>
+  <%= @manual.category.name %>
+  <%= @manual.description %>
+</div>
+<div>
+  <% @procedures.each do |procedure| %>
+    <ul style="border: 1px solid red;">
+      <li><%= procedure.title %></li>
+      <li><%= procedure.description %></li>
+      <% if procedure.image.attached? %>
+        <li><%= image_tag(procedure.image.variant(resize: '300x300')) %></li>
+      <% else %>
+        <li><%= image_tag("no_image.png", size: '300x300') %></li>
+      <% end %>
+    </ul>
+  <% end %>
+  <%= link_to '新規手順を作成', new_manual_procedure_path(@manual) %>
+</div>
