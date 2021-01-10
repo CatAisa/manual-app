@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :procedure do
-    title {Faker::Lorem.sentences(number: 1)}
-    description {Faker::Lorem.sentences}
+    title { Faker::Lorem.sentences(number: 1) }
+    description { Faker::Lorem.sentences }
 
     association :manual
     association :user
