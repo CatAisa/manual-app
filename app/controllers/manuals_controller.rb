@@ -41,7 +41,8 @@ class ManualsController < ApplicationController
 
   def destroy
     @manual.destroy
-    redirect_to user_path(@manual)
+    @user = current_user
+    redirect_to user_path(@user)
   end
 
   private
