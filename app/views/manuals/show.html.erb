@@ -10,6 +10,7 @@
   <%= @manual.category.name %>
   <%= @manual.description %>
   <%= link_to '編集', edit_manual_path(@manual) %>
+  <%= link_to '削除', manual_path(@manual), method: :delete %>
 </div>
 <div>
   <% @procedures.each do |procedure| %>

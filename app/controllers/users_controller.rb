@@ -1,13 +1,18 @@
 class UsersController < ApplicationController
-  before_action :login_judge, only: :show
+  before_action :authenticate_user!, only: :show
+  before_action :user_find, only: :show
+  before_action :user_judge, only: :show
 
   def show
-    @user = User.find(params[:id])
   end
 
   private
 
-  def login_judge
-    redirect_to root_path unless user_signed_in?
+  def user_find
+    @user = User.find(current_user.id)
+  end
+
+  def user_judge
+    redirect_to root_path if current_user.id != @user.id
   end
 end
