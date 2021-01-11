@@ -1,7 +1,7 @@
 class ManualsController < ApplicationController
   before_action :authenticate_user!, except: :index
-  before_action :manual_find, only: [:show, :edit, :update]
-  before_action :user_judge, only: [:show, :edit, :update]
+  before_action :manual_find, only: [:show, :edit, :update, :destroy]
+  before_action :user_judge, only: [:show, :edit, :update, :destroy]
 
   def index
     @user = if user_signed_in?
@@ -29,7 +29,6 @@ class ManualsController < ApplicationController
   end
 
   def edit
-    binding.pry
   end
 
   def update
@@ -38,6 +37,11 @@ class ManualsController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def destroy
+    @manual.destroy
+    redirect_to user_path(@manual)
   end
 
   private
