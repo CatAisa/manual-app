@@ -51,8 +51,6 @@ class ManualsController < ApplicationController
   end
 
   def user_judge
-    if current_user.id != @manual.user.id
-      redirect_to root_path
-    end
+    redirect_to root_path if current_user.id != @manual.user.id
   end
 end
