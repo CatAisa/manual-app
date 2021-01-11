@@ -1,28 +1,12 @@
 <%= link_to 'トップ画面に戻る', root_path %>
+<%= link_to 'マニュアル詳細画面に戻る', manual_path(@manual) %>
 <h1 style="font-size: 30px;">マニュアル編集画面</h1>
 <%= form_with model: @manual, local: true do |f| %>
   <%= render 'shared/error_messages', model: f.object %>
-  <div>
-    <%= f.label :title %>
-    <%= f.text_field :title, placeholder: "(例)" %>
-  </div>
+  <%= render 'shared/form_manual', f: f %>
 
   <div>
-    <%= f.collection_select(:category_id, Category.all, :id, :name, {}, {class: ""}) %>
-  </div>
-
-  <div>
-    <%= f.label :image %>
-    <%= f.file_field :image %>
-  </div>
-
-  <div>
-    <%= f.label :description %>
-    <%= f.text_area :description, placeholder: "", rows: 5, cols: 30 %>
-  </div>
-
-  <div>
-    <%= f.submit 'マニュアルを作成' %>
+    <%= f.submit '編集を完了する' %>
   </div>
 
 <% end %>

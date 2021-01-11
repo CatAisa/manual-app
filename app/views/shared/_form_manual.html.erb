@@ -1,0 +1,18 @@
+<div>
+  <%= f.label :title %>
+  <%= f.text_field :title, placeholder: "(例)" %>
+</div>
+
+<div>
+  <%= f.collection_select(:category_id, Category.all, :id, :name, {}, {class: ""}) %>
+</div>
+
+<div>
+  <%= f.label :image %>
+  <%= f.file_field :image %>
+</div>
+
+<div>
+  <%= f.label :description %>
+  <%= f.text_area :description, placeholder: "", rows: 5, cols: 30 %>
+</div>
