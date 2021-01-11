@@ -27,6 +27,19 @@ class ManualsController < ApplicationController
     @procedures = @manual.procedures.includes(:user)
   end
 
+  def edit
+    @manual = Manual.find(params[:id])
+  end
+
+  def update
+    @manual = Manual.find(params[:id])
+    if @manual.update(manual_params)
+      redirect_to manual_path(@manual)
+    else
+      render :edit
+    end
+  end
+
   private
 
   def manual_params
