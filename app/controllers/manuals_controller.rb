@@ -18,7 +18,8 @@ class ManualsController < ApplicationController
   def create
     @manual = Manual.new(manual_params)
     if @manual.save
-      redirect_to root_path
+      @user = current_user
+      redirect_to user_path(@user)
     else
       render :new
     end
