@@ -9,6 +9,7 @@
   <%= @manual.title %>
   <%= @manual.category.name %>
   <%= @manual.description %>
+  <%= link_to '編集', edit_manual_path(@manual) %>
 </div>
 <div>
   <% @procedures.each do |procedure| %>
