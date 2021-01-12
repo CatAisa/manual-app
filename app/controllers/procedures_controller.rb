@@ -1,8 +1,8 @@
 class ProceduresController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :manual_find, only: [:new, :create, :edit, :update]
+  before_action :manual_find, except: [:index, :show]
   before_action :procedure_find, only: [:edit, :update]
-  before_action :user_judge, only: [:new, :create, :edit, :update]
+  before_action :user_judge, except: [:index, :show]
 
   def new
     @procedure = Procedure.new
