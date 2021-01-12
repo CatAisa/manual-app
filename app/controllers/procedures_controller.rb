@@ -1,5 +1,5 @@
 class ProceduresController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create]
+  before_action :authenticate_user!, except: [:index, :show]
   before_action :manual_find, only: [:new, :create]
   before_action :user_judge, only: [:new, :create]
 
@@ -14,6 +14,14 @@ class ProceduresController < ApplicationController
     else
       render :new
     end
+  end
+
+  def edit
+    @manual = Manual.find(params[:manual_id])
+    @procedure = @manual.procedures.find(params[:id])
+  end
+
+  def update
   end
 
   private

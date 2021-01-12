@@ -22,6 +22,8 @@
       <% else %>
         <li><%= image_tag("no_image.png", size: '300x300') %></li>
       <% end %>
+      <%= link_to '編集', edit_manual_procedure_path(@manual, procedure) %>
+      <%= link_to '削除', "#" %>
     </ul>
   <% end %>
   <%= link_to '新規手順を作成', new_manual_procedure_path(@manual) %>
