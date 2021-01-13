@@ -1,7 +1,7 @@
 class ProceduresController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :manual_find, except: [:index, :show]
-  before_action :procedure_find, only: [:edit, :update]
+  before_action :procedure_find, only: [:edit, :update, :destroy]
   before_action :user_judge, except: [:index, :show]
 
   def new
@@ -26,6 +26,11 @@ class ProceduresController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def destroy
+    @procedure.destroy
+    redirect_to manual_path(@manual)
   end
 
   private
