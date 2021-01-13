@@ -9,7 +9,7 @@ class UsersController < ApplicationController
   private
 
   def user_find
-    @user = User.find(current_user.id)
+    @user = User.find(params[:id])
   end
 
   def user_judge
