@@ -1,18 +1,23 @@
-<div style="border: 1px solid blue;">
-  <div style="width: 305px; height: 305px; border: 1px solid red;">
+<div class="mypage-item">
+  <div class="mypage-item-header">
+    <%= link_to manual.title, manual_path(manual), class: "mypage-title" %>
+    <span>#<%= manual.category.name %></span>
+    <ul>
+      <li><%= link_to '編集', edit_manual_path(manual) %></li>
+      <li><%= link_to '削除', manual_path(manual), method: :delete %></li>
+    </ul>
+  </div>
+
+  <div class="mypage-image-content">
     <% if manual.image.attached? %>
-      <%= link_to image_tag(manual.image.variant(resize: '300x300')), manual_path(manual) %>
+      <%= link_to image_tag(manual.image.variant(resize: '300x250')), manual_path(manual) %>
     <% else %>
-      <%= link_to image_tag("no_image.png", size: '300x300'), manual_path(manual) %>
+      <%= link_to image_tag("no_image.png", size: '300x240'), manual_path(manual) %>
     <% end %>
   </div>
-  <div>
-    <%= link_to manual.title, manual_path(manual) %>
-    <%= manual.category.name %>
-  </div>
-  <div>
+
+  <p>【マニュアル説明】</p>
+  <div class="mypage-description">
     <%= manual.description %>
   </div>
-  <%= link_to '編集', edit_manual_path(manual) %>
-  <%= link_to '削除', manual_path(manual), method: :delete %>
 </div>

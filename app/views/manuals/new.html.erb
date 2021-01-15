@@ -1,4 +1,5 @@
-<%= link_to 'トップ画面に戻る', root_path %>
+<%= render "shared/header" %>
+
 <h1 style="font-size: 30px;">新規マニュアル投稿画面</h1>
 <%= form_with model: @manual, local: true do |f| %>
   <%= render 'shared/error_messages', model: f.object %>
