@@ -1,0 +1,106 @@
+.procedure-top {
+  display: flex;
+  justify-content: space-between;
+}
+
+.procedure-top-title {
+  /* 全角20文字以下 */
+  font-size: 30px;
+}
+
+.procedure-top-middle {
+  width: 200px;
+  margin: 0 5px 0 auto;
+}
+
+.procedure-top-category {
+  white-space: nowrap;
+  font-size: 15px;
+}
+
+.procedure-top-right {
+  font-size: 18px;
+  white-space: nowrap;
+  margin-right: 5px;
+}
+
+.procedure-top-contents {
+  height: 260px;
+  align-items: center;
+  display: flex;
+  padding: 0 10px;
+  margin: 0 10px 10px 10px;
+  background-color: skyblue;
+}
+
+.procedure-top-image {
+  width: 300px;
+  height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+}
+
+.procedure-top-item {
+  width: 330px;
+  word-wrap: break-word;
+  margin-left: 20px;
+}
+
+.procedure-top-description {
+  /* 全角160文字以下 */
+  border: 1px solid #000000;
+  height: 200px;
+  overflow: scroll;
+  margin-top: 5px;
+  background-color: white;
+}
+
+.procedure-contents {
+  height: 260px;
+  align-items: center;
+  display: flex;
+  margin: 0 10px 10px 10px;
+  padding: 0 10px;
+  background-color: pink;
+}
+
+.procedure-item {
+  width: 330px;
+  margin-right: 20px;
+}
+
+.procedure-item-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.procedure-title {
+  /* 全角30文字以下 */
+  width: 250px;
+  margin: 0 auto 0 0;
+}
+
+.procedure-item-header ul {
+  white-space: nowrap;
+}
+
+.procedure-description {
+  /* 全角140文字以下 */
+  height: 175px;
+  overflow: scroll;
+  margin-top: 5px;
+  border: 1px solid #000000;
+  background-color: white;
+}
+
+.procedure-create {
+  font-size: 18px;
+  text-decoration: none;
+  color: #000000;
+  border: 1px solid #000000;
+  background-color: #dcdcdc;
+  white-space: nowrap;
+  padding: 3px;
+}

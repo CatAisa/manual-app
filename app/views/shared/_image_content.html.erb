@@ -1,0 +1,5 @@
+<% if model.image.attached? %>
+  <%= image_tag(model.image.variant(resize: '300x250')) %>
+<% else %>
+  <%= image_tag("no_image.png", size: '300x240') %>
+<% end %>

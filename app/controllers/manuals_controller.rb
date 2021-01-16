@@ -4,11 +4,6 @@ class ManualsController < ApplicationController
   before_action :user_judge, only: [:show, :edit, :update, :destroy]
 
   def index
-    @user = if user_signed_in?
-              current_user
-            else
-              0
-            end
   end
 
   def new

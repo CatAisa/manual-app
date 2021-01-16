@@ -1,30 +1,46 @@
-<%= link_to 'トップ画面に戻る', root_path %>
-<%= link_to 'マイページに戻る', user_path(current_user) %>
-<div>
-  <% if @manual.image.attached? %>
-    <%= image_tag(@manual.image.variant(resize: '300x300')) %>
-  <% else %>
-    <%= image_tag("no_image.png", size: '300x300') %>
-  <% end %>
-  <%= @manual.title %>
-  <%= @manual.category.name %>
-  <%= @manual.description %>
-  <%= link_to '編集', edit_manual_path(@manual) %>
-  <%= link_to '削除', manual_path(@manual), method: :delete %>
+<%= render "shared/header" %>
+
+<div class="procedure-top">
+  <div class="procedure-top-title"><%= @manual.title %></div>
+  <ul class="procedure-top-middle">
+    <li class="procedure-top-category">#<%= @manual.category.name %></li>
+    <li><%= link_to '手順を追加', new_manual_procedure_path(@manual), class: "procedure-create" %></li>
+  </ul>
+  <ul class="procedure-top-right">
+    <li><%= link_to '編集', edit_manual_path(@manual) %></li>
+    <li><%= link_to '削除', manual_path(@manual), method: :delete %></li>
+  </ul>
 </div>
-<div>
-  <% @procedures.each do |procedure| %>
-    <ul style="border: 1px solid red;">
-      <li><%= procedure.title %></li>
-      <li><%= procedure.description %></li>
-      <% if procedure.image.attached? %>
-        <li><%= image_tag(procedure.image.variant(resize: '300x300')) %></li>
-      <% else %>
-        <li><%= image_tag("no_image.png", size: '300x300') %></li>
-      <% end %>
-      <%= link_to '編集', edit_manual_procedure_path(@manual, procedure) %>
-      <%= link_to '削除', manual_procedure_path(@manual, procedure), method: :delete %>
-    </ul>
-  <% end %>
-  <%= link_to '新規手順を作成', new_manual_procedure_path(@manual) %>
+
+<div class="procedure-top-contents">
+  <div class="procedure-top-image">
+    <%= render "shared/image_content", model: @manual %>
+  </div>
+
+  <div class="procedure-top-item">
+    <p>【マニュアル説明】</p>
+    <div class="procedure-top-description"><%= @manual.description %></div>
+  </div>
 </div>
+
+<% @procedures.each_with_index do |procedure, index| %>
+  <div class="procedure-contents">
+    <div class="procedure-item">
+      <div class="procedure-item-header">
+        <div class="procedure-number"><%= index+1 %>．</div>
+        <div class="procedure-title"><%= procedure.title %></div>
+        <ul>
+          <li><%= link_to '編集', edit_manual_procedure_path(@manual, procedure) %></li>
+          <li><%= link_to '削除', manual_procedure_path(@manual, procedure), method: :delete %></li>
+        </ul>
+      </div>
+
+      <div class="procedure-description"><%= procedure.description %></div>
+    </div>
+
+    <div class="procedure-top-image">
+      <%= render "shared/image_content", model: procedure %>
+    </div>
+  </div>
+<% end %>
+<%= link_to '手順を追加', new_manual_procedure_path(@manual), class: "procedure-create" %>

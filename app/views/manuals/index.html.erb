@@ -1,17 +1,17 @@
 <%= render "shared/header" %>
 
 <div class="main-content">
-
   <%= link_to new_manual_path, class: "manual-create" do %>
     <div class="main-item">
       マニュアル<br>新規作成
     </div>
   <% end %>
 
-  <%= link_to user_path(@user), class: "mypage" do %>
-    <div class="main-item">
-      マイページ<br>マニュアル一覧
-    </div>
+  <% if user_signed_in? %>
+    <%= link_to user_path(current_user), class: "mypage" do %>
+      <div class="main-item">
+        マイページ<br>マニュアル一覧
+      </div>
+    <% end %>
   <% end %>
-  
 <div>

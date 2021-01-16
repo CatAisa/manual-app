@@ -9,9 +9,14 @@
 
 .header-title {
   text-decoration: none;
-  font-size: 40px;
+  font-size: 5vw;
   margin-left: 30px;
   color: #000000;
+}
+@media (min-width: 800px) {
+  .header-title {
+    font-size: 40px;
+  }
 }
 
 .user-content {
@@ -27,6 +32,7 @@
 }
 
 .user-item {
+  /* nickname：10文字以下 */
   text-decoration: none;
   font-size: 20px;
   margin-left: 10px;
@@ -35,6 +41,7 @@
   background-color: #f5f5f5;
   padding: 5px;
   color: #000000;
+  white-space: nowrap;
 }
 
 .user-item ul {
