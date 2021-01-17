@@ -1,26 +1,25 @@
 .new-user-nickname, .form-user-nickname, 
 .new-user-email, .form-user-email, 
-.new-user-password, .form-user-password, 
-.new-user-passcom, .form-user-passcom
+.new-user-password, .user-password-text, .form-user-password
 {
   width: 40vw;
 }
 
 .new-user-nickname, .new-user-email, 
-.new-user-password, .new-user-passcom
+.new-user-password, .user-password-text
 {
   margin: 0 auto;
   text-align: start;
 }
 
 .form-user-nickname, .form-user-email, 
-.form-user-password, .form-user-passcom
+.form-user-password
 {
   margin-bottom: 10px;
 }
 
 .form-user-nickname, .form-user-email, 
-.form-user-password, .form-user-passcom
+.form-user-password
 {
   height: 40px;
 }

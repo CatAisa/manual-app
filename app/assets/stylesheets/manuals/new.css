@@ -13,6 +13,7 @@
   color: white;
   font-size: 15px;
   padding: 2px 3px;
+  white-space: nowrap;
 }
 
 .new-manual-name, .form-manual-name, 

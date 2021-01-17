@@ -21,10 +21,10 @@
     </div>
     <%= f.password_field :password, autocomplete: "new-password", placeholder: "(例)", class: "form-user-password" %>
 
-    <div class="new-user-passcom">【パスワード(確認用)】
+    <div class="new-user-password">【パスワード(確認用)】
       <span class="need-icon">必須</span>
     </div>
-    <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "(例)", class: "form-user-passcom" %>
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "(例)", class: "form-user-password" %>
 
     <div>
       <%= f.submit "登録完了", class: "new-submit-btn" %>
