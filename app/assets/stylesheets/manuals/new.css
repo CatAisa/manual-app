@@ -4,6 +4,13 @@
   margin: 10px 0;
 }
 
+.need-icon {
+  background-color: red;
+  color: white;
+  font-size: 15px;
+  padding: 2px 3px;
+}
+
 .new-manual-name, .form-manual-name, 
 .new-manual-category, .form-manual-category, 
 .new-manual-image, .new-image-text, .form-manual-image, 
