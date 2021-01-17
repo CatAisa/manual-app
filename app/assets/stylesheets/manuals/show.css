@@ -28,7 +28,7 @@
   height: 260px;
   align-items: center;
   display: flex;
-  padding: 0 10px;
+  padding: 0 30px;
   margin: 0 10px 10px 10px;
   background-color: skyblue;
 }
@@ -45,7 +45,7 @@
 .procedure-top-item {
   width: 330px;
   word-wrap: break-word;
-  margin-left: 20px;
+  margin-left: 30px;
 }
 
 .procedure-top-description {

@@ -1,12 +1,14 @@
 <%= render "shared/header" %>
 
-<h1 style="font-size: 30px;">新規マニュアル投稿画面</h1>
-<%= form_with model: @manual, local: true do |f| %>
-  <%= render 'shared/error_messages', model: f.object %>
-  <%= render 'shared/form_manual', f: f %>
+<div class="new-page-title">作成するマニュアルの情報を入力</div>
 
-  <div>
-    <%= f.submit 'マニュアルを作成' %>
-  </div>
+<div class="form-manual-contents">
+  <%= form_with model: @manual, local: true do |f| %>
+    <%= render 'shared/error_messages', model: f.object %>
+    <%= render 'shared/form_manual', f: f %>
 
-<% end %>
+    <div>
+      <%= f.submit '作成完了', class: "new-submit-btn" %>
+    </div>
+  <% end %>
+</div>
