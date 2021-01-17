@@ -8,7 +8,7 @@
   </ul>
   <ul class="procedure-top-right">
     <li><%= link_to '編集', edit_manual_path(@manual) %></li>
-    <li><%= link_to '削除', manual_path(@manual), method: :delete %></li>
+    <li><%= link_to '削除', manual_path(@manual), method: :delete, data: {confirm: "本当に削除しますか？"} %></li>
   </ul>
 </div>
 
@@ -31,7 +31,7 @@
         <div class="procedure-title"><%= procedure.title %></div>
         <ul>
           <li><%= link_to '編集', edit_manual_procedure_path(@manual, procedure) %></li>
-          <li><%= link_to '削除', manual_procedure_path(@manual, procedure), method: :delete %></li>
+          <li><%= link_to '削除', manual_procedure_path(@manual, procedure), method: :delete, data: {confirm: "本当に削除しますか？"} %></li>
         </ul>
       </div>
 
