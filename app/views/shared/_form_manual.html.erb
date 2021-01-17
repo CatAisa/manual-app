@@ -1,7 +1,7 @@
 <div class="new-manual-name">【マニュアル名】
   <span class="need-icon">必須</span>
 </div>
-<%= f.text_field :title, placeholder: "(例)", class: "form-manual-name" %>
+<%= f.text_field :title, placeholder: "(例)", autofocus: true, class: "form-manual-name" %>
 
 <div class="new-manual-category">【カテゴリー】</div>
 <%= f.collection_select(:category_id, Category.all, :id, :name, {}, {class: "form-manual-category"}) %>

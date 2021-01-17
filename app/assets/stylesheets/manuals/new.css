@@ -4,6 +4,10 @@
   margin: 10px 0;
 }
 
+.form-manual-contents {
+  text-align: center;
+}
+
 .need-icon {
   background-color: red;
   color: white;
@@ -33,10 +37,6 @@
   margin-bottom: 10px;
 }
 
-.form-manual-contents {
-  text-align: center;
-}
-
 .form-manual-name {
   height: 40px;
 }
@@ -53,5 +53,5 @@
 
 .new-submit-btn {
   font-size: 20px;
-  padding: 10px;
+  padding: 5px 10px;
 }

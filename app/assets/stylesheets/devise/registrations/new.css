@@ -1,0 +1,26 @@
+.new-user-nickname, .form-user-nickname, 
+.new-user-email, .form-user-email, 
+.new-user-password, .form-user-password, 
+.new-user-passcom, .form-user-passcom
+{
+  width: 40vw;
+}
+
+.new-user-nickname, .new-user-email, 
+.new-user-password, .new-user-passcom
+{
+  margin: 0 auto;
+  text-align: start;
+}
+
+.form-user-nickname, .form-user-email, 
+.form-user-password, .form-user-passcom
+{
+  margin-bottom: 10px;
+}
+
+.form-user-nickname, .form-user-email, 
+.form-user-password, .form-user-passcom
+{
+  height: 40px;
+}
