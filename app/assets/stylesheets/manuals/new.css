@@ -1,0 +1,58 @@
+.new-page-title {
+  text-align: center;
+  font-size: 25px;
+  margin: 10px 0;
+}
+
+.form-manual-contents {
+  text-align: center;
+}
+
+.need-icon {
+  background-color: red;
+  color: white;
+  font-size: 15px;
+  padding: 2px 3px;
+  white-space: nowrap;
+}
+
+.new-manual-name, .form-manual-name, 
+.new-manual-category, .form-manual-category, 
+.new-manual-image, .new-image-text, .form-manual-image, 
+.new-manual-description, .form-manual-description
+{
+  width: 50vw;
+}
+
+.new-manual-name, .new-manual-category, 
+.new-manual-image, .new-image-text, 
+.new-manual-description
+{
+  margin: 0 auto;
+  text-align: start;
+}
+
+.form-manual-name, .form-manual-category, 
+.form-manual-image, .form-manual-description
+{
+  margin-bottom: 10px;
+}
+
+.form-manual-name {
+  height: 40px;
+}
+
+.form-manual-category {
+  height: 30px;
+  width: 150px;
+}
+
+.form-manual-description {
+  resize: none;
+  height: 200px;
+}
+
+.new-submit-btn {
+  font-size: 20px;
+  padding: 5px 10px;
+}

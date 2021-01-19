@@ -1,11 +1,9 @@
 <header class="header-content">
-
   <div>
-    <%= link_to 'マニュアル作成アプリ', "/", class: "header-title" %>
+    <%= link_to 'マニュアル作成アプリ', root_path, class: "header-title" %>
   </div>
 
   <div class="user-content">
-  
     <%# ログアウトなら以下を表示 %>
     <% if !user_signed_in? %>
       <div class="user-list">
@@ -25,7 +23,5 @@
         <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "user-item" %>
       </div>
     <% end %>
-
   </div>
-
 </header>

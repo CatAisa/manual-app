@@ -1,18 +1,14 @@
-<div>
-  <%= f.label :title %>
-  <%= f.text_field :title, placeholder: "(例)" %>
+<div class="new-manual-name">【マニュアル名】
+  <span class="need-icon">必須</span>
 </div>
+<%= f.text_field :title, placeholder: "(例)", autofocus: true, class: "form-manual-name" %>
 
-<div>
-  <%= f.collection_select(:category_id, Category.all, :id, :name, {}, {class: ""}) %>
-</div>
+<div class="new-manual-category">【カテゴリー】</div>
+<%= f.collection_select(:category_id, Category.all, :id, :name, {}, {class: "form-manual-category"}) %>
 
-<div>
-  <%= f.label :image %>
-  <%= f.file_field :image %>
-</div>
+<div class="new-manual-image">【画像】</div>
+<div class="new-image-text">クリックして画像を選択してください</div>
+<%= f.file_field :image, class: "form-manual-image" %>
 
-<div>
-  <%= f.label :description %>
-  <%= f.text_area :description, placeholder: "", rows: 5, cols: 30 %>
-</div>
+<div class="new-manual-description">【マニュアル説明】</div>
+<%= f.text_area :description, placeholder: "(例)", class: "form-manual-description" %>

@@ -1,2 +1,10 @@
-<%= link_to 'トップ画面に戻る', root_path %>
-<%= render partial: "shared/contents", collection: @user.manuals, as: "manual" %>
+<%= render 'shared/header' %>
+
+<div class="mypage-user-contents">
+  <div class="mypage-user-nickname"><%= @user.nickname %>さんのマイページ</div>
+  <%= link_to 'マニュアル新規作成', new_manual_path, class: "mypage-manual-new" %>
+</div>
+
+<div class="mypage-contents">
+  <%= render partial: "shared/contents", collection: @user.manuals, as: "manual" %>
+</div>

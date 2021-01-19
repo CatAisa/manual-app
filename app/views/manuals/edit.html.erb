@@ -1,12 +1,15 @@
-<%= link_to 'トップ画面に戻る', root_path %>
-<%= link_to 'マニュアル詳細画面に戻る', manual_path(@manual) %>
-<h1 style="font-size: 30px;">マニュアル編集画面</h1>
-<%= form_with model: @manual, local: true do |f| %>
-  <%= render 'shared/error_messages', model: f.object %>
-  <%= render 'shared/form_manual', f: f %>
+<%= render "shared/header" %>
 
-  <div>
-    <%= f.submit '編集を完了する' %>
-  </div>
+<%= link_to 'マニュアル詳細画面に戻る', manual_path(@manual), class: "edit-to-new" %>
+<div class="new-page-title"> 編集したいマニュアルの情報を入力</div>
 
-<% end %>
+<div class="form-manual-contents">
+  <%= form_with model: @manual, local: true do |f| %>
+    <%= render 'shared/error_messages', model: f.object %>
+    <%= render 'shared/form_manual', f: f %>
+
+    <div>
+      <%= f.submit '編集完了', class: "new-sunmit-btn" %>
+    </div>
+  <% end %>
+</div>
