@@ -1,6 +1,15 @@
 class CommentsController < ApplicationController
   def create
-    comment = Comment.create(comment_params)
+    @manual = Manual.find(params[:manual_id])
+    @procedure = @manual.procedures.find(params[:procedure_id])
+    @comment = @procedure.comments.new(comment_params)
+    @comment[:manual_id] = @manual.id
+    if @comment.save
+      redirect_to manual_path(@manual)
+    else
+      @procedures = @manual.procedures.includes(:user)
+      render 'manuals/show'
+    end
   end
 
   private
