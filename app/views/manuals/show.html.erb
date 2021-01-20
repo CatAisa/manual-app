@@ -41,6 +41,15 @@
     <div class="procedure-top-image">
       <%= render "shared/image_content", model: procedure %>
     </div>
+
+    <div>
+      <%= form_with model: @comment, url: manual_procedure_comments_path(@manual, procedure), local: true do |f| %>
+        <%= f.text_field :content %>
+        <%= f.hidden_field :manual_id, value: @manual.id %>
+        <%= f.hidden_field :procedure_id, value: procedure.id %>
+        <%= f.submit '送信' %>
+      <% end %>
+    </div>
   </div>
 <% end %>
 <%= link_to '手順を追加', new_manual_procedure_path(@manual), class: "procedure-create" %>
