@@ -151,6 +151,10 @@
   width: 80%;
 }
 
+.field_with_errors {
+  display: contents;
+}
+
 .comment-submit-btn {
   padding: 0 3px;
   margin-left: 3px;
