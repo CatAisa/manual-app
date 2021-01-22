@@ -28,7 +28,7 @@
   height: 260px;
   align-items: center;
   display: flex;
-  padding: 0 30px;
+  padding: 0 20px;
   margin: 0 10px 10px 10px;
   background-color: skyblue;
 }
@@ -38,14 +38,19 @@
   height: 250px;
   display: flex;
   align-items: center;
-  justify-content: center;
   background-color: white;
+  overflow: scroll;
+}
+@media (min-width: 680px) {
+  .procedure-top-image {
+    overflow: visible;
+  }
 }
 
 .procedure-top-item {
-  width: 330px;
+  width: 300px;
   word-wrap: break-word;
-  margin-left: 30px;
+  margin-left: 20px;
 }
 
 .procedure-top-description {
@@ -55,6 +60,7 @@
   overflow: scroll;
   margin-top: 5px;
   background-color: white;
+  white-space: pre-line;
 }
 
 .procedure-contents {
@@ -87,12 +93,67 @@
 }
 
 .procedure-description {
-  /* 全角140文字以下 */
+  /* 全角133文字以下(スクロールなしの表示、バリデーション：400文字以下) */
   height: 175px;
   overflow: scroll;
   margin-top: 5px;
   border: 1px solid #000000;
   background-color: white;
+  white-space: pre-line;
+}
+
+.procedure-comment-contents {
+  margin: 10px 0 0 20px;
+  width: 100%;
+  height: 100%;
+  overflow: scroll;
+}
+@media (max-width: 680px){
+  .procedure-comment-contents {
+    display: none;
+  }
+}
+
+.procedure-comments-index {
+  width: 700px;
+  height: 220px;
+  background-color: white;
+  overflow: scroll;
+  padding: 5px;
+}
+
+.procedure-comment {
+  margin-bottom: 5px;
+  background-color: #e6e6fa;
+  border-radius: 10px;
+  padding: 0 5px;
+}
+
+.pro-comment-header {
+  border-bottom: 1px solid #000000;
+}
+
+.comment-time {
+  margin-left: 20px;
+  font-size: 12px;
+}
+
+.pro-comment-text {
+  word-wrap: break-word;
+}
+
+.pro-comment-form {
+  display: flex;
+  margin-top: 3px;
+}
+
+.comment-submit {
+  width: 80%;
+}
+
+.comment-submit-btn {
+  padding: 0 3px;
+  margin-left: 3px;
 }
 
 .procedure-create {
