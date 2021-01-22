@@ -1,5 +1,7 @@
 class CommentsController < ApplicationController
   before_action :manual_find, only: [:create, :destroy]
+  before_action :comment_find, only: :destroy
+  before_action :user_judge, only: :destroy
 
   def create
     @procedure = @manual.procedures.find(params[:procedure_id])
@@ -14,7 +16,6 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    @comment = Comment.find(params[:id])
     @comment.destroy
     redirect_to manual_path(@manual)
   end
@@ -27,5 +28,13 @@ class CommentsController < ApplicationController
 
   def manual_find
     @manual = Manual.find(params[:manual_id])
+  end
+
+  def comment_find
+    @comment = Comment.find(params[:id])
+  end
+
+  def user_judge
+    redirect_to root_path if current_user.id != @comment.user.id && current_user.id != @manual.user.id
   end
 end
