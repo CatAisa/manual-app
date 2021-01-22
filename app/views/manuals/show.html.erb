@@ -42,10 +42,23 @@
       <%= render "shared/image_content", model: procedure %>
     </div>
 
-    <div>
+    <div class="procedure-comment-contents">
+      <div class="procedure-comments-index">
+        <% procedure.comments.each do |comment| %>
+          <div class="procedure-comment">
+            <div class="pro-comment-header">
+              <%= comment.user.nickname %>
+              <span class="comment-time"><%= l comment.created_at %></span>
+            </div>
+            <div class="pro-comment-text"><%= comment.content %></div>
+          </div>
+        <% end %>
+      </div>
       <%= form_with model: @comment, url: manual_procedure_comments_path(@manual, procedure), local: true do |f| %>
-        <%= f.text_field :content %>
-        <%= f.submit '送信' %>
+        <div class="pro-comment-form">
+          <%= f.text_field :content, class: "comment-submit" %>
+          <%= f.submit '送信', class: "comment-submit-btn" %>
+        </div>
       <% end %>
     </div>
   </div>
