@@ -12,6 +12,13 @@ class CommentsController < ApplicationController
     end
   end
 
+  def destroy
+    @manual = Manual.find(params[:manual_id])
+    @comment = Comment.find(params[:id])
+    @comment.destroy
+    redirect_to manual_path(@manual)
+  end
+
   private
 
   def comment_params

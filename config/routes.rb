@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root to: "manuals#index"
   resources :manuals, except: :index do
     resources :procedures, except: [:index, :show] do
-      resources :comments, only: :create
+      resources :comments, only: [:create, :destroy]
     end
   end
   resources :users, only: :show

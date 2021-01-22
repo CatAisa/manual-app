@@ -49,6 +49,7 @@
             <div class="pro-comment-header">
               <%= comment.user.nickname %>
               <span class="comment-time"><%= l comment.created_at %></span>
+              <%= link_to '削除', manual_procedure_comment_path(@manual, procedure, comment), method: :delete %>
             </div>
             <div class="pro-comment-text"><%= comment.content %></div>
           </div>
