@@ -1,12 +1,12 @@
-function commentTitle() {
+function commentPost() {
   const submits = document.querySelectorAll(".comment-submit-btn");
-  submits.forEach(function (submit) {
+  submits.forEach(function(submit) {
     submit.addEventListener("click", (e) => {
       e.preventDefault();
       const manualId = submit.getAttribute("manual_id");
       const procedureId = submit.getAttribute("procedure_id");
-      const formId = `form${procedureId}`;
-      const commentId = `comment${procedureId}`;
+      const formId = `comment-form${procedureId}`;
+      const textId = `comment-text${procedureId}`;
       const formData = new FormData(document.getElementById(formId));
       const XHR = new XMLHttpRequest();
       XHR.open("POST", `/manuals/${manualId}/procedures/${procedureId}/comments`, true);
@@ -21,12 +21,14 @@ function commentTitle() {
         const user = XHR.response.user;
         const listId = `list${procedureId}`;
         const list = document.getElementById(listId);
-        const formText = document.getElementById(commentId);
+        const commentId = `${comment.id}`;
+        const formText = document.getElementById(textId);
         const HTML = `
-          <div class="procedure-comment">
+          <div class="procedure-comment" style="" comment_id=${comment.id}>
             <div class="pro-comment-header">
               ${user.nickname}
               <span class="comment-time">${comment.created_at}</span>
+              <a rel ="nofollow" data-method="delete" href="/manuals/${manualId}/procedures/${procedureId}/comments/${commentId}" id="comment-delete${comment.id}">削除</a>
             </div>
             <div class="pro-comment-text">${comment.content}</div>
           </div>`;
@@ -39,6 +41,6 @@ function commentTitle() {
 
 if ( document.URL.match(/manuals/) ){
   if ( !document.URL.match(/new/) && !document.URL.match(/edit/) ){
-    window.addEventListener("load", commentTitle);
+    window.addEventListener("load", commentPost);
   };
 };

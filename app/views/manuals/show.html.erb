@@ -45,20 +45,20 @@
     <div class="procedure-comment-contents">
       <div class="procedure-comments-index">
         <% procedure.comments.each do |comment| %>
-          <div class="procedure-comment">
+          <div class="procedure-comment" style="" comment_id=<%= comment.id %>>
             <div class="pro-comment-header">
               <%= comment.user.nickname %>
               <span class="comment-time"><%= l comment.created_at %></span>
-              <%= link_to '削除', manual_procedure_comment_path(@manual, procedure, comment), method: :delete %>
+              <%= link_to '削除', manual_procedure_comment_path(@manual, procedure, comment), method: :delete, id: "comment-delete#{comment.id}" %>
             </div>
             <div class="pro-comment-text"><%= comment.content %></div>
           </div>
         <% end %>
         <div id=list<%= procedure.id %>></div>
       </div>
-      <%= form_with model: @comment, url: manual_procedure_comments_path(@manual, procedure), id: "form#{procedure.id}", local: true do |f| %>
+      <%= form_with model: @comment, url: manual_procedure_comments_path(@manual, procedure), id: "comment-form#{procedure.id}", local: true do |f| %>
         <div class="pro-comment-form">
-          <%= f.text_field :content, class: "comment-submit", id: "comment#{procedure.id}" %>
+          <%= f.text_field :content, class: "comment-submit", id: "comment-text#{procedure.id}" %>
           <%= f.submit '送信', class: "comment-submit-btn", manual_id: @manual.id, procedure_id: procedure.id %>
         </div>
       <% end %>
