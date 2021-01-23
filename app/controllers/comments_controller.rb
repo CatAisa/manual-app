@@ -8,7 +8,7 @@ class CommentsController < ApplicationController
     @comment = @procedure.comments.new(comment_params)
     @comment[:manual_id] = @manual.id
     @comment.save
-    render json:{comment: @comment}
+    render json:{comment: @comment, user: current_user}
     # if @comment.save
     #   redirect_to manual_path(@manual)
     # else
