@@ -1,4 +1,4 @@
-function commentTitle() {
+function commentPost() {
   const submits = document.querySelectorAll(".comment-submit-btn");
   submits.forEach(function (submit) {
     submit.addEventListener("click", (e) => {
@@ -24,11 +24,11 @@ function commentTitle() {
         const commentId = `${comment.id}`;
         const formText = document.getElementById(textId);
         const HTML = `
-          <div class="procedure-comment">
+          <div class="procedure-comment" id="comment${comment.id}">
             <div class="pro-comment-header">
               ${user.nickname}
               <span class="comment-time">${comment.created_at}</span>
-              <a rel ="nofollow" data-method="delete" href="/manuals/${manualId}/procedures/procedureId/comments/${commentId}">削除</a>
+              <a rel ="nofollow" data-method="delete" href="/manuals/${manualId}/procedures/procedureId/comments/${commentId}" class="comment-delete">削除</a>
             </div>
             <div class="pro-comment-text">${comment.content}</div>
           </div>`;
@@ -41,6 +41,6 @@ function commentTitle() {
 
 if ( document.URL.match(/manuals/) ){
   if ( !document.URL.match(/new/) && !document.URL.match(/edit/) ){
-    window.addEventListener("load", commentTitle);
+    window.addEventListener("load", commentPost);
   };
 };
