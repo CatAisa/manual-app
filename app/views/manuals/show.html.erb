@@ -56,9 +56,9 @@
         <% end %>
         <div id=list<%= procedure.id %>></div>
       </div>
-      <%= form_with model: @comment, url: manual_procedure_comments_path(@manual, procedure), id: "form#{procedure.id}", local: true do |f| %>
+      <%= form_with model: @comment, url: manual_procedure_comments_path(@manual, procedure), id: "comment-form#{procedure.id}", local: true do |f| %>
         <div class="pro-comment-form">
-          <%= f.text_field :content, class: "comment-submit", id: "comment#{procedure.id}" %>
+          <%= f.text_field :content, class: "comment-submit", id: "comment-text#{procedure.id}" %>
           <%= f.submit '送信', class: "comment-submit-btn", manual_id: @manual.id, procedure_id: procedure.id %>
         </div>
       <% end %>
