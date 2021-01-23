@@ -7,12 +7,14 @@ class CommentsController < ApplicationController
     @procedure = @manual.procedures.find(params[:procedure_id])
     @comment = @procedure.comments.new(comment_params)
     @comment[:manual_id] = @manual.id
-    if @comment.save
-      redirect_to manual_path(@manual)
-    else
-      @procedures = @manual.procedures.includes(:user)
-      render 'manuals/show'
-    end
+    @comment.save
+    render json:{comment: @comment, user: current_user}
+    # if @comment.save
+    #   redirect_to manual_path(@manual)
+    # else
+    #   @procedures = @manual.procedures.includes(:user)
+    #   render 'manuals/show'
+    # end
   end
 
   def destroy
