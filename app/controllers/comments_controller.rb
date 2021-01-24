@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+  before_action :authenticate_user!, only: [:create, :destroy]
   before_action :manual_find, only: [:create, :destroy]
   before_action :comment_find, only: :destroy
   before_action :user_judge, only: :destroy
