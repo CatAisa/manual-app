@@ -4,7 +4,7 @@ class ReleasesController < ApplicationController
     @manual = Manual.find(params[:manual_id])
     if @manual.release.blank?
       Release.create(release_params)
-      redirect_to root_path
+      redirect_to manual_path(@manual)
     else
       redirect_to root_path
     end
