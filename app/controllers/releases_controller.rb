@@ -1,6 +1,7 @@
 class ReleasesController < ApplicationController
   before_action :manual_find, only: [:create, :destroy]
-  
+  before_action :user_judge, only: [:create, :destroy]
+
   def create
     if @manual.release.blank?
       Release.create(release_params)
@@ -24,5 +25,9 @@ class ReleasesController < ApplicationController
 
   def manual_find
     @manual = Manual.find(params[:manual_id])
+  end
+
+  def user_judge
+    redirect_to root_path if current_user.id != @manual.user.id
   end
 end
