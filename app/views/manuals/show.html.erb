@@ -7,7 +7,11 @@
     <li><%= link_to '手順を追加', new_manual_procedure_path(@manual), class: "procedure-create" %></li>
   </ul>
   <div class="show-release">
-    <%= link_to '一般公開する', manual_releases_path(@manual, @release), method: :post, class: "procedure-create" %>
+    <% if @manual.release.blank? %>
+      <%= link_to '一般公開する', manual_releases_path(@manual, @release), method: :post, class: "procedure-create" %>
+    <% else %>
+      <%= link_to '非公開にする', manual_release_path(@manual, @manual.release.id), method: :delete, class: "procedure-create" %>
+    <% end %>
   </div>
   <ul class="procedure-top-right">
     <li><%= link_to '編集', edit_manual_path(@manual) %></li>
