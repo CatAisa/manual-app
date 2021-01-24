@@ -23,6 +23,7 @@ class ManualsController < ApplicationController
   def show
     @procedures = @manual.procedures.includes(:user)
     @comment = Comment.new
+    @release = Release.new
   end
 
   def edit
