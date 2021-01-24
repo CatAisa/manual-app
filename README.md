@@ -11,6 +11,7 @@
 - has_many :manuals
 - has_many :procedures
 - has_many :comments
+- has_one :release
 
 ## manualsテーブル
 
@@ -26,6 +27,7 @@
 - belongs_to :user
 - has_many :procedures
 - has_many :comments
+- has_one :release
 
 ## proceduresテーブル
 
@@ -56,3 +58,15 @@
 - belongs_to :user
 - belongs_to :manual
 - belongs_to :procedure
+
+## releasesテーブル
+
+| Column | Type       | Options                        |
+| ------ | ---------- | ------------------------------ |
+| user   | references | null: false, foreign_key: true |
+| manual | references | null: false, foreign_key: true |
+
+### Associations
+
+- belongs_to :user
+- belongs_to :manual
