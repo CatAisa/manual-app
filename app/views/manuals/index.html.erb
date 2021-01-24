@@ -14,4 +14,10 @@
       </div>
     <% end %>
   <% end %>
-<div>
+</div>
+
+<div class="mypage-contents">
+  <% @releases.each do |release| %>
+    <%= render partial: "shared/contents", locals: {manual: release.manual} %>
+  <% end %>
+</div>

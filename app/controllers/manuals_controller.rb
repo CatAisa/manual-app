@@ -4,6 +4,8 @@ class ManualsController < ApplicationController
   before_action :user_judge, only: [:show, :edit, :update, :destroy]
 
   def index
+    @release = Release.new
+    @releases = Release.includes(:user)
   end
 
   def new
