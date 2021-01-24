@@ -6,6 +6,9 @@
     <li class="procedure-top-category">#<%= @manual.category.name %></li>
     <li><%= link_to '手順を追加', new_manual_procedure_path(@manual), class: "procedure-create" %></li>
   </ul>
+  <div class="show-release">
+    <%= link_to '一般公開する', "#", class: "procedure-create" %>
+  </div>
   <ul class="procedure-top-right">
     <li><%= link_to '編集', edit_manual_path(@manual) %></li>
     <li><%= link_to '削除', manual_path(@manual), method: :delete, data: {confirm: "本当に削除しますか？"} %></li>

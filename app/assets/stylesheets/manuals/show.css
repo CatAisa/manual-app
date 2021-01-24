@@ -9,13 +9,17 @@
 }
 
 .procedure-top-middle {
-  width: 200px;
+  width: 180px;
   margin: 0 5px 0 auto;
 }
 
 .procedure-top-category {
   white-space: nowrap;
   font-size: 15px;
+}
+
+.show-release {
+  margin: 15px 5px 0 0;
 }
 
 .procedure-top-right {
