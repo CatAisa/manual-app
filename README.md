@@ -11,7 +11,7 @@
 - has_many :manuals
 - has_many :procedures
 - has_many :comments
-- has_one :release
+- has_many :releases
 
 ## manualsテーブル
 
