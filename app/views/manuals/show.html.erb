@@ -11,7 +11,7 @@
   <% if @manual.user.id == current_user.id %>
     <div class="show-release">
       <% if @manual.release.blank? %>
-        <%= link_to '一般公開する', manual_releases_path(@manual, @release), method: :post, class: "procedure-create" %>
+        <%= link_to '一般公開する', manual_releases_path(@manual, @release), method: :post, class: "procedure-create", data: {confirm: "一般公開すると全ユーザーから情報が閲覧可能になります。\n本当によろしいですか？"} %>
       <% else %>
         <%= link_to '非公開にする', manual_release_path(@manual, @manual.release.id), method: :delete, class: "procedure-create" %>
       <% end %>
