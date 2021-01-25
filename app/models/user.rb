@@ -7,7 +7,7 @@ class User < ApplicationRecord
   has_many :manuals
   has_many :procedures
   has_many :comments
-  has_one :release
+  has_many :releases
 
   validates :nickname, presence: true
 end
