@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+  before_action :authenticate_user!, only: [:create, :destroy]
   before_action :manual_find, only: [:create, :destroy]
   before_action :comment_find, only: :destroy
   before_action :user_judge, only: :destroy
@@ -6,7 +7,7 @@ class CommentsController < ApplicationController
   def create
     @procedure = @manual.procedures.find(params[:procedure_id])
     @comment = @procedure.comments.new(comment_params)
-    @comment[:manual_id] = @manual.id
+    # @comment[:manual_id] = @manual.id
     if @comment.save
       render json: { comment: @comment, user: current_user }
     else
@@ -28,7 +29,8 @@ class CommentsController < ApplicationController
   private
 
   def comment_params
-    params.require(:comment).permit(:content, :manual_id, :procedure_id).merge(user_id: current_user.id)
+    params.require(:comment).permit(:content, :manual_id, :procedure_id).merge(user_id: current_user.id,
+                                                                               manual_id: params[:manual_id])
   end
 
   def manual_find

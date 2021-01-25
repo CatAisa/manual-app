@@ -1,9 +1,10 @@
 .main-content {
-  height: calc(100vh - 120px - 80px);
+  /* height: calc(100vh - 120px - 80px); */
   display: flex;
   justify-content: center;
   padding: 30px;
   background-color: #ffebcd;
+  margin-bottom: 20px;
 }
 
 .manual-create, .mypage {
@@ -23,4 +24,14 @@
   text-align: center;
   border-radius: 20px;
   background-color: #dcdcdc;
+}
+
+.release-btn {
+  font-size: 15px;
+  text-decoration: none;
+  color: #000000;
+  border: 1px solid #000000;
+  background-color: #dcdcdc;
+  white-space: nowrap;
+  padding: 3px;
 }

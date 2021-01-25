@@ -1,9 +1,12 @@
 class ManualsController < ApplicationController
   before_action :authenticate_user!, except: :index
   before_action :manual_find, only: [:show, :edit, :update, :destroy]
-  before_action :user_judge, only: [:show, :edit, :update, :destroy]
+  before_action :user_judge, only: [:edit, :update, :destroy]
+  before_action :show_user_judge, only: :show
 
   def index
+    @release = Release.new
+    @releases = Release.includes(:user).order(created_at: 'DESC')
   end
 
   def new
@@ -23,6 +26,7 @@ class ManualsController < ApplicationController
   def show
     @procedures = @manual.procedures.includes(:user)
     @comment = Comment.new
+    @release = Release.new
   end
 
   def edit
@@ -54,5 +58,9 @@ class ManualsController < ApplicationController
 
   def user_judge
     redirect_to root_path if current_user.id != @manual.user.id
+  end
+
+  def show_user_judge
+    redirect_to root_path if @manual.release.blank? && (current_user.id != @manual.user.id)
   end
 end

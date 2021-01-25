@@ -4,12 +4,23 @@
   <div class="procedure-top-title"><%= @manual.title %></div>
   <ul class="procedure-top-middle">
     <li class="procedure-top-category">#<%= @manual.category.name %></li>
-    <li><%= link_to '手順を追加', new_manual_procedure_path(@manual), class: "procedure-create" %></li>
+    <% if @manual.user.id == current_user.id %>
+      <li><%= link_to '手順を追加', new_manual_procedure_path(@manual), class: "procedure-create" %></li>
+    <% end %>
   </ul>
-  <ul class="procedure-top-right">
-    <li><%= link_to '編集', edit_manual_path(@manual) %></li>
-    <li><%= link_to '削除', manual_path(@manual), method: :delete, data: {confirm: "本当に削除しますか？"} %></li>
-  </ul>
+  <% if @manual.user.id == current_user.id %>
+    <div class="show-release">
+      <% if @manual.release.blank? %>
+        <%= link_to '一般公開する', manual_releases_path(@manual, @release), method: :post, class: "procedure-create", data: {confirm: "一般公開すると全ユーザーから情報が閲覧可能になります。\n本当によろしいですか？"} %>
+      <% else %>
+        <%= link_to '非公開にする', manual_release_path(@manual, @manual.release.id), method: :delete, class: "procedure-create" %>
+      <% end %>
+    </div>
+    <ul class="procedure-top-right">
+      <li><%= link_to '編集', edit_manual_path(@manual) %></li>
+      <li><%= link_to '削除', manual_path(@manual), method: :delete, data: {confirm: "本当に削除しますか？"} %></li>
+    </ul>
+  <% end %>
 </div>
 
 <div class="procedure-top-contents">
@@ -29,10 +40,12 @@
       <div class="procedure-item-header">
         <div class="procedure-number"><%= index+1 %>．</div>
         <div class="procedure-title"><%= procedure.title %></div>
-        <ul>
-          <li><%= link_to '編集', edit_manual_procedure_path(@manual, procedure) %></li>
-          <li><%= link_to '削除', manual_procedure_path(@manual, procedure), method: :delete, data: {confirm: "本当に削除しますか？"} %></li>
-        </ul>
+        <% if @manual.user.id == current_user.id %>
+          <ul>
+            <li><%= link_to '編集', edit_manual_procedure_path(@manual, procedure) %></li>
+            <li><%= link_to '削除', manual_procedure_path(@manual, procedure), method: :delete, data: {confirm: "本当に削除しますか？"} %></li>
+          </ul>
+        <% end %>
       </div>
 
       <div class="procedure-description"><%= procedure.description %></div>
@@ -49,7 +62,11 @@
             <div class="pro-comment-header">
               <%= comment.user.nickname %>
               <span class="comment-time"><%= l comment.created_at %></span>
-              <%= link_to '削除', manual_procedure_comment_path(@manual, procedure, comment), method: :delete, id: "comment-delete#{comment.id}" %>
+              <% if @manual.user.id == current_user.id || comment.user.id == current_user.id %>
+                <%= link_to '削除', manual_procedure_comment_path(@manual, procedure, comment), method: :delete, id: "comment-delete#{comment.id}" %>
+              <% else %>
+                <%= link_to '削除', manual_procedure_comment_path(@manual, procedure, comment), method: :delete, id: "comment-delete#{comment.id}", style: "display: none;" %>
+              <% end %>
             </div>
             <div class="pro-comment-text"><%= comment.content %></div>
           </div>
@@ -65,4 +82,7 @@
     </div>
   </div>
 <% end %>
-<%= link_to '手順を追加', new_manual_procedure_path(@manual), class: "procedure-create" %>
+
+<% if @manual.user.id == current_user.id %>
+  <%= link_to '手順を追加', new_manual_procedure_path(@manual), class: "procedure-create" %>
+<% end %>
