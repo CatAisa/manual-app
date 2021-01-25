@@ -21,7 +21,7 @@ class ReleasesController < ApplicationController
   private
 
   def release_params
-    params.permit(:release).permit().merge(user_id: current_user.id, manual_id: params[:manual_id])
+    params.permit(:release).permit.merge(user_id: current_user.id, manual_id: params[:manual_id])
   end
 
   def manual_find

@@ -61,8 +61,6 @@ class ManualsController < ApplicationController
   end
 
   def show_user_judge
-    if @manual.release.blank?
-      redirect_to root_path if current_user.id != @manual.user.id
-    end
+    redirect_to root_path if @manual.release.blank? && (current_user.id != @manual.user.id)
   end
 end
