@@ -6,7 +6,7 @@ class ManualsController < ApplicationController
 
   def index
     @release = Release.new
-    @releases = Release.includes(:user).order(created_at: "DESC")
+    @releases = Release.includes(:user).order(created_at: 'DESC')
   end
 
   def new
