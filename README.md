@@ -12,6 +12,7 @@
 - has_many :procedures
 - has_many :comments
 - has_many :releases
+- has_many :like_manuals, through: :likes, source: manual
 
 ## manualsテーブル
 
@@ -28,6 +29,7 @@
 - has_many :procedures
 - has_many :comments
 - has_one :release
+- has_many :like_users, through: :likes, source: user
 
 ## proceduresテーブル
 
@@ -62,6 +64,18 @@
 ## releasesテーブル
 
 | Column | Type       | Options                        |
+| ------ | ---------- | ------------------------------ |
+| user   | references | null: false, foreign_key: true |
+| manual | references | null: false, foreign_key: true |
+
+### Associations
+
+- belongs_to :user
+- belongs_to :manual
+
+## Likesテーブル
+
+| Column | type       | Options                        |
 | ------ | ---------- | ------------------------------ |
 | user   | references | null: false, foreign_key: true |
 | manual | references | null: false, foreign_key: true |
