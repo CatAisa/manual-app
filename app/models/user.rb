@@ -8,6 +8,8 @@ class User < ApplicationRecord
   has_many :procedures
   has_many :comments
   has_many :releases
+  has_many :likes
+  has_many :like_manuals, through: :likes, source: :manual
 
   validates :nickname, presence: true
 end

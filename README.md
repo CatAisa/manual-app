@@ -12,7 +12,8 @@
 - has_many :procedures
 - has_many :comments
 - has_many :releases
-- has_many :like_manuals, through: :likes, source: manual
+- has_many :likes
+- has_many :like_manuals, through: :likes, source: :manual
 
 ## manualsテーブル
 
@@ -29,7 +30,8 @@
 - has_many :procedures
 - has_many :comments
 - has_one :release
-- has_many :like_users, through: :likes, source: user
+- has_many :likes
+- has_many :like_users, through: :likes, source: :user
 
 ## proceduresテーブル
 
