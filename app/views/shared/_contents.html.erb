@@ -30,10 +30,13 @@
   </div>
 
   <div>【マニュアル説明】
-    <%= link_to '☆', manual_likes_path(manual), method: :post %>
-    <%= manual.like_users.count %>
-    <%= link_to '★', manual_like_path(manual, "#"), method: :delete %>
-    <%= manual.like_users.count %>
+    <% if current_user.already_liked?(manual) %>
+      <%= link_to '★', manual_like_path(manual, "#"), method: :delete %>
+      <%= manual.like_users.count %>
+    <% else %>
+      <%= link_to '☆', manual_likes_path(manual), method: :post %>
+      <%= manual.like_users.count %>
+    <% end %>
   </div>
   <div class="mypage-description"><%= manual.description %></div>
   <% if user_signed_in? && manual.user.id == current_user.id %>

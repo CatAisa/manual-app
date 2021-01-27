@@ -12,4 +12,8 @@ class User < ApplicationRecord
   has_many :like_manuals, through: :likes, source: :manual
 
   validates :nickname, presence: true
+
+  def already_liked?(manual)
+    self.likes.exists?(manual_id: manual.id)
+  end
 end
