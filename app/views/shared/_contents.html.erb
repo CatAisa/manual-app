@@ -32,7 +32,7 @@
   <div>【マニュアル説明】
     <%= link_to '☆', manual_likes_path(manual), method: :post %>
     <%= manual.like_users.count %>
-    <%= link_to '★', "#" %>
+    <%= link_to '★', manual_like_path(manual, "#"), method: :delete %>
     <%= manual.like_users.count %>
   </div>
   <div class="mypage-description"><%= manual.description %></div>

@@ -6,6 +6,12 @@ class LikesController < ApplicationController
     redirect_to root_path
   end
 
+  def destroy
+    @like = Like.find_by(user_id: current_user.id, manual_id: params[:manual_id])
+    @like.destroy
+    redirect_to root_path
+  end
+
   private
 
   def like_params
