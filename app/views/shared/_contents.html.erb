@@ -29,6 +29,11 @@
     <% end %>
   </div>
 
-  <p>【マニュアル説明】</p>
+  <div>【マニュアル説明】
+    <%= link_to '☆', "#" %>
+    <%= manual.like_users.count %>
+    <%= link_to '★', "#" %>
+    <%= manual.like_users.count %>
+  </div>
   <div class="mypage-description"><%= manual.description %></div>
 </div>
