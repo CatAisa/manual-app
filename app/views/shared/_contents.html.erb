@@ -36,4 +36,9 @@
     <%= manual.like_users.count %>
   </div>
   <div class="mypage-description"><%= manual.description %></div>
+  <% if user_signed_in? && manual.user.id == current_user.id %>
+    <div class="mypage-manual-user">投稿者：あなたの投稿です</div>
+  <% else %>
+    <div class="mypage-manual-user">投稿者：<%= manual.user.nickname %></div>
+  <% end %>
 </div>
