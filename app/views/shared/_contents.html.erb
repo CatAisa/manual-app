@@ -30,7 +30,7 @@
   </div>
 
   <div>【マニュアル説明】
-    <% if current_user.already_liked?(manual) %>
+    <% if user_signed_in? && current_user.already_liked?(manual) %>
       <%= link_to '★', manual_like_path(manual, "#"), method: :delete %>
       <%= manual.like_users.count %>
     <% else %>
