@@ -1,1 +1,9 @@
-テスト表示
+<%= render 'shared/header' %>
+
+<div class="mypage-user-contents">
+  <div class="mypage-user-nickname"><%= current_user.nickname %>さんのお気に入り一覧</div>
+</div>
+
+<div class="mypage-contents">
+  <%= render partial: "shared/contents", collection: current_user.like_manuals, as: "manual" %>
+</div>
