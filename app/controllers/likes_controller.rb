@@ -33,6 +33,6 @@ class LikesController < ApplicationController
   end
 
   def user_judge
-    redirect_to root_path if current_user.id == @manual.id
+    redirect_to root_path if current_user.id == @manual.user.id
   end
 end
