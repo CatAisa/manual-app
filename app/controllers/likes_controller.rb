@@ -1,6 +1,7 @@
 class LikesController < ApplicationController
   before_action :authenticate_user!, only: [:create, :destroy]
   before_action :manual_find, only: [:create, :destroy]
+  before_action :user_judge, only: [:create, :destroy]
 
   def create
     if !current_user.already_liked?(@manual)
@@ -29,5 +30,9 @@ class LikesController < ApplicationController
 
   def manual_find
     @manual = Manual.find(params[:manual_id])
+  end
+
+  def user_judge
+    redirect_to root_path if current_user.id == @manual.id
   end
 end
