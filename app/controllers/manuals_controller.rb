@@ -5,7 +5,6 @@ class ManualsController < ApplicationController
   before_action :show_user_judge, only: :show
 
   def index
-    @release = Release.new
     @releases = Release.includes(:user).order(created_at: 'DESC')
   end
 

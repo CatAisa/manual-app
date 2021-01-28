@@ -6,7 +6,7 @@
       <% if user_signed_in? && manual.user.id == current_user.id %>
         <li class="show-release">
           <% if manual.release.blank? %>
-            <%= link_to '一般公開する', manual_releases_path(manual, @release), method: :post, class: "release-btn", data: {confirm: "一般公開すると全ユーザーから情報が閲覧可能になります。\n本当によろしいですか？"} %>
+            <%= link_to '一般公開する', manual_releases_path(manual), method: :post, class: "release-btn", data: {confirm: "一般公開すると全ユーザーから情報が閲覧可能になります。\n本当によろしいですか？"} %>
           <% else %>
             <%= link_to '非公開にする', manual_release_path(manual, manual.release.id), method: :delete, class: "release-btn" %>
           <% end %>
@@ -29,6 +29,26 @@
     <% end %>
   </div>
 
-  <p>【マニュアル説明】</p>
+  <div>【マニュアル説明】
+    <% if user_signed_in? %>
+      <% if current_user.id == manual.user.id %>
+        <span>☆ <%= manual.likes.count %></span>
+      <% elsif current_user.already_liked?(manual) %>
+        <%= link_to '★', manual_like_path(manual, "#"), method: :delete %>
+        <%= manual.like_users.count %>
+      <% else %>
+        <%= link_to '☆', manual_likes_path(manual), method: :post %>
+        <%= manual.like_users.count %>
+      <% end %>
+    <% else %>
+      <%= link_to '☆', manual_likes_path(manual), method: :post %>
+      <%= manual.like_users.count %>
+    <% end %>
+  </div>
   <div class="mypage-description"><%= manual.description %></div>
+  <% if user_signed_in? && manual.user.id == current_user.id %>
+    <div class="mypage-manual-user">投稿者：あなたの投稿です</div>
+  <% else %>
+    <div class="mypage-manual-user">投稿者：<%= manual.user.nickname %></div>
+  <% end %>
 </div>

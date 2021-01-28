@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_24_043943) do
+ActiveRecord::Schema.define(version: 2021_01_26_101501) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -43,6 +43,15 @@ ActiveRecord::Schema.define(version: 2021_01_24_043943) do
     t.index ["manual_id"], name: "index_comments_on_manual_id"
     t.index ["procedure_id"], name: "index_comments_on_procedure_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "likes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "manual_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["manual_id"], name: "index_likes_on_manual_id"
+    t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
   create_table "manuals", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -92,6 +101,8 @@ ActiveRecord::Schema.define(version: 2021_01_24_043943) do
   add_foreign_key "comments", "manuals"
   add_foreign_key "comments", "procedures"
   add_foreign_key "comments", "users"
+  add_foreign_key "likes", "manuals"
+  add_foreign_key "likes", "users"
   add_foreign_key "manuals", "users"
   add_foreign_key "procedures", "manuals"
   add_foreign_key "procedures", "users"

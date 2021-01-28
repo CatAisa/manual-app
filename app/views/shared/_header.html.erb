@@ -17,6 +17,7 @@
         <span class="user-item">▲<%= current_user.nickname %>
           <ul>
             <li><%= link_to '編集', edit_user_registration_path, class: "user-edit" %></li>
+            <li><%= link_to 'お気に入り', user_likes_path(current_user), class: "user-likes" %></li>
             <li><%= link_to 'マイページ', user_path(current_user), class: "user-mypage" %></li>
           </ul>
         </span>
