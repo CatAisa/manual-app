@@ -14,6 +14,6 @@ class User < ApplicationRecord
   validates :nickname, presence: true
 
   def already_liked?(manual)
-    self.likes.exists?(manual_id: manual.id)
+    likes.exists?(manual_id: manual.id)
   end
 end
