@@ -24,7 +24,7 @@
   display: flex;
   align-items: flex-end;
   padding-right: 20px;
-  margin-bottom: 10px;
+  margin-bottom: 6px;
 }
 
 .user-list {
@@ -34,7 +34,7 @@
 .user-item {
   /* nickname：半角10文字以下 */
   text-decoration: none;
-  font-size: 20px;
+  font-size: 16px;
   margin-left: 10px;
   position: relative;
   border: 1px solid #000000;
@@ -53,17 +53,16 @@
   background-color: #f5f5f5;
   border: 1px solid #000000;
   padding: 0 5px;
-  width: 120px;
+  width: 100px;
 }
 
 .user-item:hover > ul {
   display: block;
-  width: 100px;
-  bottom: 41px;
+  bottom: 35px;
   left: -1px;
 }
 
-.user-edit, .user-mypage {
+.user-edit, .user-mypage, .user-likes {
   text-decoration: none;
   color: #000000;
 }
