@@ -14,8 +14,8 @@ function canvasTitle() {
 
     image.src = blob;
     image.onload = () => {
-      const imageHeight = 500 / image.width * image.height;
-      ctx.drawImage(image, 0, 0, 500, imageHeight);
+      const imageHeight = 480 / image.width * image.height;
+      ctx.drawImage(image, 0, 0, 480, imageHeight);
     };
   });
 };
