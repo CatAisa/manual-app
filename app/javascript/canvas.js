@@ -20,6 +20,6 @@ function canvasTitle() {
   });
 };
 
-if ( document.URL.match(/new/) ) {
+if ( document.URL.match(/new/) || document.URL.match(/edit/) ) {
   window.addEventListener("load", canvasTitle);
 };
