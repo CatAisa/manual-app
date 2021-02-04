@@ -6,6 +6,7 @@
 <div class="new-manual-image">【画像】</div>
 <div class="new-image-text">クリックして画像を選択してください</div>
 <%= f.file_field :image, class: "form-manual-image", id: "file-field" %>
+<%= f.hidden_field :image_url, value: "", id: "image-form" %>
 
 <canvas class="canvas" width="480px" height="400px" id="canvas"></canvas>
 

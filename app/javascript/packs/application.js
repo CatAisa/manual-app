@@ -9,6 +9,7 @@ require("channels")
 require("../comment_post")
 require("../comment_delete")
 require("../canvas")
+require("../form")
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference
