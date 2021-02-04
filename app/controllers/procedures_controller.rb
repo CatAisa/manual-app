@@ -9,17 +9,22 @@ class ProceduresController < ApplicationController
   end
 
   def create
-    @procedure = @manual.procedures.new(procedure_params)
     url = params[:procedure][:image_url]
-    converted_url = url.sub %r/data:((image|application)\/.{3,}),/, ""
-    decoded_url = Base64.decode64(converted_url)
-    filename = Time.zone.now.to_s + '.png'
 
-    File.open("#{Rails.root}/tmp/images/#{filename}", "wb") do |f|
-      f.write(decoded_url)
+    if url.blank?
+      @procedure = @manual.procedures.new(procedure_params)
+    else
+      @procedure = @manual.procedures.new(procedure_params_no_image)
+      converted_url = url.sub %r/data:((image|application)\/.{3,}),/, ""
+      decoded_url = Base64.decode64(converted_url)
+      filename = Time.zone.now.to_s + '.png'
+
+      File.open("#{Rails.root}/tmp/images/#{filename}", "wb") do |f|
+        f.write(decoded_url)
+      end
+      @procedure.image.attach(io: File.open("#{Rails.root}/tmp/images/#{filename}"), filename: filename)
+      FileUtils.rm("#{Rails.root}/tmp/images/#{filename}")
     end
-    @procedure.image.attach(io: File.open("#{Rails.root}/tmp/images/#{filename}"), filename: filename)
-    FileUtils.rm("#{Rails.root}/tmp/images/#{filename}")
 
     if @procedure.save
       redirect_to manual_path(@manual)
@@ -47,6 +52,10 @@ class ProceduresController < ApplicationController
   private
 
   def procedure_params
+    params.require(:procedure).permit(:title, :image, :description).merge(user_id: current_user.id)
+  end
+
+  def procedure_params_no_image
     params.require(:procedure).permit(:title, :description).merge(user_id: current_user.id)
   end
 
