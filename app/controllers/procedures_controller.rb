@@ -19,6 +19,7 @@ class ProceduresController < ApplicationController
       f.write(decoded_url)
     end
     @procedure.image.attach(io: File.open("#{Rails.root}/tmp/images/#{filename}"), filename: filename)
+    FileUtils.rm("#{Rails.root}/tmp/images/#{filename}")
 
     if @procedure.save
       redirect_to manual_path(@manual)
