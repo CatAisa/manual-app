@@ -3,13 +3,11 @@ function formTitle() {
 
   const imageSave = document.getElementById("image-save");
   imageSave.addEventListener("click", () => {
-    console.log("click");
-
+    const canvas = document.getElementById("canvas");
     const imageForm = document.getElementById("image-form");
     const imageURL = canvas.toDataURL("image/png");
 
     imageForm.value = imageURL;
-    console.log(imageForm.value);
   });
 };
 

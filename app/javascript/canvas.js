@@ -1,16 +1,14 @@
 function canvasTitle() {
-  console.log("load");
+  console.log("loadCanvas");
+
+  const canvas = document.getElementById("canvas");
+  const ctx = canvas.getContext("2d");
+  const image = new Image();
 
   fileField = document.getElementById("file-field");
   fileField.addEventListener("change", (e) => {
-    console.log(e);
-
     const file = e.target.files[0];
     const blob = window.URL.createObjectURL(file);
-
-    const canvas = document.getElementById("canvas");
-    const ctx = canvas.getContext("2d");
-    const image = new Image();
 
     image.src = blob;
     image.onload = () => {
