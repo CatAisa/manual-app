@@ -48,6 +48,16 @@ function drawingTitle() {
       return false;
     });
   });
+
+  // Change bold
+  const fontBold = document.querySelectorAll(".bold a");
+  fontBold.forEach((f) => {
+    f.addEventListener("click", (e) => {
+      e.preventDefault();
+      cnvBold = f.getAttribute("data-bold");
+      return false;
+    });
+  });
 };
 
 if (document.URL.match(/procedures/)) {
