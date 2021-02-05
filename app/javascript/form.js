@@ -8,6 +8,9 @@ function formTitle() {
     const imageURL = canvas.toDataURL("image/png");
 
     imageForm.value = imageURL;
+
+    const savedMessage = document.getElementById("saved-message");
+    savedMessage.setAttribute("style", "display: inline-block;");
   });
 };
 

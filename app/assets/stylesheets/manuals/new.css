@@ -81,6 +81,17 @@
   font-size: 20px;
 }
 
+.image-save:hover {
+  background-color: #DDDDDD;
+}
+
+#saved-message {
+  color: red;
+  margin-left: 5px;
+  padding-top: 10px;
+  display: none;
+}
+
 .paint-status {
   margin: 0 0 0 auto;
 }
