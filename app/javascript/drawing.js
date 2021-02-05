@@ -1,15 +1,15 @@
-function paintTitle() {
+function drawingTitle() {
   console.log("loadPaint");
 
   const canvas = document.getElementById("canvas");
   const ctx = canvas.getContext("2d");
 
-  // ペイント初期設定
+  // Initial setting of drawing
   let clickFig = 0;
   let cnvColor = "0, 0, 0, 1";
   let cnvBold = 5;
 
-  // 描画イベント
+  // Drawing event
   canvas.addEventListener("mousedown", () => {
     clickFig = 1;
   });
@@ -23,7 +23,7 @@ function paintTitle() {
     draw(e.offsetX, e.offsetY);
   });
 
-  // 描画処理
+  // Drawing processing
   function draw(x, y) {
     ctx.strokeStyle = `rgba(${cnvColor})`;
     ctx.lineWidth = cnvBold;
@@ -38,8 +38,18 @@ function paintTitle() {
     };
     ctx.stroke();
   };
+
+  // Change color
+  const fontColor = document.querySelectorAll(".color a");
+  fontColor.forEach((f) => {
+    f.addEventListener("click", (e) => {
+      e.preventDefault();
+      cnvColor = f.getAttribute("data-color");
+      return false;
+    });
+  });
 };
 
-if ( document.URL.match(/procedures/) ) {
-  window.addEventListener("load", paintTitle);
+if (document.URL.match(/procedures/)) {
+  window.addEventListener("load", drawingTitle);
 };

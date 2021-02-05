@@ -18,6 +18,6 @@ function canvasTitle() {
   });
 };
 
-if ( document.URL.match(/procedures/) ) {
+if (document.URL.match(/procedures/)) {
   window.addEventListener("load", canvasTitle);
 };
