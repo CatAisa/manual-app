@@ -4,14 +4,14 @@
   </div>
 
   <div class="user-content">
-    <%# ログアウトなら以下を表示 %>
+    <%# Show below in the case of log out %>
     <% if !user_signed_in? %>
       <div class="user-list">
         <%= link_to 'ログイン', new_user_session_path, class: "user-item" %>
         <%= link_to '新規登録', new_user_registration_path, class: "user-item" %>
       </div>
 
-    <%# ログインなら以下を表示 %>
+    <%# Show below int the case of log in %>
     <% else %>
       <div class="user-list">
         <span class="user-item">▲<%= current_user.nickname %>

@@ -5,7 +5,28 @@
 
 <div class="new-manual-image">【画像】</div>
 <div class="new-image-text">クリックして画像を選択してください</div>
-<%= f.file_field :image, class: "form-manual-image" %>
+<%= f.file_field :image, class: "form-manual-image", id: "file-field" %>
+<%= f.hidden_field :image_url, value: "", id: "image-form" %>
+
+<canvas class="canvas" width="480px" height="400px" id="canvas"></canvas>
+
+<div class="image-contents">
+  <span class="image-save" id="image-save">画像保存</span>
+  <span id="saved-message">編集画像を保存しました</span>
+  <ul class="paint-status">
+    <li class="color">色：
+      <a href="#" class="black" data-color="0, 0, 0, 1"></a>
+      <a href="#" class="red" data-color="255, 0, 0, 1"></a>
+      <a href="#" class="blue" data-color="0, 0, 255, 1"></a>
+    </li>
+
+    <li class="bold">太さ：
+      <a href="#" class="small" data-bold="1">小</a>
+      <a href="#" class="middle" data-bold="5">中</a>
+      <a href="#" class="large" data-bold="10">大</a>
+    </li>
+  </ul>
+</div>
 
 <div class="new-manual-description">【内容】</div>
 <%= f.text_area :description, placeholder: "(例)", class: "form-manual-description" %>

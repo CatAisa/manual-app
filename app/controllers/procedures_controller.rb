@@ -9,8 +9,26 @@ class ProceduresController < ApplicationController
   end
 
   def create
-    @procedure = @manual.procedures.new(procedure_params)
-    if @procedure.save
+    url = params[:procedure][:image_url]
+    converted_url = url.sub %r/data:((image|application)\/.{3,}),/, ""
+
+    if url.blank? || url == converted_url
+      procedure = @manual.procedures.new(procedure_params)
+    else
+      procedure = @manual.procedures.new(procedure_params_no_image)
+      decoded_url = Base64.decode64(converted_url)
+      filename = Time.zone.now.to_s + '.png'
+
+      if Rails.env == "development"
+        # Local environment
+        procedure.image_attach_local(procedure, decoded_url, filename)
+      elsif Rails.env == "production"
+        # Production environment
+        procedure.image_attach_production(procedure, decoded_url, filename)
+      end
+    end
+
+    if procedure.save
       redirect_to manual_path(@manual)
     else
       render :new
@@ -37,6 +55,10 @@ class ProceduresController < ApplicationController
 
   def procedure_params
     params.require(:procedure).permit(:title, :image, :description).merge(user_id: current_user.id)
+  end
+
+  def procedure_params_no_image
+    params.require(:procedure).permit(:title, :description).merge(user_id: current_user.id)
   end
 
   def manual_find
