@@ -13,30 +13,22 @@ class ProceduresController < ApplicationController
     converted_url = url.sub %r/data:((image|application)\/.{3,}),/, ""
 
     if url.blank? || url == converted_url
-      @procedure = @manual.procedures.new(procedure_params)
+      procedure = @manual.procedures.new(procedure_params)
     else
-      @procedure = @manual.procedures.new(procedure_params_no_image)
+      procedure = @manual.procedures.new(procedure_params_no_image)
       decoded_url = Base64.decode64(converted_url)
       filename = Time.zone.now.to_s + '.png'
 
       if Rails.env == "development"
         # Local environment
-        File.open("#{Rails.root}/tmp/images/#{filename}", "wb") do |f|
-          f.write(decoded_url)
-        end
-        @procedure.image.attach(io: File.open("#{Rails.root}/tmp/images/#{filename}"), filename: filename)
-        FileUtils.rm("#{Rails.root}/tmp/images/#{filename}")
+        image_attach_local(procedure, decoded_url, filename)
       elsif Rails.env == "production"
         # Production environment
-        File.open("/tmp/#{filename}", "wb") do |f|
-          f.write(decoded_url)
-        end
-        @procedure.image.attach(io: File.open("/tmp/#{filename}"), filename: filename)
-        FileUtils.rm("/tmp/#{filename}")
+        image_attach_production(procedure, decoded_url, filename)
       end
     end
 
-    if @procedure.save
+    if procedure.save
       redirect_to manual_path(@manual)
     else
       render :new
@@ -79,5 +71,21 @@ class ProceduresController < ApplicationController
 
   def user_judge
     redirect_to root_path if current_user.id != @manual.user.id
+  end
+
+  def image_attach_local(procedure, decoded_url, filename)
+    File.open("#{Rails.root}/tmp/images/#{filename}", "wb") do |f|
+      f.write(decoded_url)
+    end
+    procedure.image.attach(io: File.open("#{Rails.root}/tmp/images/#{filename}"), filename: filename)
+    FileUtils.rm("#{Rails.root}/tmp/images/#{filename}")
+  end
+
+  def image_attach_production(procedure, decoded_url, filename)
+    File.open("/tmp/#{filename}", "wb") do |f|
+      f.write(decoded_url)
+    end
+    procedure.image.attach(io: File.open("/tmp/#{filename}"), filename: filename)
+    FileUtils.rm("/tmp/#{filename}")
   end
 end
