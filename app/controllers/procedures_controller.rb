@@ -10,20 +10,30 @@ class ProceduresController < ApplicationController
 
   def create
     url = params[:procedure][:image_url]
+    converted_url = url.sub %r/data:((image|application)\/.{3,}),/, ""
 
-    if url.blank?
+    if url.blank? || url == converted_url
       @procedure = @manual.procedures.new(procedure_params)
     else
       @procedure = @manual.procedures.new(procedure_params_no_image)
-      converted_url = url.sub %r/data:((image|application)\/.{3,}),/, ""
       decoded_url = Base64.decode64(converted_url)
       filename = Time.zone.now.to_s + '.png'
 
-      File.open("#{Rails.root}/tmp/images/#{filename}", "wb") do |f|
-        f.write(decoded_url)
+      if Rails.env == "development"
+        # Local environment
+        File.open("#{Rails.root}/tmp/images/#{filename}", "wb") do |f|
+          f.write(decoded_url)
+        end
+        @procedure.image.attach(io: File.open("#{Rails.root}/tmp/images/#{filename}"), filename: filename)
+        FileUtils.rm("#{Rails.root}/tmp/images/#{filename}")
+      elsif Rails.env == "production"
+        # Production environment
+        File.open("/tmp/#{filename}", "wb") do |f|
+          f.write(decoded_url)
+        end
+        @procedure.image.attach(io: File.open("/tmp/#{filename}"), filename: filename)
+        FileUtils.rm("/tmp/#{filename}")
       end
-      @procedure.image.attach(io: File.open("#{Rails.root}/tmp/images/#{filename}"), filename: filename)
-      FileUtils.rm("#{Rails.root}/tmp/images/#{filename}")
     end
 
     if @procedure.save
