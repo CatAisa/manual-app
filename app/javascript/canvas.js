@@ -76,11 +76,21 @@ function canvasTitle() {
         ctx.clearRect(0, 0, ow, ov);
         image.src = blob;
         image.onload = () => {
-          ctx.drawImage(image, (crw-rw/2)/ap, (crv-rv/2)/ap, rw/ap, rv/ap, 0, 0, ow, ov);
+          ctx.drawImage(image, (crw-rw/2)/apCrop, (crv-rv/2)/apCrop, rw/apCrop, rv/apCrop, 0, 0, ow, ov);
         };
       };
     };
   };
+
+  // Change crop size
+  const cropSize = document.querySelectorAll(".crop-size");
+  cropSize.forEach((f) => {
+    f.addEventListener("click", (e) => {
+      e.preventDefault();
+      rw = f.getAttribute("data-size");
+      rv = f.getAttribute("data-size");
+    });
+  });
 };
 
 if (document.URL.match(/procedures/)) {
