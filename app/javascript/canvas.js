@@ -3,7 +3,7 @@ function canvasTitle() {
   const ctx = canvas.getContext("2d");
   const image = new Image();
 
-  fileField = document.getElementById("file-field");
+  const fileField = document.getElementById("file-field");
   fileField.addEventListener("change", (e) => {
     const file = e.target.files[0];
     const blob = window.URL.createObjectURL(file);

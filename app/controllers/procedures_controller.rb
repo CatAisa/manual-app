@@ -31,6 +31,7 @@ class ProceduresController < ApplicationController
     if procedure.save
       redirect_to manual_path(@manual)
     else
+      @procedure = procedure
       render :new
     end
   end
