@@ -68,7 +68,7 @@
 }
 
 .procedure-contents {
-  height: 260px;
+  height: 330px;
   align-items: center;
   display: flex;
   margin: 0 10px 10px 10px;
@@ -98,7 +98,7 @@
 
 .procedure-description {
   /* 全角133文字以下(スクロールなしの表示、バリデーション：400文字以下) */
-  height: 175px;
+  height: 245px;
   width: 310px;
   overflow: scroll;
   margin-top: 5px;
@@ -121,7 +121,7 @@
 
 .procedure-comments-index {
   width: 700px;
-  height: 220px;
+  height: 290px;
   background-color: white;
   overflow: scroll;
   padding: 5px;
