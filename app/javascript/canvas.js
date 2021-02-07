@@ -1,6 +1,4 @@
 function canvasTitle() {
-  console.log("loadCanvas");
-
   const canvas = document.getElementById("canvas");
   const ctx = canvas.getContext("2d");
   const image = new Image();

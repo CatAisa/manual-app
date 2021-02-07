@@ -1,6 +1,4 @@
 function formTitle() {
-  console.log("loadForm");
-
   const imageSave = document.getElementById("image-save");
   imageSave.addEventListener("click", () => {
     const canvas = document.getElementById("canvas");
