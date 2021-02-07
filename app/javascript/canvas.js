@@ -44,6 +44,41 @@ function canvasTitle() {
       const ap = ow / iw;
       ctxCrop.drawImage(image, 0, 0, cw, apCrop*iv);
       ctx.drawImage(image, 0, 0, ow, ap*iv);
+
+      cnvRed.addEventListener("mousedown", () => {
+        clickFig = 1;
+      });
+      cnvRed.addEventListener("mouseup", () => {
+        clickFig = 0;
+      });
+      cnvRed.addEventListener("mousemove", (e) => {
+        if (!clickFig == 1) {
+          return false;
+        };
+        crw = e.offsetX;
+        crv = e.offsetY;
+        drawRed(crw, crv);
+        drawCanvas(crw, crv);
+      });
+
+      function drawRed(crw, crv) {
+        imgRed.src = blob;
+        if (clickFig == 1) {
+          ctxRed.clearRect(0, 0, cw, cv);
+          imgRed.onload = () => {
+            ctxRed.strokeStyle = "rgba(200, 0, 0, 0.8)";
+            ctxRed.strokeRect(crw-rw/2, crv-rv/2, rw, rv);
+          };
+        };
+      };
+
+      function drawCanvas(crw, crv) {
+        ctx.clearRect(0, 0, ow, ov);
+        image.src = blob;
+        image.onload = () => {
+          ctx.drawImage(image, (crw-rw/2)/ap, (crv-rv/2)/ap, rw/ap, rv/ap, 0, 0, ow, ov);
+        };
+      };
     };
   };
 };
