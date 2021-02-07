@@ -32,13 +32,20 @@ function canvasTitle() {
     ctx.clearRect(0, 0, ow, ov);
     const file = e.target.files[0];
     const blob = window.URL.createObjectURL(file);
+    cropper(blob);
+  });
 
+  function cropper(blob) {
     image.src = blob;
     image.onload = () => {
-      const imageHeight = 480 / image.width * image.height;
-      ctx.drawImage(image, 0, 0, 480, imageHeight);
+      const iw = image.width;
+      const iv = image.height;
+      const apCrop = cw / iw;
+      const ap = ow / iw;
+      ctxCrop.drawImage(image, 0, 0, cw, apCrop*iv);
+      ctx.drawImage(image, 0, 0, ow, ap*iv);
     };
-  });
+  };
 };
 
 if (document.URL.match(/procedures/)) {
