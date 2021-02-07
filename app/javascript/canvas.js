@@ -4,6 +4,7 @@ function canvasTitle() {
   let crv = 0;
   let rw = 300;
   let rv = 300;
+  let blob = ""
 
   // Input image
   const cnvCrop = document.getElementById("crop-canvas");
@@ -31,7 +32,9 @@ function canvasTitle() {
     ctxCrop.clearRect(0, 0, cw, cv);
     ctx.clearRect(0, 0, ow, ov);
     const file = e.target.files[0];
-    const blob = window.URL.createObjectURL(file);
+    if (file != undefined) {
+      blob = window.URL.createObjectURL(file);
+    };
     cropper(blob);
   });
 
