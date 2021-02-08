@@ -15,3 +15,7 @@ function formTitle() {
 if (document.URL.match(/procedures/)) {
   window.addEventListener("load", formTitle);
 };
+
+if (document.URL.match(/manuals/) && !document.URL.match(/manuals\/\d/)) {
+  window.addEventListener("load", formTitle);
+};

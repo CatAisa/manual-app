@@ -99,3 +99,7 @@ function canvasTitle() {
 if (document.URL.match(/procedures/)) {
   window.addEventListener("load", canvasTitle);
 };
+
+if (document.URL.match(/manuals/) && !document.URL.match(/manuals\/\d/)) {
+  window.addEventListener("load", canvasTitle);
+};
