@@ -50,10 +50,32 @@ class ManualsController < ApplicationController
   end
 
   def update
-    if @manual.update(manual_params)
-      redirect_to manual_path(@manual)
+    manual = @manual
+    url = params[:manual][:image_url]
+    converted_url = url.sub %r/data:((image|application)\/.{3,}),/, ""
+
+    if url.blank? || url == converted_url
+      if manual.update(manual_params)
+        redirect_to manual_path(@manual)
+      else
+        render :edit
+      end
     else
-      render :edit
+      if manual.update(manual_params_no_image)
+        redirect_to manual_path(@manual)
+      else
+        render :edit
+      end
+      decoded_url = Base64.decode64(converted_url)
+      filename = Time.zone.now.to_s + '.png'
+
+      if Rails.env == "development"
+        # Local environment
+        manual.image_attach_local(manual, decoded_url, filename)
+      elsif Rails.env == "production"
+        # Production environment
+        manual.image_attach_production(manual, decoded_url, filename)
+      end
     end
   end
 

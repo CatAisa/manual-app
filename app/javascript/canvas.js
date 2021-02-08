@@ -96,7 +96,7 @@ function canvasTitle() {
   });
 };
 
-if (document.URL.match(/procedures/)) {
+if (document.URL.match(/procedures/) || document.URL.match(/edit/)) {
   window.addEventListener("load", canvasTitle);
 };
 
