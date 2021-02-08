@@ -14,4 +14,20 @@ class Manual < ApplicationRecord
     validates :title
     validates :category_id, numericality: { other_than: 0, message: 'is invalid. Select status' }
   end
+
+  def image_attach_local(manual, decoded_url, filename)
+    File.open("#{Rails.root}/tmp/images/#{filename}", "wb") do |f|
+      f.write(decoded_url)
+    end
+    manual.image.attach(io: File.open("#{Rails.root}/tmp/images/#{filename}"), filename: filename)
+    FileUtils.rm("#{Rails.root}/tmp/images/#{filename}")
+  end
+
+  def image_attach_production(manual, decoded_url, filename)
+    File.open("/tmp/#{filename}", "wb") do |f|
+      f.write(decoded_url)
+    end
+    manual.image.attach(io: File.open("/tmp/#{filename}"), filename: filename)
+    FileUtils.rm("/tmp/#{filename}")
+  end
 end

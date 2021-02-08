@@ -13,8 +13,26 @@ class ManualsController < ApplicationController
   end
 
   def create
-    @manual = Manual.new(manual_params)
-    if @manual.save
+    url = params[:manual][:image_url]
+    converted_url = url.sub %r/data:((image|application)\/.{3,}),/, ""
+
+    if url.blank? || url == converted_url
+      manual = Manual.new(manual_params)
+    else
+      manual = Manual.new(manual_params_no_image)
+      decoded_url = Base64.decode64(converted_url)
+      filename = Time.zone.now.to_s + '.png'
+
+      if Rails.env == "development"
+        # Local environment
+        manual.image_attach_local(manual, decoded_url, filename)
+      elsif Rails.env == "production"
+        # Production environment
+        manual.image_attach_production(manual, decoded_url, filename)
+      end
+    end
+
+    if manual.save
       @user = current_user
       redirect_to user_path(@user)
     else
@@ -49,6 +67,10 @@ class ManualsController < ApplicationController
 
   def manual_params
     params.require(:manual).permit(:title, :category_id, :description, :image).merge(user_id: current_user.id)
+  end
+
+  def manual_params_no_image
+    params.require(:manual).permit(:title, :category_id, :description).merge(user_id: current_user.id)
   end
 
   def manual_find
