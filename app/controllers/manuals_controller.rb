@@ -58,13 +58,13 @@ class ManualsController < ApplicationController
       if manual.update(manual_params)
         redirect_to manual_path(@manual)
       else
-        render :edit
+        redirect_to edit_manual_path(@manual)
       end
     else
       if manual.update(manual_params_no_image)
         redirect_to manual_path(@manual)
       else
-        render :edit
+        redirect_to edit_manual_path(@manual)
       end
       decoded_url = Base64.decode64(converted_url)
       filename = Time.zone.now.to_s + '.png'

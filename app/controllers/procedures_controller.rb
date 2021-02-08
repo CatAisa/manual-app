@@ -48,13 +48,13 @@ class ProceduresController < ApplicationController
       if procedure.update(procedure_params)
         redirect_to manual_path(@manual)
       else
-        render :edit
+        redirect_to edit_manual_procedure_path(@manual, @procedure)
       end
     else
       if procedure.update(procedure_params_no_image)
         redirect_to manual_path(@manual)
       else
-        render :edit
+        redirect_to edit_manual_procedure_path(@manual, @procedure)
       end
       decoded_url = Base64.decode64(converted_url)
       filename = Time.zone.now.to_s + '.png'
