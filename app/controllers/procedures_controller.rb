@@ -40,10 +40,32 @@ class ProceduresController < ApplicationController
   end
 
   def update
-    if @procedure.update(procedure_params)
-      redirect_to manual_path(@manual)
+    procedure = @procedure
+    url = params[:procedure][:image_url]
+    converted_url = url.sub %r/data:((image|application)\/.{3,}),/, ""
+
+    if url.blank? || url == converted_url
+      if procedure.update(procedure_params)
+        redirect_to manual_path(@manual)
+      else
+        render :edit
+      end
     else
-      render :edit
+      if procedure.update(procedure_params_no_image)
+        redirect_to manual_path(@manual)
+      else
+        render :edit
+      end
+      decoded_url = Base64.decode64(converted_url)
+      filename = Time.zone.now.to_s + '.png'
+
+      if Rails.env == "development"
+        # Local environment
+        procedure.image_attach_local(procedure, decoded_url, filename)
+      elsif Rails.env == "production"
+        # Production environment
+        procedure.image_attach_production(procedure, decoded_url, filename)
+      end
     end
   end
 
