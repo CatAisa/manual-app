@@ -54,7 +54,7 @@
     <%= form_with model: @review, url: manual_reviews_path(@manual), id: "review-form", local: true do |f| %>
       <div class="review-form">
         <%= f.text_field :content, class: "review-submit", id: "review-text" %>
-        <%= f.submit '送信', class: "review-submit-btn", manual_id: @manual.id %>
+        <%= f.submit '送信', class: "review-submit-btn", id: "review-submit-btn", manual_id: @manual.id %>
       </div>
     <% end %>
   </div>
