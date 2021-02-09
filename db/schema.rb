@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_26_101501) do
+ActiveRecord::Schema.define(version: 2021_02_09_115234) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -84,6 +84,16 @@ ActiveRecord::Schema.define(version: 2021_01_26_101501) do
     t.index ["user_id"], name: "index_releases_on_user_id"
   end
 
+  create_table "reviews", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.text "content"
+    t.bigint "user_id", null: false
+    t.bigint "manual_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["manual_id"], name: "index_reviews_on_manual_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
+
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "nickname", null: false
     t.string "email", default: "", null: false
@@ -108,4 +118,6 @@ ActiveRecord::Schema.define(version: 2021_01_26_101501) do
   add_foreign_key "procedures", "users"
   add_foreign_key "releases", "manuals"
   add_foreign_key "releases", "users"
+  add_foreign_key "reviews", "manuals"
+  add_foreign_key "reviews", "users"
 end
