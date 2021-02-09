@@ -44,6 +44,7 @@ class ManualsController < ApplicationController
     @procedures = @manual.procedures.includes(:user)
     @comment = Comment.new
     @release = Release.new
+    @review = Review.new
   end
 
   def edit

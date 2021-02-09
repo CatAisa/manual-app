@@ -29,7 +29,7 @@
 }
 
 .procedure-top-contents {
-  height: 310px;
+  height: 330px;
   align-items: center;
   display: flex;
   padding: 0 20px;
@@ -60,11 +60,20 @@
 .procedure-top-description {
   /* 全角160文字以下 */
   border: 1px solid #000000;
-  height: 250px;
+  height: 270px;
+  width: 300px;
   overflow: scroll;
   margin-top: 5px;
   background-color: white;
   white-space: pre-line;
+}
+@media (max-width: 680px) {
+  .procedure-top-item {
+    width: 40vw;
+  }
+  .procedure-top-description {
+    width: 40vw;
+  }
 }
 
 .procedure-contents {
@@ -107,19 +116,19 @@
   white-space: pre-line;
 }
 
-.procedure-comment-contents {
+.procedure-comment-contents, .review-contents {
   margin: 10px 0 0 20px;
   width: 100%;
   height: 100%;
   overflow: scroll;
 }
 @media (max-width: 680px){
-  .procedure-comment-contents {
+  .procedure-comment-contents, .review-contents {
     display: none;
   }
 }
 
-.procedure-comments-index {
+.procedure-comments-index, .reviews-index {
   width: 700px;
   height: 290px;
   background-color: white;
@@ -127,32 +136,32 @@
   padding: 5px;
 }
 
-.procedure-comment {
+.procedure-comment, .review {
   margin-bottom: 5px;
   background-color: #e6e6fa;
   border-radius: 10px;
   padding: 0 5px;
 }
 
-.pro-comment-header {
+.pro-comment-header, .review-header {
   border-bottom: 1px solid #000000;
 }
 
-.comment-time {
+.comment-time, .review-time {
   margin-left: 20px;
   font-size: 12px;
 }
 
-.pro-comment-text {
+.pro-comment-text, .review-text {
   word-wrap: break-word;
 }
 
-.pro-comment-form {
+.pro-comment-form, .review-form {
   display: flex;
   margin-top: 3px;
 }
 
-.comment-submit {
+.comment-submit, .review-submit {
   width: 80%;
 }
 
@@ -160,7 +169,7 @@
   display: contents;
 }
 
-.comment-submit-btn {
+.comment-submit-btn, .review-submit-btn {
   padding: 0 3px;
   margin-left: 3px;
 }
