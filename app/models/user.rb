@@ -10,6 +10,7 @@ class User < ApplicationRecord
   has_many :releases
   has_many :likes
   has_many :like_manuals, through: :likes, source: :manual
+  has_many :reviews
 
   validates :nickname, presence: true
 

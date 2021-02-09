@@ -6,6 +6,7 @@ class Manual < ApplicationRecord
   has_one :release, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :like_users, through: :likes, source: :user
+  has_many :reviews
 
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category
