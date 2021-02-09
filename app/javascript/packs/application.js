@@ -12,6 +12,7 @@ require("../canvas")
 require("../form")
 require("../drawing")
 require("../review_post")
+require("../review_delete")
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference
