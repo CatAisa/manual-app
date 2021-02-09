@@ -1,6 +1,4 @@
 function drawingTitle() {
-  console.log("loadPaint");
-
   const canvas = document.getElementById("canvas");
   const ctx = canvas.getContext("2d");
 
@@ -60,6 +58,10 @@ function drawingTitle() {
   });
 };
 
-if (document.URL.match(/procedures/)) {
+if (document.URL.match(/procedures/) || document.URL.match(/edit/)) {
+  window.addEventListener("load", drawingTitle);
+};
+
+if (document.URL.match(/manuals/) && !document.URL.match(/manuals\/\d/)) {
   window.addEventListener("load", drawingTitle);
 };

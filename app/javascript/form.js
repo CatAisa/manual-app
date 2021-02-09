@@ -1,6 +1,4 @@
 function formTitle() {
-  console.log("loadForm");
-
   const imageSave = document.getElementById("image-save");
   imageSave.addEventListener("click", () => {
     const canvas = document.getElementById("canvas");
@@ -14,6 +12,10 @@ function formTitle() {
   });
 };
 
-if (document.URL.match(/procedures/)) {
+if (document.URL.match(/procedures/) || document.URL.match(/edit/)) {
+  window.addEventListener("load", formTitle);
+};
+
+if (document.URL.match(/manuals/) && !document.URL.match(/manuals\/\d/)) {
   window.addEventListener("load", formTitle);
 };

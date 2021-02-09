@@ -1,0 +1,30 @@
+<div>
+  <canvas class="canvas" width="300px" height="300" id="crop-area"></canvas>
+  <canvas class="canvas" width="300px" height="300" id="crop-canvas"></canvas>
+  <ul class="crop-list">
+    <li><a href="#" class="crop-size" data-size="75">0.25x</a></li>
+    <li><a href="#" class="crop-size" data-size="150">0.5x</a></li>
+    <li><a href="#" class="crop-size" data-size="225">0.75x</a></li>
+    <li><a href="#" class="crop-size" data-size="300">1.0x</a></li>
+  </ul>
+</div>
+
+<canvas class="canvas" width="500px" height="500px" id="canvas"></canvas>
+
+<div class="image-contents">
+  <span class="image-save" id="image-save">画像保存</span>
+  <span id="saved-message">編集画像を保存しました</span>
+  <ul class="paint-status">
+    <li class="color">色：
+      <a href="#" class="black" data-color="0, 0, 0, 1"></a>
+      <a href="#" class="red" data-color="255, 0, 0, 1"></a>
+      <a href="#" class="blue" data-color="0, 0, 255, 1"></a>
+    </li>
+
+    <li class="bold">太さ：
+      <a href="#" class="small" data-bold="1">小</a>
+      <a href="#" class="middle" data-bold="5">中</a>
+      <a href="#" class="large" data-bold="10">大</a>
+    </li>
+  </ul>
+</div>

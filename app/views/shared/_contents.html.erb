@@ -23,9 +23,9 @@
 
   <div class="mypage-image-content">
     <% if manual.image.attached? %>
-      <%= link_to image_tag(manual.image.variant(resize: '300x250')), manual_path(manual) %>
+      <%= link_to image_tag(manual.image.variant(resize: '250x250')), manual_path(manual) %>
     <% else %>
-      <%= link_to image_tag("no_image.png", size: '300x240'), manual_path(manual) %>
+      <%= link_to image_tag("no_image.png", size: '250x240'), manual_path(manual) %>
     <% end %>
   </div>
 
