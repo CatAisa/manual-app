@@ -7,7 +7,7 @@ class Procedure < ApplicationRecord
   validates :title, presence: true
 
   def image_attach_local(procedure, decoded_url, filename)
-    File.open("#{Rails.root}/tmp/images/#{filename}", "wb") do |f|
+    File.open("#{Rails.root}/tmp/images/#{filename}", 'wb') do |f|
       f.write(decoded_url)
     end
     procedure.image.attach(io: File.open("#{Rails.root}/tmp/images/#{filename}"), filename: filename)
@@ -15,7 +15,7 @@ class Procedure < ApplicationRecord
   end
 
   def image_attach_production(procedure, decoded_url, filename)
-    File.open("/tmp/#{filename}", "wb") do |f|
+    File.open("/tmp/#{filename}", 'wb') do |f|
       f.write(decoded_url)
     end
     procedure.image.attach(io: File.open("/tmp/#{filename}"), filename: filename)

@@ -1,5 +1,5 @@
 function commentDelete() {
-  comments = document.querySelectorAll(".procedure-comment");
+  const comments = document.querySelectorAll(".procedure-comment");
   comments.forEach(function(comment) {
     const commentId = comment.getAttribute("comment_id");
     const deleteId = `comment-delete${commentId}`;

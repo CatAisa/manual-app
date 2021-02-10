@@ -32,6 +32,32 @@
     <p>【マニュアル説明】</p>
     <div class="procedure-top-description"><%= @manual.description %></div>
   </div>
+
+  <div class="review-contents">
+    <div class="reviews-index">
+      <% @manual.reviews.each do |review| %>
+        <div class="review" style="" review_id=<%= review.id %>>
+          <div class="review-header">
+            <%= review.user.nickname %>
+            <span class="review-time"><%= l review.created_at %></span>
+            <% if @manual.user.id == current_user.id || review.user.id == current_user.id %>
+              <%= link_to '削除', manual_review_path(@manual, review), method: :delete, id: "review-delete#{review.id}" %>
+            <% else %>
+              <%= link_to '削除', manual_review_path(@manual, review), method: :delete, id: "review-delete#{review.id}", style: "display: none;" %>
+            <% end %>
+          </div>
+          <div class="review-text"><%= review.content %></div>
+        </div>
+      <% end %>
+      <div id="review-list"></div>
+    </div>
+    <%= form_with model: @review, url: manual_reviews_path(@manual), id: "review-form", local: true do |f| %>
+      <div class="review-form">
+        <%= f.text_field :content, class: "review-submit", id: "review-text" %>
+        <%= f.submit '送信', class: "review-submit-btn", id: "review-submit-btn", manual_id: @manual.id %>
+      </div>
+    <% end %>
+  </div>
 </div>
 
 <% @procedures.each_with_index do |procedure, index| %>
@@ -71,7 +97,7 @@
             <div class="pro-comment-text"><%= comment.content %></div>
           </div>
         <% end %>
-        <div id=list<%= procedure.id %>></div>
+        <div id="list<%= procedure.id %>"></div>
       </div>
       <%= form_with model: @comment, url: manual_procedure_comments_path(@manual, procedure), id: "comment-form#{procedure.id}", local: true do |f| %>
         <div class="pro-comment-form">
