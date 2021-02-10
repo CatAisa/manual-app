@@ -8,9 +8,6 @@ class ReviewsController < ApplicationController
     @review = @manual.reviews.new(review_params)
     if @review.save
       render json: { review: @review, user: current_user }
-    else
-      @procedures = @manual.procedures.includes(:user)
-      render 'manuals/show'
     end
   end
 

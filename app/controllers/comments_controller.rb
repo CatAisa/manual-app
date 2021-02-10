@@ -9,9 +9,6 @@ class CommentsController < ApplicationController
     @comment = @procedure.comments.new(comment_params)
     if @comment.save
       render json: { comment: @comment, user: current_user }
-    else
-      @procedures = @manual.procedures.includes(:user)
-      render 'manuals/show'
     end
   end
 
