@@ -14,7 +14,7 @@ class ManualsController < ApplicationController
 
   def create
     url = params[:manual][:image_url]
-    converted_url = url.sub %r/data:((image|application)\/.{3,}),/, ""
+    converted_url = url.sub %r/data:((image|application)\/.{3,}),/, ''
 
     if url.blank? || url == converted_url
       manual = Manual.new(manual_params)
@@ -23,10 +23,10 @@ class ManualsController < ApplicationController
       decoded_url = Base64.decode64(converted_url)
       filename = Time.zone.now.to_s + '.png'
 
-      if Rails.env == "development"
+      if Rails.env == 'development'
         # Local environment
         manual.image_attach_local(manual, decoded_url, filename)
-      elsif Rails.env == "production"
+      elsif Rails.env == 'production'
         # Production environment
         manual.image_attach_production(manual, decoded_url, filename)
       end
@@ -53,7 +53,7 @@ class ManualsController < ApplicationController
   def update
     manual = @manual
     url = params[:manual][:image_url]
-    converted_url = url.sub %r/data:((image|application)\/.{3,}),/, ""
+    converted_url = url.sub %r/data:((image|application)\/.{3,}),/, ''
 
     if url.blank? || url == converted_url
       if manual.update(manual_params)
@@ -70,10 +70,10 @@ class ManualsController < ApplicationController
       decoded_url = Base64.decode64(converted_url)
       filename = Time.zone.now.to_s + '.png'
 
-      if Rails.env == "development"
+      if Rails.env == 'development'
         # Local environment
         manual.image_attach_local(manual, decoded_url, filename)
-      elsif Rails.env == "production"
+      elsif Rails.env == 'production'
         # Production environment
         manual.image_attach_production(manual, decoded_url, filename)
       end

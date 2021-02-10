@@ -7,9 +7,7 @@ class CommentsController < ApplicationController
   def create
     @procedure = @manual.procedures.find(params[:procedure_id])
     @comment = @procedure.comments.new(comment_params)
-    if @comment.save
-      render json: { comment: @comment, user: current_user }
-    end
+    render json: { comment: @comment, user: current_user } if @comment.save
   end
 
   def destroy
@@ -20,7 +18,7 @@ class CommentsController < ApplicationController
 
   def comment_params
     params.require(:comment).permit(:content, :procedure_id).merge(user_id: current_user.id,
-                                                                               manual_id: params[:manual_id])
+                                                                   manual_id: params[:manual_id])
   end
 
   def manual_find

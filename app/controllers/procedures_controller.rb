@@ -10,7 +10,7 @@ class ProceduresController < ApplicationController
 
   def create
     url = params[:procedure][:image_url]
-    converted_url = url.sub %r/data:((image|application)\/.{3,}),/, ""
+    converted_url = url.sub %r/data:((image|application)\/.{3,}),/, ''
 
     if url.blank? || url == converted_url
       procedure = @manual.procedures.new(procedure_params)
@@ -19,10 +19,10 @@ class ProceduresController < ApplicationController
       decoded_url = Base64.decode64(converted_url)
       filename = Time.zone.now.to_s + '.png'
 
-      if Rails.env == "development"
+      if Rails.env == 'development'
         # Local environment
         procedure.image_attach_local(procedure, decoded_url, filename)
-      elsif Rails.env == "production"
+      elsif Rails.env == 'production'
         # Production environment
         procedure.image_attach_production(procedure, decoded_url, filename)
       end
@@ -42,7 +42,7 @@ class ProceduresController < ApplicationController
   def update
     procedure = @procedure
     url = params[:procedure][:image_url]
-    converted_url = url.sub %r/data:((image|application)\/.{3,}),/, ""
+    converted_url = url.sub %r/data:((image|application)\/.{3,}),/, ''
 
     if url.blank? || url == converted_url
       if procedure.update(procedure_params)
@@ -59,10 +59,10 @@ class ProceduresController < ApplicationController
       decoded_url = Base64.decode64(converted_url)
       filename = Time.zone.now.to_s + '.png'
 
-      if Rails.env == "development"
+      if Rails.env == 'development'
         # Local environment
         procedure.image_attach_local(procedure, decoded_url, filename)
-      elsif Rails.env == "production"
+      elsif Rails.env == 'production'
         # Production environment
         procedure.image_attach_production(procedure, decoded_url, filename)
       end
