@@ -31,6 +31,7 @@ ja:
         nickname: ニックネーム
       manual:
         title: マニュアル名
+        category_id: カテゴリー
       procedure:
         title: タイトル
     models:
