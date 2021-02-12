@@ -16,12 +16,12 @@ RSpec.describe Like, type: :model do
       it 'userが紐付いていないと設定できない' do
         @like.user = nil
         @like.valid?
-        expect(@like.errors.full_messages).to include('User translation missing: ja.activerecord.errors.models.like.attributes.user.required')
+        expect(@like.errors.full_messages).to include('Userを入力してください')
       end
       it 'manualが紐付いていないと設定できない' do
         @like.manual = nil
         @like.valid?
-        expect(@like.errors.full_messages).to include('Manual translation missing: ja.activerecord.errors.models.like.attributes.manual.required')
+        expect(@like.errors.full_messages).to include('Manualを入力してください')
       end
     end
   end

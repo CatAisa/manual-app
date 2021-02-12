@@ -16,12 +16,12 @@ RSpec.describe Release, type: :model do
       it 'userが紐付いていないと設定できない' do
         @release.user = nil
         @release.valid?
-        expect(@release.errors.full_messages).to include('User translation missing: ja.activerecord.errors.models.release.attributes.user.required')
+        expect(@release.errors.full_messages).to include('Userを入力してください')
       end
       it 'manualが紐付いていないと設定できない' do
         @release.manual = nil
         @release.valid?
-        expect(@release.errors.full_messages).to include('Manual translation missing: ja.activerecord.errors.models.release.attributes.manual.required')
+        expect(@release.errors.full_messages).to include('Manualを入力してください')
       end
     end
   end
