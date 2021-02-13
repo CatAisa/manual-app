@@ -13,7 +13,7 @@ class Manual < ApplicationRecord
 
   with_options presence: true do
     validates :title
-    validates :category_id, numericality: { other_than: 0, message: 'is invalid. Select status' }
+    validates :category_id, numericality: { other_than: 0, message: 'を選択してください' }
   end
 
   def image_attach_local(manual, decoded_url, filename)

@@ -24,22 +24,22 @@ RSpec.describe Manual, type: :model do
       it 'titleが空だと保存できない' do
         @manual.title = nil
         @manual.valid?
-        expect(@manual.errors.full_messages).to include("Title can't be blank")
+        expect(@manual.errors.full_messages).to include('マニュアル名を入力してください')
       end
       it 'category_idが空だと保存できない' do
         @manual.category_id = nil
         @manual.valid?
-        expect(@manual.errors.full_messages).to include("Category can't be blank")
+        expect(@manual.errors.full_messages).to include('カテゴリーを入力してください')
       end
       it 'category_idの値が0だと保存できない' do
         @manual.category_id = 0
         @manual.valid?
-        expect(@manual.errors.full_messages).to include('Category is invalid. Select status')
+        expect(@manual.errors.full_messages).to include('カテゴリーを選択してください')
       end
       it 'Userが紐づいていないと保存できない' do
         @manual.user = nil
         @manual.valid?
-        expect(@manual.errors.full_messages).to include('User must exist')
+        expect(@manual.errors.full_messages).to include('Userを入力してください')
       end
     end
   end

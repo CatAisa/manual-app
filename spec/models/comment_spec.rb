@@ -16,22 +16,22 @@ RSpec.describe Comment, type: :model do
       it 'contentが空だと保存できない' do
         @comment.content = nil
         @comment.valid?
-        expect(@comment.errors.full_messages).to include('Content translation missing: ja.activerecord.errors.models.comment.attributes.content.blank')
+        expect(@comment.errors.full_messages).to include('Contentを入力してください')
       end
       it 'Userが紐付いていないと保存できない' do
         @comment.user = nil
         @comment.valid?
-        expect(@comment.errors.full_messages).to include('User translation missing: ja.activerecord.errors.models.comment.attributes.user.required')
+        expect(@comment.errors.full_messages).to include('Userを入力してください')
       end
       it 'Manualが紐付いていないと保存できない' do
         @comment.manual = nil
         @comment.valid?
-        expect(@comment.errors.full_messages).to include('Manual translation missing: ja.activerecord.errors.models.comment.attributes.manual.required')
+        expect(@comment.errors.full_messages).to include('Manualを入力してください')
       end
       it 'Procedureが紐付いていないと保存できない' do
         @comment.procedure = nil
         @comment.valid?
-        expect(@comment.errors.full_messages).to include('Procedure translation missing: ja.activerecord.errors.models.comment.attributes.procedure.required')
+        expect(@comment.errors.full_messages).to include('Procedureを入力してください')
       end
     end
   end

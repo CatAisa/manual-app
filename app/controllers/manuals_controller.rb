@@ -36,6 +36,7 @@ class ManualsController < ApplicationController
       @user = current_user
       redirect_to user_path(@user)
     else
+      @manual = manual
       render :new
     end
   end

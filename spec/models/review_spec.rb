@@ -16,17 +16,17 @@ RSpec.describe Review, type: :model do
       it 'contentが空だと保存できない' do
         @review.content = nil
         @review.valid?
-        expect(@review.errors.full_messages).to include('Content translation missing: ja.activerecord.errors.models.review.attributes.content.blank')
+        expect(@review.errors.full_messages).to include('Contentを入力してください')
       end
       it 'Userが紐付いていないと保存できない' do
         @review.user = nil
         @review.valid?
-        expect(@review.errors.full_messages).to include('User translation missing: ja.activerecord.errors.models.review.attributes.user.required')
+        expect(@review.errors.full_messages).to include('Userを入力してください')
       end
       it 'Manualが紐付いていないと保存できない' do
         @review.manual = nil
         @review.valid?
-        expect(@review.errors.full_messages).to include('Manual translation missing: ja.activerecord.errors.models.review.attributes.manual.required')
+        expect(@review.errors.full_messages).to include('Manualを入力してください')
       end
     end
   end

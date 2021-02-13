@@ -48,8 +48,12 @@ function canvasTitle() {
       ctxCrop.drawImage(image, 0, 0, cw, apCrop*iv);
       ctx.drawImage(image, 0, 0, ow, ap*iv);
 
-      cnvRed.addEventListener("mousedown", () => {
+      cnvRed.addEventListener("mousedown", (e) => {
         clickFig = 1;
+        crw = e.offsetX;
+        crv = e.offsetY;
+        drawRed(crw, crv);
+        drawCanvas(crw, crv);
       });
       cnvRed.addEventListener("mouseup", () => {
         clickFig = 0;
@@ -96,10 +100,10 @@ function canvasTitle() {
   });
 };
 
-if (document.URL.match(/procedures/) || document.URL.match(/edit/)) {
-  window.addEventListener("load", canvasTitle);
-};
-
-if (document.URL.match(/manuals/) && !document.URL.match(/manuals\/\d/)) {
-  window.addEventListener("load", canvasTitle);
+if (document.URL.match(/manuals/)) {
+  if (document.URL.match(/procedures/) || document.URL.match(/edit/)) {
+    window.addEventListener("load", canvasTitle);
+  } else if (!document.URL.match(/manuals\/\d/)) {
+    window.addEventListener("load", canvasTitle);
+  };
 };

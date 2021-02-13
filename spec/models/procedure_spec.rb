@@ -24,17 +24,17 @@ RSpec.describe Procedure, type: :model do
       it 'titleが空だと保存できない' do
         @procedure.title = nil
         @procedure.valid?
-        expect(@procedure.errors.full_messages).to include("Title can't be blank")
+        expect(@procedure.errors.full_messages).to include('タイトルを入力してください')
       end
       it 'manualが紐付いていないと保存できない' do
         @procedure.manual = nil
         @procedure.valid?
-        expect(@procedure.errors.full_messages).to include('Manual must exist')
+        expect(@procedure.errors.full_messages).to include('Manualを入力してください')
       end
       it 'userが紐付いていないと保存できない' do
         @procedure.user = nil
         @procedure.valid?
-        expect(@procedure.errors.full_messages).to include('User must exist')
+        expect(@procedure.errors.full_messages).to include('Userを入力してください')
       end
     end
   end

@@ -58,10 +58,10 @@ function drawingTitle() {
   });
 };
 
-if (document.URL.match(/procedures/) || document.URL.match(/edit/)) {
-  window.addEventListener("load", drawingTitle);
-};
-
-if (document.URL.match(/manuals/) && !document.URL.match(/manuals\/\d/)) {
-  window.addEventListener("load", drawingTitle);
+if (document.URL.match(/manuals/)) {
+  if (document.URL.match(/procedures/) || document.URL.match(/edit/)) {
+    window.addEventListener("load", drawingTitle);
+  } else if (!document.URL.match(/manuals\/\d/)) {
+    window.addEventListener("load", drawingTitle);
+  };
 };

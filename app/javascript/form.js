@@ -12,10 +12,10 @@ function formTitle() {
   });
 };
 
-if (document.URL.match(/procedures/) || document.URL.match(/edit/)) {
-  window.addEventListener("load", formTitle);
-};
-
-if (document.URL.match(/manuals/) && !document.URL.match(/manuals\/\d/)) {
-  window.addEventListener("load", formTitle);
+if (document.URL.match(/manuals/)) {
+  if (document.URL.match(/procedures/) || document.URL.match(/edit/)) {
+    window.addEventListener("load", formTitle);
+  } else if (!document.URL.match(/manuals\/\d/)) {
+    window.addEventListener("load", formTitle);
+  };
 };
