@@ -16,12 +16,12 @@ RSpec.describe User, type: :model do
       it 'nicknameが空だと保存できない' do
         @user.nickname = nil
         @user.valid?
-        expect(@user.errors.full_messages).to include("ニックネームを入力してください")
+        expect(@user.errors.full_messages).to include('ニックネームを入力してください')
       end
       it 'emailが空だと保存できない' do
         @user.email = nil
         @user.valid?
-        expect(@user.errors.full_messages).to include("Eメールを入力してください")
+        expect(@user.errors.full_messages).to include('Eメールを入力してください')
       end
       it 'emailが「@」を含まないと保存できない' do
         @user.email = 'test123'
@@ -38,7 +38,7 @@ RSpec.describe User, type: :model do
       it 'passwordが空だと保存できない' do
         @user.password = nil
         @user.valid?
-        expect(@user.errors.full_messages).to include("パスワードを入力してください")
+        expect(@user.errors.full_messages).to include('パスワードを入力してください')
       end
       it 'passwordが5文字以下だと保存できない' do
         password = @user.password = 'abc12'
@@ -49,7 +49,7 @@ RSpec.describe User, type: :model do
       it 'passwordとpassword_confirmationが一致していないと保存できない' do
         @user.password_confirmation = @user.password + 'abc123'
         @user.valid?
-        expect(@user.errors.full_messages).to include("パスワード（確認用）とパスワードの入力が一致しません")
+        expect(@user.errors.full_messages).to include('パスワード（確認用）とパスワードの入力が一致しません')
       end
     end
   end

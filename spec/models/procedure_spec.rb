@@ -24,7 +24,7 @@ RSpec.describe Procedure, type: :model do
       it 'titleが空だと保存できない' do
         @procedure.title = nil
         @procedure.valid?
-        expect(@procedure.errors.full_messages).to include("タイトルを入力してください")
+        expect(@procedure.errors.full_messages).to include('タイトルを入力してください')
       end
       it 'manualが紐付いていないと保存できない' do
         @procedure.manual = nil
