@@ -1,7 +1,7 @@
 <div class="new-manual-name">【マニュアル名】
   <span class="need-icon">必須</span>
 </div>
-<%= f.text_field :title, placeholder: "(例)", autofocus: true, class: "form-manual-name" %>
+<%= f.text_field :title, placeholder: "  20文字以内", autofocus: true, class: "form-manual-name" %>
 
 <div class="new-manual-category">【カテゴリー】
   <span class="need-icon">必須</span>
@@ -16,4 +16,4 @@
 <%= render "shared/canvas" %>
 
 <div class="new-manual-description">【マニュアル説明】</div>
-<%= f.text_area :description, placeholder: "(例)", class: "form-manual-description" %>
+<%= f.text_area :description, placeholder: "  400文字以内", class: "form-manual-description" %>
