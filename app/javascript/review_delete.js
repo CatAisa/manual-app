@@ -1,4 +1,5 @@
 function reviewDelete() {
+  console.log("reviewDelete");
   const reviews = document.querySelectorAll(".review");
   reviews.forEach(function(review) {
     const reviewId = review.getAttribute("review_id");

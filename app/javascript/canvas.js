@@ -1,4 +1,5 @@
 function canvasTitle() {
+  console.log("canvas");
   let clickFig = 0;
   let crw = 0;
   let crv = 0;
