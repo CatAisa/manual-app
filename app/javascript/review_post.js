@@ -1,5 +1,4 @@
 function reviewPost() {
-  console.log("reviewPost");
   const submitReview = document.getElementById("review-submit-btn");
   submitReview.addEventListener("click", (e) => {
     e.preventDefault();

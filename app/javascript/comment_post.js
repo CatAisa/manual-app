@@ -1,5 +1,4 @@
 function commentPost() {
-  console.log("commentPost");
   const submits = document.querySelectorAll(".comment-submit-btn");
   submits.forEach(function(submit) {
     submit.addEventListener("click", (e) => {
