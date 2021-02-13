@@ -9,26 +9,26 @@
     <div class="new-user-nickname">【ニックネーム】
       <span class="need-icon">必須</span>
     </div>
-    <%= f.text_field :nickname, autofocus: true, autocomplete: "nickname", placeholder: "(例)", class: "form-user-nickname" %>
+    <%= f.text_field :nickname, autofocus: true, autocomplete: "nickname", placeholder: "  半角英数10文字以内", class: "form-user-nickname" %>
   
     <div class="new-user-email">【メールアドレス】
       <span class="need-icon">必須</span>
     </div>
-    <%= f.email_field :email, autocomplete: "email", placeholder: "(例)", class: "form-user-email" %>
+    <%= f.email_field :email, autocomplete: "email", placeholder: "  PC・携帯どちらでも可", class: "form-user-email" %>
 
     <div class="new-user-password">【変更後のパスワード】</div>
     <div class="user-password-text">変更しない場合は空のままにしてください</div>
-    <%= f.password_field :password, autocomplete: "new-password", placeholder: "(例)", class: "form-user-password" %>
+    <%= f.password_field :password, autocomplete: "new-password", placeholder: "  半角英数8文字以上（※英字と数字両方を含んでください）", class: "form-user-password" %>
 
     <div class="new-user-password">【変更後のパスワード(確認用)】</div>
     <div class="user-password-text">変更しない場合は空のままにしてください</div>
-    <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "(例)", class: "form-user-password" %>
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "  パスワードと同じ値を入力してください", class: "form-user-password" %>
 
     <div class="new-user-password">【現在のパスワード】
       <span class="need-icon">必須</span>
     </div>
     <div class="user-password-text">確認のため入力してください</div>
-    <%= f.password_field :current_password, autocomplete: "current-password", placeholder: "(例)", class: "form-user-password" %>
+    <%= f.password_field :current_password, autocomplete: "current-password", class: "form-user-password" %>
 
     <div>
       <%= f.submit "更新完了", class: "new-submit-btn" %>
