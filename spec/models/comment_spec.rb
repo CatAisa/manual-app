@@ -10,6 +10,10 @@ RSpec.describe Comment, type: :model do
       it 'content, user_id, manual_id, procedure_idが存在すれば保存できる' do
         expect(@comment).to be_valid
       end
+      it 'contentが200文字以内ならば保存できる' do
+        @comment.content = "あ" * 200
+        expect(@comment).to be_valid
+      end
     end
 
     context 'コメント情報を保存できないとき' do
@@ -17,6 +21,11 @@ RSpec.describe Comment, type: :model do
         @comment.content = nil
         @comment.valid?
         expect(@comment.errors.full_messages).to include('Contentを入力してください')
+      end
+      it 'contentが201文字以上だと保存できない' do
+        @comment.content = "あ" * 201
+        @comment.valid?
+        expect(@comment.errors.full_messages).to include('Contentは200文字以内で入力してください')
       end
       it 'Userが紐付いていないと保存できない' do
         @comment.user = nil
