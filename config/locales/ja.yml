@@ -32,8 +32,10 @@ ja:
       manual:
         title: マニュアル名
         category_id: カテゴリー
+        description: マニュアル説明
       procedure:
         title: タイトル
+        description: 内容
     models:
       user: ユーザー
   devise:

@@ -10,6 +10,15 @@ RSpec.describe User, type: :model do
       it 'nickname, email, password, password_confirmationが存在すれば保存できる' do
         expect(@user).to be_valid
       end
+      it 'nicknameが半角英数10文字以内ならば保存できる' do
+        @user.nickname = 'abcde12345'
+        expect(@user).to be_valid
+      end
+      it 'passwordが半角英字と半角数字の両方を含む8文字以上ならば保存できる' do
+        password = 'abcd1234'
+        @user.password = password
+        @user.password_confirmation = @user.password
+      end
     end
 
     context 'ユーザー情報を保存できないとき' do
@@ -17,6 +26,16 @@ RSpec.describe User, type: :model do
         @user.nickname = nil
         @user.valid?
         expect(@user.errors.full_messages).to include('ニックネームを入力してください')
+      end
+      it 'nicknameが半角英数以外だと保存できない' do
+        @user.nickname = 'さとう'
+        @user.valid?
+        expect(@user.errors.full_messages).to include('ニックネームは半角英数10文字以内で入力してください')
+      end
+      it 'nicknameが11文字以上だと保存できない' do
+        @user.nickname = 'abcde123456'
+        @user.valid?
+        expect(@user.errors.full_messages).to include('ニックネームは10文字以内で入力してください')
       end
       it 'emailが空だと保存できない' do
         @user.email = nil
@@ -40,11 +59,25 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include('パスワードを入力してください')
       end
-      it 'passwordが5文字以下だと保存できない' do
-        password = @user.password = 'abc12'
+      it 'passwordが7文字以下だと保存できない' do
+        password = @user.password = 'abc1234'
         @user.password_confirmation = password
         @user.valid?
-        expect(@user.errors.full_messages).to include('パスワードは6文字以上で入力してください')
+        expect(@user.errors.full_messages).to include('パスワードは8文字以上で入力してください')
+      end
+      it 'passwordが半角英数以外だと保存できない' do
+        password = 'ab123１２３'
+        @user.password = password
+        @user.password_confirmation = password
+        @user.valid?
+        expect(@user.errors.full_messages).to include('パスワードは半角英字と半角数字の両方を含んでください')
+      end
+      it 'passwordが英字と数字両方を含まないと保存できない' do
+        password = '12345678'
+        @user.password = password
+        @user.password_confirmation = password
+        @user.valid?
+        expect(@user.errors.full_messages).to include('パスワードは半角英字と半角数字の両方を含んでください')
       end
       it 'passwordとpassword_confirmationが一致していないと保存できない' do
         @user.password_confirmation = @user.password + 'abc123'

@@ -53,7 +53,7 @@
     </div>
     <%= form_with model: @review, url: manual_reviews_path(@manual), id: "review-form", local: true do |f| %>
       <div class="review-form">
-        <%= f.text_field :content, class: "review-submit", id: "review-text" %>
+        <%= f.text_field :content, class: "review-submit", id: "review-text", placeholder: "  200文字以内" %>
         <%= f.submit '送信', class: "review-submit-btn", id: "review-submit-btn", manual_id: @manual.id %>
       </div>
     <% end %>
@@ -101,7 +101,7 @@
       </div>
       <%= form_with model: @comment, url: manual_procedure_comments_path(@manual, procedure), id: "comment-form#{procedure.id}", local: true do |f| %>
         <div class="pro-comment-form">
-          <%= f.text_field :content, class: "comment-submit", id: "comment-text#{procedure.id}" %>
+          <%= f.text_field :content, class: "comment-submit", id: "comment-text#{procedure.id}", placeholder: "  200文字以内" %>
           <%= f.submit '送信', class: "comment-submit-btn", manual_id: @manual.id, procedure_id: procedure.id %>
         </div>
       <% end %>

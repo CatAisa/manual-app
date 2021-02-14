@@ -12,12 +12,12 @@
     <div class="new-user-email">【メールアドレス】
       <span class="need-icon">必須</span>
     </div>
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "(例)", class: "form-user-email" %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "  PC・携帯どちらでも可", class: "form-user-email" %>
 
     <div class="new-user-password">【パスワード】
       <span class="need-icon">必須</span>
     </div>
-    <%= f.password_field :password, autocomplete: "current-password", placeholder: "(例)", class: "form-user-password" %>
+    <%= f.password_field :password, autocomplete: "current-password", class: "form-user-password" %>
 
     <div>
       <%= f.submit "ユーザー情報送信", class: "new-submit-btn" %>

@@ -12,7 +12,10 @@ class User < ApplicationRecord
   has_many :like_manuals, through: :likes, source: :manual
   has_many :reviews
 
-  validates :nickname, presence: true
+  validates :nickname, presence: true, format: { with: /\A[a-zA-Z0-9]+\z/, message: 'は半角英数10文字以内で入力してください' },
+                       length: { maximum: 10 }
+  validates :password, format: { with: /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i, message: 'は半角英字と半角数字の両方を含んでください' },
+                       length: { minimum: 8 }
 
   def already_liked?(manual)
     likes.exists?(manual_id: manual.id)
