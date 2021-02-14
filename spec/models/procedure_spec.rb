@@ -11,7 +11,7 @@ RSpec.describe Procedure, type: :model do
         expect(@procedure).to be_valid
       end
       it 'titleが30文字以内ならば保存できる' do
-        @procedure.title = "あ" * 30
+        @procedure.title = 'あ' * 30
         expect(@procedure).to be_valid
       end
       it 'imageが空でも保存できる' do
@@ -23,7 +23,7 @@ RSpec.describe Procedure, type: :model do
         expect(@procedure).to be_valid
       end
       it 'descriptionが400文字以内ならば保存できる' do
-        @procedure.description = "あ" * 400
+        @procedure.description = 'あ' * 400
         expect(@procedure).to be_valid
       end
     end
@@ -35,12 +35,12 @@ RSpec.describe Procedure, type: :model do
         expect(@procedure.errors.full_messages).to include('タイトルを入力してください')
       end
       it 'titleが31文字以上だと保存できない' do
-        @procedure.title = "あ" * 31
+        @procedure.title = 'あ' * 31
         @procedure.valid?
         expect(@procedure.errors.full_messages).to include('タイトルは30文字以内で入力してください')
       end
       it 'descriptionが401文字以上だと保存できない' do
-        @procedure.description = "あ" * 401
+        @procedure.description = 'あ' * 401
         @procedure.valid?
         expect(@procedure.errors.full_messages).to include('内容は400文字以内で入力してください')
       end

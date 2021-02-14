@@ -11,7 +11,7 @@ RSpec.describe Comment, type: :model do
         expect(@comment).to be_valid
       end
       it 'contentが200文字以内ならば保存できる' do
-        @comment.content = "あ" * 200
+        @comment.content = 'あ' * 200
         expect(@comment).to be_valid
       end
     end
@@ -23,7 +23,7 @@ RSpec.describe Comment, type: :model do
         expect(@comment.errors.full_messages).to include('Contentを入力してください')
       end
       it 'contentが201文字以上だと保存できない' do
-        @comment.content = "あ" * 201
+        @comment.content = 'あ' * 201
         @comment.valid?
         expect(@comment.errors.full_messages).to include('Contentは200文字以内で入力してください')
       end

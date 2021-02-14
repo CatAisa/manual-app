@@ -11,11 +11,11 @@ RSpec.describe User, type: :model do
         expect(@user).to be_valid
       end
       it 'nicknameが半角英数10文字以内ならば保存できる' do
-        @user.nickname = "abcde12345"
+        @user.nickname = 'abcde12345'
         expect(@user).to be_valid
       end
       it 'passwordが半角英字と半角数字の両方を含む8文字以上ならば保存できる' do
-        password = "abcd1234"
+        password = 'abcd1234'
         @user.password = password
         @user.password_confirmation = @user.password
       end

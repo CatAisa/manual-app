@@ -11,7 +11,7 @@ RSpec.describe Review, type: :model do
         expect(@review).to be_valid
       end
       it 'contentが200文字以内ならば保存できる' do
-        @review.content = "あ" * 200
+        @review.content = 'あ' * 200
         expect(@review).to be_valid
       end
     end
@@ -23,7 +23,7 @@ RSpec.describe Review, type: :model do
         expect(@review.errors.full_messages).to include('Contentを入力してください')
       end
       it 'contentが201文字以上だと保存できない' do
-        @review.content = "あ" * 201
+        @review.content = 'あ' * 201
         @review.valid?
         expect(@review.errors.full_messages).to include('Contentは200文字以内で入力してください')
       end

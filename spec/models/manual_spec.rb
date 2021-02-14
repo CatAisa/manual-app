@@ -11,7 +11,7 @@ RSpec.describe Manual, type: :model do
         expect(@manual).to be_valid
       end
       it 'titleが20文字以内ならば保存できる' do
-        @manual.title = "あ" * 20
+        @manual.title = 'あ' * 20
         expect(@manual).to be_valid
       end
       it 'imageが空でも保存できる' do
@@ -23,7 +23,7 @@ RSpec.describe Manual, type: :model do
         expect(@manual).to be_valid
       end
       it 'descriptionが160文字以内ならば保存できる' do
-        @manual.description = "あ" * 160
+        @manual.description = 'あ' * 160
         expect(@manual).to be_valid
       end
     end
@@ -35,7 +35,7 @@ RSpec.describe Manual, type: :model do
         expect(@manual.errors.full_messages).to include('マニュアル名を入力してください')
       end
       it 'titleが21文字以上だと保存できない' do
-        @manual.title = "あ" * 21
+        @manual.title = 'あ' * 21
         @manual.valid?
         expect(@manual.errors.full_messages).to include('マニュアル名は20文字以内で入力してください')
       end
@@ -50,7 +50,7 @@ RSpec.describe Manual, type: :model do
         expect(@manual.errors.full_messages).to include('カテゴリーを選択してください')
       end
       it 'descriptionが161文字以上だと保存できない' do
-        @manual.description = "あ" * 161
+        @manual.description = 'あ' * 161
         @manual.valid?
         expect(@manual.errors.full_messages).to include('マニュアル説明は160文字以内で入力してください')
       end
