@@ -15,7 +15,7 @@ class Manual < ApplicationRecord
     validates :title, length: { maximum: 20 }
     validates :category_id, numericality: { other_than: 0, message: 'を選択してください' }
   end
-  validates :description, length: { maximum: 400 }
+  validates :description, length: { maximum: 160 }
 
   def image_attach_local(manual, decoded_url, filename)
     File.open("#{Rails.root}/tmp/images/#{filename}", 'wb') do |f|
