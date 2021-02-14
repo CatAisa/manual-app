@@ -4,7 +4,8 @@ class Procedure < ApplicationRecord
   has_one_attached :image
   has_many :comments, dependent: :destroy
 
-  validates :title, presence: true
+  validates :title, presence: true, length: { maximum: 30 }
+  validates :description, length: { maximum: 400 }
 
   def image_attach_local(procedure, decoded_url, filename)
     File.open("#{Rails.root}/tmp/images/#{filename}", 'wb') do |f|
