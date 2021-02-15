@@ -68,7 +68,23 @@ RSpec.describe 'マニュアル新規作成', type: :system do
 
   context 'マニュアル新規作成ができないとき' do
     it '誤った情報を入力するとマニュアルを新規作成できず、入力フォームに戻ってくる' do
-      
+      # ログインする
+      sign_in(@user)
+      # 新規作成ページへのリンクが存在する
+      expect(page).to have_content('新規作成')
+      # 新規作成ページに遷移する
+      visit new_manual_path
+      # 誤った情報を入力する
+      fill_in 'manual_title', with: ''
+      fill_in 'manual_description', with: ''
+      # 情報を送信してもManualモデルのカウントは変化しない
+      expect {
+        find('input[name="commit"]').click
+      }.to change { Manual.count }.by(0)
+      # 入力フォームに戻ってくる
+      expect(current_path).to eq('/manuals')
     end
   end
 end
+
+
