@@ -87,4 +87,54 @@ RSpec.describe 'マニュアル新規作成', type: :system do
   end
 end
 
+RSpec.describe 'マニュアル編集', type: :system do
+  before do
+    @manual1 = FactoryBot.create(:manual)
+    @manual2 = FactoryBot.create(:manual)
+  end
 
+  context 'マニュアル編集ができるとき' do
+    it '（画像編集なし）正しい情報を入力すればマニュアルを編集できて、,マニュアル詳細ページに遷移する' do
+      
+    end
+    it '（画像加工なし）正しい情報を入力すればマニュアルを編集できて、,マニュアル詳細ページに遷移する' do
+      # manual1のユーザーでログインする
+      sign_in(@manual1.user)
+      # マイページへのリンクが存在する
+      # マイページに遷移する
+      visit user_path(@manual1.user)
+      # 編集ページへのリンクが存在する
+      expect(page).to have_content('編集')
+      # 編集ページに遷移する
+      visit edit_manual_path(@manual1)
+      # 正しい情報を入力する
+      fill_in 'manual_title', with: 'NewTitle'
+      find('select[name="manual[category_id]"]').click
+      find('option[value="4"]').click
+      image_path = Rails.root.join('public/images/test_image.jpg')
+      attach_file('manual[image]', image_path, make_visible: true)
+      fill_in 'manual_description', with: 'NewText'
+      # 情報を送信しても、Manualモデルのカウントは変化しない
+      expect {
+        find('input[name="commit"]').click
+      }.to change { Manual.count }.by(0)
+      # マイページに遷移する
+      expect(current_path).to eq(manual_path(@manual1))
+      # マイページに先ほど保存した内容が表示されている
+      expect(page).to have_content('NewTitle')
+      expect(page).to have_content('その他')
+      expect(page).to have_selector('img')
+      expect(page).to have_content('NewText')
+    end
+
+    it '（画像加工あり）正しい情報入力・画像保存・情報送信をすればマニュアルを編集できて、マニュアル詳細ページに遷移する' do
+      
+    end
+  end
+
+  context 'マニュアル編集ができないとき' do
+    it '誤った情報を入力するとマニュアルを編集できず、入力フォームに戻ってくる' do
+      
+    end
+  end
+end
