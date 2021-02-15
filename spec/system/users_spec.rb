@@ -19,7 +19,7 @@ RSpec.describe 'ユーザー新規登録', type: :system do
       fill_in 'user_password', with: @user.password
       fill_in 'user_password_confirmation', with: @user.password_confirmation
       # ユーザー情報を送信するとUserモデルのカウントが1増える
-      expect{
+      expect {
         find('input[name="commit"]').click
       }.to change { User.count }.by(1)
       # トップページに遷移する
@@ -49,7 +49,7 @@ RSpec.describe 'ユーザー新規登録', type: :system do
       fill_in 'user_password', with: ''
       fill_in 'user_password_confirmation', with: ''
       # ユーザー情報を送信してもUserモデルのカウントが増えない
-      expect{
+      expect {
         find('input[name="commit"]').click
       }.to change { User.count }.by(0)
       # 新規登録ページに戻される
