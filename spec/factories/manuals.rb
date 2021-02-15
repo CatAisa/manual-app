@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :manual do
-    title { Faker::Lorem.sentences(number: 1) }
+    title { Faker::Lorem.characters(number: 20) }
     category_id { Faker::Number.between(from: 1, to: 4) }
     description { Faker::Lorem.sentences }
 
