@@ -99,6 +99,7 @@ RSpec.describe 'マニュアル編集', type: :system do
       # マイページに先ほど保存した内容が表示されている
       check_manual('NewTitle', 'その他', 'NewText')
     end
+    
     it '（画像加工なし）正しい情報を入力すればマニュアルを編集できて、,マニュアル詳細ページに遷移する' do
       # manual1のユーザーでログインする
       sign_in(@manual1.user)

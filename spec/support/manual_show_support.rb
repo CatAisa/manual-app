@@ -11,4 +11,15 @@ module ManualShowSupport
     # マニュアル詳細ページに遷移する
     visit manual_path(manual)
   end
+
+  def reject_user(manual)
+    # manual2のマイページに遷移する
+    visit user_path(manual.user)
+    # 遷移できずにトップページに戻ってくる
+    expect(current_path).to eq(root_path)
+    # manual2の詳細ページに遷移する
+    visit manual_path(manual)
+    # 遷移できずにトップページに戻ってくる
+    expect(current_path).to eq(root_path)
+  end
 end
