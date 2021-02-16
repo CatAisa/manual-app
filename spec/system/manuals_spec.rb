@@ -164,5 +164,12 @@ RSpec.describe 'マニュアル編集', type: :system do
       # 入力フォームに戻ってくる
       expect(current_path).to eq("/manuals/#{@manual1.id}/edit")
     end
+
+    it '自分が作成したマニュアル以外は編集できない' do
+      # manual1のユーザーでログインする
+      sign_in(@manual1.user)
+      # 編集ボタンの存在するページに遷移できない
+      reject_user(@manual2)
+    end
   end
 end
