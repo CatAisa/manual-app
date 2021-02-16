@@ -21,6 +21,19 @@ module ManualSupport
     visit edit_manual_path(manual)
   end
 
+  def delete_intro(manual)
+    # マイページへのリンクが存在する
+    expect(
+      find('span[class="user-item"]').hover
+    ).to have_link('マイページ', href: user_path(manual.user))
+    # マイページに遷移する
+    visit user_path(manual.user)
+    # マイページに保存済みのマニュアルが存在する
+    check_manual(manual.title, manual.category_id, manual.description)
+    # 削除ボタンが存在する
+    expect(page).to have_content('削除')
+  end
+
   def input_manual_true(title, text)
     fill_in 'manual_title', with: title
     find('select[name="manual[category_id]"]').click

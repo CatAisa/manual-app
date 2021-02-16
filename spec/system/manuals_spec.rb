@@ -167,3 +167,36 @@ RSpec.describe 'マニュアル編集', type: :system do
     end
   end
 end
+
+RSpec.describe 'マニュアル削除', type: :system do
+  before do
+    @manual1 = FactoryBot.create(:manual)
+    @manual2 = FactoryBot.create(:manual)
+  end
+
+  context 'マニュアル削除ができるとき' do
+    it '作成者はマニュアルを削除できる' do
+      # manual1のユーザーでログインする
+      sign_in(@manual1.user)
+      # 削除ボタン確認まで
+      delete_intro(@manual1)
+      # 削除ボタンをクリックすると、Manualモデルのカウントが1減少する
+      find_link('削除', href: manual_path(@manual1.id)).click
+      expect {
+        expect(page.accept_confirm).to eq('本当に削除しますか？')
+        sleep 1
+      }.to change { Manual.count }.by(-1)
+      # マイページに遷移する
+      expect(current_path).to eq(user_path(@manual1.user))
+    end
+  end
+
+  context 'マニュアル削除ができないとき' do
+    it '自分が作成したマニュアル以外は削除できない' do
+      # manual1のユーザーでログインする
+      sign_in(@manual1.user)
+      # 削除ボタンの存在するページに遷移できない
+      reject_user(@manual2)
+    end
+  end
+end
