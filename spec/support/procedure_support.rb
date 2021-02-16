@@ -9,4 +9,9 @@ module ProcedureSupport
     expect(page).to have_selector('img')
     expect(page).to have_content(description)
   end
+
+  def check_no_procedure(title, description)
+    expect(page).to have_no_content(title)
+    expect(page).to have_no_content(description)
+  end
 end

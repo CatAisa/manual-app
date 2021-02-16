@@ -191,3 +191,44 @@ RSpec.describe '手順編集', type: :system do
     end
   end
 end
+
+RSpec.describe '手順削除', type: :system do
+  before do
+    @user1 = FactoryBot.create(:user)
+    @manual1 = FactoryBot.create(:manual, user_id: @user1.id)
+    @procedure1 = FactoryBot.create(:procedure, user_id: @user1.id, manual_id: @manual1.id)
+    @user2 = FactoryBot.create(:user)
+    @manual2 = FactoryBot.create(:manual, user_id: @user2.id)
+    @procedure2 = FactoryBot.create(:procedure, user_id: @user2.id, manual_id: @manual2.id)
+  end
+
+  context '手順削除ができるとき' do
+    it '作成者は手順を削除できる' do
+      # procedure1のユーザーでログインする
+      sign_in(@user1)
+      # マニュアル詳細ページに遷移するまで
+      move_show(@manual1)
+      # 削除ボタンが存在する
+      expect(page).to have_link('削除', href: manual_procedure_path(@manual1, @procedure1))
+      # 削除ボタンをクリックすると、Manualモデルのカウントが1減少する
+      find_link('削除', href: manual_procedure_path(@manual1, @procedure1)).click
+      expect {
+        expect(page.accept_confirm).to eq('本当に削除しますか？')
+        sleep 1
+      }.to change { Procedure.count }.by(-1)
+      # マニュアル詳細ページに遷移する
+      expect(current_path).to eq(manual_path(@manual1))
+      # procedure1の情報が存在しない
+      check_no_procedure(@procedure1.title, @procedure1.description)
+    end
+  end
+
+  context '手順削除ができないとき' do
+    it '自分が作成した手順以外は削除できない' do
+      # procedure1のユーザーでログインする
+      sign_in(@user1)
+      # 編集ボタンの存在するページに遷移できない
+      reject_user(@manual2)
+    end
+  end
+end
