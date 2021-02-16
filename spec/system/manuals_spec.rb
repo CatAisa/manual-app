@@ -188,6 +188,8 @@ RSpec.describe 'マニュアル削除', type: :system do
       }.to change { Manual.count }.by(-1)
       # マイページに遷移する
       expect(current_path).to eq(user_path(@manual1.user))
+      # manual1の情報が存在しない
+      check_no_manual(@manual1.title, @manual1.category.name, @manual1.description)
     end
   end
 
