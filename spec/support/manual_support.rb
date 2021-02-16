@@ -1,4 +1,11 @@
 module ManualSupport
+  def created_manual(manual)
+    expect(page).to have_content(manual.title)
+    expect(page).to have_content('その他')
+    expect(page).to have_selector('img')
+    expect(page).to have_content(manual.description)
+  end
+
   def edit_intro(manual)
     # マイページへのリンクが存在する
     expect(
@@ -15,5 +22,19 @@ module ManualSupport
     expect(page).to have_content('編集')
     # 編集ページに遷移する
     visit edit_manual_path(manual)
+  end
+
+  def input_manual_true
+    fill_in 'manual_title', with: 'NewTitle'
+    find('select[name="manual[category_id]"]').click
+    find('option[value="4"]').click
+    fill_in 'manual_description', with: 'NewText'
+  end
+
+  def edited_manual
+    expect(page).to have_content('NewTitle')
+    expect(page).to have_content('その他')
+    expect(page).to have_selector('img')
+    expect(page).to have_content('NewText')
   end
 end

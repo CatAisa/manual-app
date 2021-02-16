@@ -18,8 +18,7 @@ RSpec.describe 'マニュアル新規作成', type: :system do
       fill_in 'manual_title', with: @manual.title
       find('select[name="manual[category_id]"]').click
       find('option[value="4"]').click
-      image_path = Rails.root.join('public/images/test_image.jpg')
-      attach_file('manual[image]', image_path, make_visible: true)
+      manual_image_attach
       fill_in 'manual_description', with: @manual.description
       # 情報を送信すると、Manualモデルのカウントが1増加する
       expect {
@@ -28,10 +27,7 @@ RSpec.describe 'マニュアル新規作成', type: :system do
       # マイページに遷移する
       expect(current_path).to eq(user_path(@user))
       # マイページに先ほど保存した内容が表示されている
-      expect(page).to have_content(@manual.title)
-      expect(page).to have_content('その他')
-      expect(page).to have_selector('img')
-      expect(page).to have_content(@manual.description)
+      created_manual(@manual)
     end
 
     it '（画像加工あり）正しい情報入力・画像保存・情報送信をすればマニュアルを新規作成できて、マイページに遷移する' do
@@ -45,8 +41,7 @@ RSpec.describe 'マニュアル新規作成', type: :system do
       fill_in 'manual_title', with: @manual.title
       find('select[name="manual[category_id]"]').click
       find('option[value="4"]').click
-      image_path = Rails.root.join('public/images/test_image.jpg')
-      attach_file('manual[image]', image_path, make_visible: true)
+      manual_image_attach
       fill_in 'manual_description', with: @manual.description
       # 画像保存をクリックする
       find('span[id="image-save"]').click
@@ -59,10 +54,7 @@ RSpec.describe 'マニュアル新規作成', type: :system do
       # マイページに遷移する
       expect(current_path).to eq(user_path(@user))
       # マイページに先ほど保存した内容が表示されている
-      expect(page).to have_content(@manual.title)
-      expect(page).to have_content('その他')
-      expect(page).to have_selector('img')
-      expect(page).to have_content(@manual.description)
+      created_manual(@manual)
     end
   end
 
@@ -83,6 +75,9 @@ RSpec.describe 'マニュアル新規作成', type: :system do
       }.to change { Manual.count }.by(0)
       # 入力フォームに戻ってくる
       expect(current_path).to eq('/manuals')
+      # 入力フォームにエラー文が表示されている
+      expect(page).to have_content('マニュアル名を入力してください')
+      expect(page).to have_content('カテゴリーを選択してください')
     end
   end
 end
@@ -97,25 +92,10 @@ RSpec.describe 'マニュアル編集', type: :system do
     it '（画像編集なし）正しい情報を入力すればマニュアルを編集できて、,マニュアル詳細ページに遷移する' do
       # manual1のユーザーでログインする
       sign_in(@manual1.user)
-      # マイページへのリンクが存在する
-      expect(
-        find('span[class="user-item"]').hover
-      ).to have_link('マイページ', href: user_path(@manual1.user))
-      # マイページに遷移する
-      visit user_path(@manual1.user)
-      # マイページに保存済みのマニュアルが存在する
-      expect(page).to have_content(@manual1.title)
-      expect(page).to have_content(@manual1.category_id)
-      expect(page).to have_content(@manual1.description)
-      # 編集ページへのリンクが存在する
-      expect(page).to have_content('編集')
-      # 編集ページに遷移する
-      visit edit_manual_path(@manual1)
+      # 編集情報の入力手前まで
+      edit_intro(@manual1)
       # 正しい情報を入力する
-      fill_in 'manual_title', with: 'NewTitle'
-      find('select[name="manual[category_id]"]').click
-      find('option[value="4"]').click
-      fill_in 'manual_description', with: 'NewText'
+      input_manual_true
       # 情報を送信しても、Manualモデルのカウントは変化しない
       expect {
         find('input[name="commit"]').click
@@ -123,35 +103,16 @@ RSpec.describe 'マニュアル編集', type: :system do
       # マイページに遷移する
       expect(current_path).to eq(manual_path(@manual1))
       # マイページに先ほど保存した内容が表示されている
-      expect(page).to have_content('NewTitle')
-      expect(page).to have_content('その他')
-      expect(page).to have_selector('img')
-      expect(page).to have_content('NewText')
+      edited_manual
     end
     it '（画像加工なし）正しい情報を入力すればマニュアルを編集できて、,マニュアル詳細ページに遷移する' do
       # manual1のユーザーでログインする
       sign_in(@manual1.user)
-      # マイページへのリンクが存在する
-      expect(
-        find('span[class="user-item"]').hover
-      ).to have_link('マイページ', href: user_path(@manual1.user))
-      # マイページに遷移する
-      visit user_path(@manual1.user)
-      # マイページに保存済みのマニュアルが存在する
-      expect(page).to have_content(@manual1.title)
-      expect(page).to have_content(@manual1.category_id)
-      expect(page).to have_content(@manual1.description)
-      # 編集ページへのリンクが存在する
-      expect(page).to have_content('編集')
-      # 編集ページに遷移する
-      visit edit_manual_path(@manual1)
+      # 編集情報の入力手前まで
+      edit_intro(@manual1)
       # 正しい情報を入力する
-      fill_in 'manual_title', with: 'NewTitle'
-      find('select[name="manual[category_id]"]').click
-      find('option[value="4"]').click
-      image_path = Rails.root.join('public/images/test_image.jpg')
-      attach_file('manual[image]', image_path, make_visible: true)
-      fill_in 'manual_description', with: 'NewText'
+      input_manual_true
+      manual_image_attach
       # 情報を送信しても、Manualモデルのカウントは変化しない
       expect {
         find('input[name="commit"]').click
@@ -159,36 +120,17 @@ RSpec.describe 'マニュアル編集', type: :system do
       # マイページに遷移する
       expect(current_path).to eq(manual_path(@manual1))
       # マイページに先ほど保存した内容が表示されている
-      expect(page).to have_content('NewTitle')
-      expect(page).to have_content('その他')
-      expect(page).to have_selector('img')
-      expect(page).to have_content('NewText')
+      edited_manual
     end
 
     it '（画像加工あり）正しい情報入力・画像保存・情報送信をすればマニュアルを編集できて、マニュアル詳細ページに遷移する' do
       # manual1のユーザーでログインする
       sign_in(@manual1.user)
-      # マイページへのリンクが存在する
-      expect(
-        find('span[class="user-item"]').hover
-      ).to have_link('マイページ', href: user_path(@manual1.user))
-      # マイページに遷移する
-      visit user_path(@manual1.user)
-      # マイページに保存済みのマニュアルが存在する
-      expect(page).to have_content(@manual1.title)
-      expect(page).to have_content(@manual1.category_id)
-      expect(page).to have_content(@manual1.description)
-      # 編集ページへのリンクが存在する
-      expect(page).to have_content('編集')
-      # 編集ページに遷移する
-      visit edit_manual_path(@manual1)
+      # 編集情報の入力手前まで
+      edit_intro(@manual1)
       # 正しい情報を入力する
-      fill_in 'manual_title', with: 'NewTitle'
-      find('select[name="manual[category_id]"]').click
-      find('option[value="4"]').click
-      image_path = Rails.root.join('public/images/test_image.jpg')
-      attach_file('manual[image]', image_path, make_visible: true)
-      fill_in 'manual_description', with: 'NewText'
+      input_manual_true
+      manual_image_attach
       # 画像保存をクリックする
       find('span[id="image-save"]').click
       # 「編集画像を保存しました」の記述が存在する
@@ -200,16 +142,27 @@ RSpec.describe 'マニュアル編集', type: :system do
       # マイページに遷移する
       expect(current_path).to eq(manual_path(@manual1))
       # マイページに先ほど保存した内容が表示されている
-      expect(page).to have_content('NewTitle')
-      expect(page).to have_content('その他')
-      expect(page).to have_selector('img')
-      expect(page).to have_content('NewText')
+      edited_manual
     end
   end
 
   context 'マニュアル編集ができないとき' do
     it '誤った情報を入力するとマニュアルを編集できず、入力フォームに戻ってくる' do
-      
+      # manual1のユーザーでログインする
+      sign_in(@manual1.user)
+      # 編集情報の入力手前まで
+      edit_intro(@manual1)
+      # 誤った情報を入力する
+      fill_in 'manual_title', with: ''
+      find('select[name="manual[category_id]"]').click
+      find('option[value="0"]').click
+      fill_in 'manual_description', with: ''
+      # 情報を送信してもManualモデルのカウントは変化しない
+      expect {
+        find('input[name="commit"]').click
+      }.to change { Manual.count }.by(0)
+      # 入力フォームに戻ってくる
+      expect(current_path).to eq("/manuals/#{@manual1.id}/edit")
     end
   end
 end
