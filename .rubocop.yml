@@ -9,6 +9,7 @@ AllCops:
    - "node_modules/**/*"
    - "Gemfile"
    - "spec/system/**/*"
+   - "spec/support/**/*"
 
 # 1行あたりの文字数をチェックする
 Layout/LineLength:
