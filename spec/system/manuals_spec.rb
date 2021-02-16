@@ -15,11 +15,8 @@ RSpec.describe 'マニュアル新規作成', type: :system do
       # 新規作成ページに遷移する
       visit new_manual_path
       # 正しい情報を入力する
-      fill_in 'manual_title', with: @manual.title
-      find('select[name="manual[category_id]"]').click
-      find('option[value="4"]').click
+      input_manual_true(@manual.title, @manual.description)
       manual_image_attach
-      fill_in 'manual_description', with: @manual.description
       # 情報を送信すると、Manualモデルのカウントが1増加する
       expect {
         find('input[name="commit"]').click
@@ -27,7 +24,7 @@ RSpec.describe 'マニュアル新規作成', type: :system do
       # マイページに遷移する
       expect(current_path).to eq(user_path(@user))
       # マイページに先ほど保存した内容が表示されている
-      created_manual(@manual)
+      check_manual(@manual.title, 'その他', @manual.description)
     end
 
     it '（画像加工あり）正しい情報入力・画像保存・情報送信をすればマニュアルを新規作成できて、マイページに遷移する' do
@@ -38,11 +35,8 @@ RSpec.describe 'マニュアル新規作成', type: :system do
       # 新規作成ページに遷移する
       visit new_manual_path
       # 正しい情報を入力する
-      fill_in 'manual_title', with: @manual.title
-      find('select[name="manual[category_id]"]').click
-      find('option[value="4"]').click
+      input_manual_true(@manual.title, @manual.description)
       manual_image_attach
-      fill_in 'manual_description', with: @manual.description
       # 画像保存をクリックする
       find('span[id="image-save"]').click
       # 「編集画像を保存しました」の記述が存在する
@@ -54,7 +48,7 @@ RSpec.describe 'マニュアル新規作成', type: :system do
       # マイページに遷移する
       expect(current_path).to eq(user_path(@user))
       # マイページに先ほど保存した内容が表示されている
-      created_manual(@manual)
+      check_manual(@manual.title, 'その他', @manual.description)
     end
   end
 
@@ -95,7 +89,7 @@ RSpec.describe 'マニュアル編集', type: :system do
       # 編集情報の入力手前まで
       edit_intro(@manual1)
       # 正しい情報を入力する
-      input_manual_true
+      input_manual_true('NewTitle', 'NewText')
       # 情報を送信しても、Manualモデルのカウントは変化しない
       expect {
         find('input[name="commit"]').click
@@ -103,7 +97,7 @@ RSpec.describe 'マニュアル編集', type: :system do
       # マイページに遷移する
       expect(current_path).to eq(manual_path(@manual1))
       # マイページに先ほど保存した内容が表示されている
-      edited_manual
+      check_manual('NewTitle', 'その他', 'NewText')
     end
     it '（画像加工なし）正しい情報を入力すればマニュアルを編集できて、,マニュアル詳細ページに遷移する' do
       # manual1のユーザーでログインする
@@ -111,7 +105,7 @@ RSpec.describe 'マニュアル編集', type: :system do
       # 編集情報の入力手前まで
       edit_intro(@manual1)
       # 正しい情報を入力する
-      input_manual_true
+      input_manual_true('NewTitle', 'NewText')
       manual_image_attach
       # 情報を送信しても、Manualモデルのカウントは変化しない
       expect {
@@ -120,7 +114,7 @@ RSpec.describe 'マニュアル編集', type: :system do
       # マイページに遷移する
       expect(current_path).to eq(manual_path(@manual1))
       # マイページに先ほど保存した内容が表示されている
-      edited_manual
+      check_manual('NewTitle', 'その他', 'NewText')
     end
 
     it '（画像加工あり）正しい情報入力・画像保存・情報送信をすればマニュアルを編集できて、マニュアル詳細ページに遷移する' do
@@ -129,7 +123,7 @@ RSpec.describe 'マニュアル編集', type: :system do
       # 編集情報の入力手前まで
       edit_intro(@manual1)
       # 正しい情報を入力する
-      input_manual_true
+      input_manual_true('NewTitle', 'NewText')
       manual_image_attach
       # 画像保存をクリックする
       find('span[id="image-save"]').click
@@ -142,7 +136,7 @@ RSpec.describe 'マニュアル編集', type: :system do
       # マイページに遷移する
       expect(current_path).to eq(manual_path(@manual1))
       # マイページに先ほど保存した内容が表示されている
-      edited_manual
+      check_manual('NewTitle', 'その他', 'NewText')
     end
   end
 
