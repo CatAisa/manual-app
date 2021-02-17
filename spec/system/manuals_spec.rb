@@ -86,8 +86,10 @@ RSpec.describe 'マニュアル編集', type: :system do
     it '（画像編集なし）正しい情報を入力すればマニュアルを編集できて、,マニュアル詳細ページに遷移する' do
       # manual1のユーザーでログインする
       sign_in(@manual1.user)
-      # 編集情報の入力手前まで
-      edit_intro(@manual1)
+      # マイページに遷移する
+      move_mypage(@manual1)
+      # 編集ボタンが存在する
+      edit_check(@manual1)
       # 正しい情報を入力する
       input_manual_true('NewTitle', 'NewText')
       # 情報を送信しても、Manualモデルのカウントは変化しない
@@ -103,8 +105,10 @@ RSpec.describe 'マニュアル編集', type: :system do
     it '（画像加工なし）正しい情報を入力すればマニュアルを編集できて、,マニュアル詳細ページに遷移する' do
       # manual1のユーザーでログインする
       sign_in(@manual1.user)
-      # 編集情報の入力手前まで
-      edit_intro(@manual1)
+      # マイページに遷移する
+      move_mypage(@manual1)
+      # 編集ボタンが存在する
+      edit_check(@manual1)
       # 正しい情報を入力する
       input_manual_true('NewTitle', 'NewText')
       manual_image_attach
@@ -121,8 +125,10 @@ RSpec.describe 'マニュアル編集', type: :system do
     it '（画像加工あり）正しい情報入力・画像保存・情報送信をすればマニュアルを編集できて、マニュアル詳細ページに遷移する' do
       # manual1のユーザーでログインする
       sign_in(@manual1.user)
-      # 編集情報の入力手前まで
-      edit_intro(@manual1)
+      # マイページに遷移する
+      move_mypage(@manual1)
+      # 編集ボタンが存在する
+      edit_check(@manual1)
       # 正しい情報を入力する
       input_manual_true('NewTitle', 'NewText')
       manual_image_attach
@@ -145,8 +151,10 @@ RSpec.describe 'マニュアル編集', type: :system do
     it '誤った情報を入力するとマニュアルを編集できず、入力フォームに戻ってくる' do
       # manual1のユーザーでログインする
       sign_in(@manual1.user)
-      # 編集情報の入力手前まで
-      edit_intro(@manual1)
+      # マイページに遷移する
+      move_mypage(@manual1)
+      # 編集ボタンが存在する
+      edit_check(@manual1)
       # 誤った情報を入力する
       fill_in 'manual_title', with: ''
       find('select[name="manual[category_id]"]').click
@@ -179,8 +187,10 @@ RSpec.describe 'マニュアル削除', type: :system do
     it '作成者はマニュアルを削除できる' do
       # manual1のユーザーでログインする
       sign_in(@manual1.user)
-      # 削除ボタン確認まで
-      delete_intro(@manual1)
+      # マイページに遷移する
+      move_mypage(@manual1)
+      # 削除ボタンが存在する
+      delete_check(@manual1)
       # 削除ボタンをクリックすると、Manualモデルのカウントが1減少する
       find_link('削除', href: manual_path(@manual1.id)).click
       expect {

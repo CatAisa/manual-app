@@ -1,11 +1,18 @@
-module ManualShowSupport
-  def move_show(manual)
+module MovePageSupport
+  def move_mypage(manual)
     # マイページへのリンクが存在する
     expect(
       find('span[class="user-item"]').hover
     ).to have_link('マイページ', href: user_path(manual.user))
     # マイページに遷移する
     visit user_path(manual.user)
+    # マイページに保存済みのマニュアルが存在する
+    check_manual(manual.title, manual.category.name, manual.description)
+  end
+
+  def move_show(manual)
+    # マイページに遷移する
+    move_mypage(manual)
     # マニュアル詳細ページへのリンクが存在する
     expect(page).to have_link(href: manual_path(manual))
     # マニュアル詳細ページに遷移する

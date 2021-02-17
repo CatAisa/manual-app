@@ -13,30 +13,14 @@ module ManualSupport
     expect(page).to have_no_content(description)
   end
 
-  def edit_intro(manual)
-    # マイページへのリンクが存在する
-    expect(
-      find('span[class="user-item"]').hover
-    ).to have_link('マイページ', href: user_path(manual.user))
-    # マイページに遷移する
-    visit user_path(manual.user)
-    # マイページに保存済みのマニュアルが存在する
-    check_manual(manual.title, manual.category.name, manual.description)
+  def edit_check(manual)
     # 編集ページへのリンクが存在する
     expect(page).to have_content('編集')
     # 編集ページに遷移する
     visit edit_manual_path(manual)
   end
 
-  def delete_intro(manual)
-    # マイページへのリンクが存在する
-    expect(
-      find('span[class="user-item"]').hover
-    ).to have_link('マイページ', href: user_path(manual.user))
-    # マイページに遷移する
-    visit user_path(manual.user)
-    # マイページに保存済みのマニュアルが存在する
-    check_manual(manual.title, manual.category_id, manual.description)
+  def delete_check(manual)
     # 削除ボタンが存在する
     expect(page).to have_content('削除')
   end
