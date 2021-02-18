@@ -10,6 +10,15 @@ module MovePageSupport
     check_manual(manual.title, manual.category.name, manual.description)
   end
 
+  def move_likepage(manual)
+    # お気に入りページへのリンクが存在する
+    expect(
+      find('span[class="user-item"]').hover
+    ).to have_link('お気に入り', href: user_likes_path(manual.user))
+    # お気に入りページに遷移する
+    visit user_likes_path(manual.user)
+  end
+
   def move_show(manual)
     # マイページに遷移する
     move_mypage(manual)
