@@ -32,7 +32,13 @@ RSpec.describe 'お気に入り登録', type: :system do
 
   context 'お気に入り登録できないとき' do
     it '作成者は自分のマニュアルをお気に入り登録ができない' do
-      
+      # manual1のユーザーでログインする
+      sign_in(@manual1.user)
+      # トップページに公開されているマニュアルの情報が表示されている
+      check_manual(@manual1.title, @manual1.category.name, @manual1.description)
+      check_manual(@manual2.title, @manual2.category.name, @manual2.description)
+      # manual1にお気に入りボタンが存在しない
+      expect(page).to have_no_link(href: manual_likes_path(@manual1))
     end
   end
 end
