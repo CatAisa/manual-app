@@ -65,10 +65,10 @@ RSpec.describe 'お気に入り解除', type: :system do
       # お気に入りページにmanual2の情報が表示されている
       check_manual(@manual2.title, @manual2.category.name, @manual2.description)
       # manual2にお気に入り解除ボタンが存在する
-      expect(page).to have_content('★')
+      expect(page).to have_link('★', href: manual_like_path(@manual2, "#"))
       # お気に入り解除ボタンをクリックすると、Likeモデルのカウントが1減少する
       expect {
-        click_on('★')
+        find_link('★', href: manual_like_path(@manual2, "#")).click
       }.to change { Like.count }.by(-1)
       # トップページに遷移する
       expect(current_path).to eq(root_path)
