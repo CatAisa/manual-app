@@ -36,6 +36,7 @@ RSpec.configure do |config|
   config.include ManualSupport
   config.include MovePageSupport
   config.include ProcedureSupport
+  config.include CommentSupport
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
