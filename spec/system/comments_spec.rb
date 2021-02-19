@@ -56,12 +56,13 @@ RSpec.describe 'コメント削除機能', type: :system do
     @manual = FactoryBot.create(:manual, user_id: @user.id)
     @procedure = FactoryBot.create(:procedure, user_id: @user.id, manual_id: @manual.id)
     @comment = FactoryBot.create(:comment, user_id: @user.id, manual_id: @manual.id, procedure_id: @procedure.id)
+    @release = FactoryBot.create(:release, user_id: @user.id, manual_id: @manual.id)
     @another_comment = FactoryBot.create(:comment, manual_id: @manual.id, procedure_id: @procedure.id)
   end
 
   context 'コメントが削除できるとき' do
     it 'コメント投稿者はコメントを削除できる' do
-      # ログインする
+      # manualの作成者でログインする
       sign_in(@user)
       # マニュアル詳細ページに遷移するまで
       move_show(@manual)
@@ -72,7 +73,7 @@ RSpec.describe 'コメント削除機能', type: :system do
     end
 
     it 'マニュアル作成者は自分のマニュアルに対するコメントを削除できる' do
-      # ログインする
+      # manualの作成者でログインする
       sign_in(@user)
       # マニュアル詳細ページに遷移するまで
       move_show(@manual)
@@ -85,7 +86,16 @@ RSpec.describe 'コメント削除機能', type: :system do
 
   context 'コメントが削除できないとき' do
     it 'コメント投稿者以外かつマニュアル作成者以外のユーザーはコメントを削除できない' do
-      
+      # manual作成者以外ででログインする
+      sign_in(@another_comment.user)
+      # トップページにマニュアル詳細ページへのリンクが存在する
+      expect(page).to have_link(href: manual_path(@manual))
+      # マニュアル詳細ページに遷移する
+      visit manual_path(@manual)
+      # 他ユーザーのコメントが存在する
+      expect(page).to have_content(@comment.content)
+      # コメントに削除ボタンが存在しない
+      expect(page).to have_no_link('削除', href: manual_procedure_comment_path(@manual, @procedure, @comment))
     end
   end
 end
