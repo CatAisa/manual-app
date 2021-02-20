@@ -20,16 +20,7 @@ class ManualsController < ApplicationController
       manual = Manual.new(manual_params)
     else
       manual = Manual.new(manual_params_no_image)
-      decoded_url = Base64.decode64(converted_url)
-      filename = Time.zone.now.to_s + '.png'
-
-      if Rails.env == 'development'
-        # Local environment
-        manual.image_attach_local(manual, decoded_url, filename)
-      elsif Rails.env == 'production'
-        # Production environment
-        manual.image_attach_production(manual, decoded_url, filename)
-      end
+      manual.image_attach(converted_url)
     end
 
     if manual.save
@@ -68,16 +59,7 @@ class ManualsController < ApplicationController
       else
         redirect_to edit_manual_path(@manual)
       end
-      decoded_url = Base64.decode64(converted_url)
-      filename = Time.zone.now.to_s + '.png'
-
-      if Rails.env == 'development'
-        # Local environment
-        manual.image_attach_local(manual, decoded_url, filename)
-      elsif Rails.env == 'production'
-        # Production environment
-        manual.image_attach_production(manual, decoded_url, filename)
-      end
+      manual.image_attach(converted_url)
     end
   end
 
