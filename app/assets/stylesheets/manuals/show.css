@@ -116,19 +116,19 @@
   white-space: pre-line;
 }
 
-.procedure-comment-contents, .review-contents {
+.comment-contents, .review-contents {
   margin: 10px 0 0 20px;
   width: 100%;
   height: 100%;
   overflow: scroll;
 }
 @media (max-width: 680px){
-  .procedure-comment-contents, .review-contents {
+  .comment-contents, .review-contents {
     display: none;
   }
 }
 
-.procedure-comments-index, .reviews-index {
+.comments-index, .reviews-index {
   width: 700px;
   height: 290px;
   background-color: white;
@@ -136,14 +136,14 @@
   padding: 5px;
 }
 
-.procedure-comment, .review {
+.comment, .review {
   margin-bottom: 5px;
   background-color: #e6e6fa;
   border-radius: 10px;
   padding: 0 5px;
 }
 
-.pro-comment-header, .review-header {
+.comment-header, .review-header {
   border-bottom: 1px solid #000000;
 }
 
@@ -152,11 +152,11 @@
   font-size: 12px;
 }
 
-.pro-comment-text, .review-text {
+.comment-text, .review-text {
   word-wrap: break-word;
 }
 
-.pro-comment-form, .review-form {
+.comment-form, .review-form {
   display: flex;
   margin-top: 3px;
 }
