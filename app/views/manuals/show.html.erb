@@ -57,7 +57,15 @@
       <%= render "shared/image_content", model: procedure %>
     </div>
 
-    <%= render "shared/comment", {manual: @manual, procedure: procedure, comment: @comment} %>
+    <div class="comment-contents">
+      <div class="comment-index">
+        <% procedure.comments.each do |comment| %>
+          <%= render "shared/test_comment", {manual: @manual, procedure: procedure, comment: comment, type: 'comment', path: manual_procedure_comment_path(@manual, procedure, comment)} %>
+        <% end %>
+        <div id="list<%= procedure.id %>"></div>
+      </div>
+      <%= render "shared/test_comment_form", {manual: @manual, procedure: procedure, comment: @comment, type: 'comment', path: manual_procedure_comments_path(@manual, procedure)} %>
+    </div>
   </div>
 <% end %>
 
