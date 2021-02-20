@@ -43,23 +43,14 @@ class ManualsController < ApplicationController
   end
 
   def update
-    manual = @manual
     url = params[:manual][:image_url]
     converted_url = url.sub %r/data:((image|application)\/.{3,}),/, ''
 
     if url.blank? || url == converted_url
-      if manual.update(manual_params)
-        redirect_to manual_path(@manual)
-      else
-        redirect_to edit_manual_path(@manual)
-      end
+      move_page(manual_params)
     else
-      if manual.update(manual_params_no_image)
-        redirect_to manual_path(@manual)
-      else
-        redirect_to edit_manual_path(@manual)
-      end
-      manual.image_attach(converted_url)
+      move_page(manual_params_no_image)
+      @manual.image_attach(converted_url)
     end
   end
 
@@ -89,5 +80,13 @@ class ManualsController < ApplicationController
 
   def show_user_judge
     redirect_to root_path if @manual.release.blank? && (current_user.id != @manual.user.id)
+  end
+
+  def move_page(params_type)
+    if @manual.update(params_type)
+      redirect_to manual_path(@manual)
+    else
+      redirect_to edit_manual_path(@manual)
+    end
   end
 end
