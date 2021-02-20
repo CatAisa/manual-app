@@ -13,18 +13,20 @@ class Procedure < ApplicationRecord
 
     if Rails.env == 'development'
       # Local environment
-      File.open("#{Rails.root}/tmp/images/#{filename}", 'wb') do |f|
-        f.write(decoded_url)
-      end
-      image.attach(io: File.open("#{Rails.root}/tmp/images/#{filename}"), filename: filename)
-      FileUtils.rm("#{Rails.root}/tmp/images/#{filename}")
+      file_path = "#{Rails.root}/tmp/images/#{filename}"
+      image_attach_process(decoded_url, filename, file_path)
     elsif Rails.env == 'production'
       # Production environment
-      File.open("/tmp/#{filename}", 'wb') do |f|
-        f.write(decoded_url)
-      end
-      image.attach(io: File.open("/tmp/#{filename}"), filename: filename)
-      FileUtils.rm("/tmp/#{filename}")
+      file_path = "/tmp/#{filename}"
+      image_attach_process(decoded_url, filename, file_path)
     end
+  end
+
+  def image_attach_process(decoded_url, filename, file_path)
+    File.open(file_path, 'wb') do |f|
+      f.write(decoded_url)
+    end
+    image.attach(io: File.open(file_path), filename: filename)
+    FileUtils.rm(file_path)
   end
 end
