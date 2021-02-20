@@ -1,0 +1,21 @@
+<div class="new-manual-name">【<%= title_name %>】
+  <span class="need-icon">必須</span>
+</div>
+<%= f.text_field :title, placeholder: "  #{title_count}文字以内", autofocus: true, class: "form-manual-name" %>
+
+<% if !request.path.include?('procedures') %>
+  <div class="new-manual-category">【カテゴリー】
+    <span class="need-icon">必須</span>
+  </div>
+  <%= f.collection_select(:category_id, Category.all, :id, :name, {}, {class: "form-manual-category"}) %>
+<% end %>
+
+<div class="new-manual-image">【画像】</div>
+<div class="new-image-text">クリックして画像を選択してください</div>
+<%= f.file_field :image, class: "form-manual-image", id: "file-field" %>
+<%= f.hidden_field :image_url, value: "", id: "image-form" %>
+
+<%= render "shared/canvas" %>
+
+<div class="new-manual-description">【<%= description_name %>】</div>
+<%= f.text_area :description, placeholder: "  #{description_count}文字以内", class: "form-manual-description" %>
