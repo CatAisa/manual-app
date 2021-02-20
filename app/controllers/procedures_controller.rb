@@ -13,16 +13,15 @@ class ProceduresController < ApplicationController
     converted_url = url.sub %r/data:((image|application)\/.{3,}),/, ''
 
     if url.blank? || url == converted_url
-      procedure = @manual.procedures.new(procedure_params)
+      @procedure = @manual.procedures.new(procedure_params)
     else
-      procedure = @manual.procedures.new(procedure_params_no_image)
-      procedure.image_attach(converted_url)
+      @procedure = @manual.procedures.new(procedure_params_no_image)
+      @procedure.image_attach(converted_url)
     end
 
-    if procedure.save
+    if @procedure.save
       redirect_to manual_path(@manual)
     else
-      @procedure = procedure
       render :new
     end
   end

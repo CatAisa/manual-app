@@ -17,17 +17,16 @@ class ManualsController < ApplicationController
     converted_url = url.sub %r/data:((image|application)\/.{3,}),/, ''
 
     if url.blank? || url == converted_url
-      manual = Manual.new(manual_params)
+      @manual = Manual.new(manual_params)
     else
-      manual = Manual.new(manual_params_no_image)
-      manual.image_attach(converted_url)
+      @manual = Manual.new(manual_params_no_image)
+      @manual.image_attach(converted_url)
     end
 
-    if manual.save
+    if @manual.save
       @user = current_user
       redirect_to user_path(@user)
     else
-      @manual = manual
       render :new
     end
   end
