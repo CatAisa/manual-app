@@ -16,16 +16,7 @@ class ProceduresController < ApplicationController
       procedure = @manual.procedures.new(procedure_params)
     else
       procedure = @manual.procedures.new(procedure_params_no_image)
-      decoded_url = Base64.decode64(converted_url)
-      filename = Time.zone.now.to_s + '.png'
-
-      if Rails.env == 'development'
-        # Local environment
-        procedure.image_attach_local(procedure, decoded_url, filename)
-      elsif Rails.env == 'production'
-        # Production environment
-        procedure.image_attach_production(procedure, decoded_url, filename)
-      end
+      procedure.image_attach(converted_url)
     end
 
     if procedure.save
@@ -56,16 +47,7 @@ class ProceduresController < ApplicationController
       else
         redirect_to edit_manual_procedure_path(@manual, @procedure)
       end
-      decoded_url = Base64.decode64(converted_url)
-      filename = Time.zone.now.to_s + '.png'
-
-      if Rails.env == 'development'
-        # Local environment
-        procedure.image_attach_local(procedure, decoded_url, filename)
-      elsif Rails.env == 'production'
-        # Production environment
-        procedure.image_attach_production(procedure, decoded_url, filename)
-      end
+      procedure.image_attach(converted_url)
     end
   end
 
