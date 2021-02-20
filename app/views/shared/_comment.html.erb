@@ -1,25 +1,12 @@
-<div class="comment-contents">
-  <div class="comment-index">
-    <% procedure.comments.each do |comment| %>
-      <div class="comment" style="" comment_id=<%= comment.id %>>
-        <div class="comment-header">
-          <%= comment.user.nickname %>
-          <span class="comment-time"><%= l comment.created_at %></span>
-          <% if manual.user.id == current_user.id || comment.user.id == current_user.id %>
-            <%= link_to '削除', manual_procedure_comment_path(manual, procedure, comment), method: :delete, id: "comment-delete#{comment.id}" %>
-          <% else %>
-            <%= link_to '削除', manual_procedure_comment_path(manual, procedure, comment), method: :delete, id: "comment-delete#{comment.id}", style: "display: none;" %>
-          <% end %>
-        </div>
-        <div class="comment-text"><%= comment.content %></div>
-      </div>
+<div class=<%= type %> style="" <%= type %>_id=<%= model.id %>>
+  <div class="<%= type %>-header">
+    <%= model.user.nickname %>
+    <span class="<%= type %>-time"><%= l model.created_at %></span>
+    <% if manual.user.id == current_user.id || model.user.id == current_user.id %>
+      <%= link_to '削除', path, method: :delete, id: "#{type}-delete#{model.id}" %>
+    <% else %>
+      <%= link_to '削除', path, method: :delete, id: "#{type}-delete#{model.id}", style: "display: none;" %>
     <% end %>
-    <div id="list<%= procedure.id %>"></div>
   </div>
-  <%= form_with model: comment, url: manual_procedure_comments_path(manual, procedure), id: "comment-form#{procedure.id}", local: true do |f| %>
-    <div class="comment-form">
-      <%= f.text_field :content, class: "comment-submit", id: "comment-text#{procedure.id}", placeholder: "  200文字以内" %>
-      <%= f.submit '送信', class: "comment-submit-btn", manual_id: manual.id, procedure_id: procedure.id %>
-    </div>
-  <% end %>
+  <div class="<%= type %>-text"><%= model.content %></div>
 </div>

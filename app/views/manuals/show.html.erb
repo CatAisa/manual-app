@@ -33,7 +33,15 @@
     <div class="procedure-top-description"><%= @manual.description %></div>
   </div>
 
-  <%= render "shared/review", {manual: @manual, review: @review} %>
+  <div class="review-contents">
+    <div class="review-index">
+      <% @manual.reviews.each do |review| %>
+        <%= render "shared/comment", {manual: @manual, model: review, type: 'review', path: manual_review_path(@manual, review)} %>
+      <% end %>
+      <div id="review-list"></div>
+    </div>
+    <%= render "shared/comment_form", {manual: @manual, model: @review, type: 'review', path: manual_reviews_path(@manual), form_id: ''} %>
+  </div>
 </div>
 
 <% @procedures.each_with_index do |procedure, index| %>
@@ -60,11 +68,11 @@
     <div class="comment-contents">
       <div class="comment-index">
         <% procedure.comments.each do |comment| %>
-          <%= render "shared/test_comment", {manual: @manual, procedure: procedure, comment: comment, type: 'comment', path: manual_procedure_comment_path(@manual, procedure, comment)} %>
+          <%= render "shared/comment", {manual: @manual, procedure: procedure, model: comment, type: 'comment', path: manual_procedure_comment_path(@manual, procedure, comment)} %>
         <% end %>
         <div id="list<%= procedure.id %>"></div>
       </div>
-      <%= render "shared/test_comment_form", {manual: @manual, procedure: procedure, comment: @comment, type: 'comment', path: manual_procedure_comments_path(@manual, procedure)} %>
+      <%= render "shared/comment_form", {manual: @manual, procedure: procedure, model: @comment, type: 'comment', path: manual_procedure_comments_path(@manual, procedure), form_id: procedure.id} %>
     </div>
   </div>
 <% end %>

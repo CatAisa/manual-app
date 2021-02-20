@@ -1,0 +1,6 @@
+<%= form_with model: model, url: path, id: "#{type}-form#{form_id}", local: true do |f| %>
+  <div class="<%= type %>-form">
+    <%= f.text_field :content, class: "#{type}-submit", id: "#{type}-text#{form_id}", placeholder: "  200文字以内" %>
+    <%= f.submit '送信', class: "#{type}-submit-btn",id: "#{type}-submit-btn#{form_id}", manual_id: manual.id, procedure_id: form_id %>
+  </div>
+<% end %>
