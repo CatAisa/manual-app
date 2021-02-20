@@ -24,7 +24,7 @@ RSpec.describe 'コメント投稿機能', type: :system do
       # マニュアル詳細ページから移動しない
       expect(current_path).to eq(manual_path(@manual))
       # マニュアル詳細ページに先ほど投稿したコメント情報が存在する
-      expect(current_path).to have_content(@comment_content)
+      expect(page).to have_content(@comment.content)
     end
   end
 
