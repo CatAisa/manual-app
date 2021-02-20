@@ -31,23 +31,14 @@ class ProceduresController < ApplicationController
   end
 
   def update
-    procedure = @procedure
     url = params[:procedure][:image_url]
     converted_url = url.sub %r/data:((image|application)\/.{3,}),/, ''
 
     if url.blank? || url == converted_url
-      if procedure.update(procedure_params)
-        redirect_to manual_path(@manual)
-      else
-        redirect_to edit_manual_procedure_path(@manual, @procedure)
-      end
+      move_page(procedure_params)
     else
-      if procedure.update(procedure_params_no_image)
-        redirect_to manual_path(@manual)
-      else
-        redirect_to edit_manual_procedure_path(@manual, @procedure)
-      end
-      procedure.image_attach(converted_url)
+      move_page(procedure_params_no_image)
+      @procedure.image_attach(converted_url)
     end
   end
 
@@ -76,5 +67,13 @@ class ProceduresController < ApplicationController
 
   def user_judge
     redirect_to root_path if current_user.id != @manual.user.id
+  end
+
+  def move_page(params_type)
+    if @procedure.update(params_type)
+      redirect_to manual_path(@manual)
+    else
+      redirect_to edit_manual_procedure_path(@manual, @procedure)
+    end
   end
 end
