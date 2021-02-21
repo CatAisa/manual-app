@@ -6,10 +6,6 @@
 <div class="form-manual-contents">
   <%= form_with model: [@manual, @procedure], local: true do |f| %>
     <%= render 'shared/error_messages', model: f.object %>
-    <%= render 'shared/form', {f: f, title_name: 'タイトル', title_count: '30', description_name: '内容', description_count: '400'} %>
-
-    <div>
-      <%= f.submit '編集完了', class: "new-submit-btn" %>
-    </div>
+    <%= render 'shared/form', {f: f, title_name: 'タイトル', title_count: '30', description_name: '内容', description_count: '400', submit_text: '編集完了'} %>
   <% end %>
 </div>
