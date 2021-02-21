@@ -4,17 +4,18 @@ function commentPostTitle() {
     const manualId = submitComment.getAttribute("manual_id");
     const procedureId = submitComment.getAttribute("procedure_id");
     const path = `/manuals/${manualId}/procedures/${procedureId}/comments`
-    commentPostTest(submitComment, manualId, procedureId, path);
+    const type = 'comment'
+    commentPostTest(submitComment, procedureId, path, type);
   });
   // commentPost();
   reviewPost();
 };
 
-function commentPostTest(submit, manualId, procedureId, path) {
+function commentPostTest(submit, procedureId, path, type) {
   submit.addEventListener("click", (e) => {
     e.preventDefault();
-    const formId = `comment-form${procedureId}`;
-    const textId = `comment-text${procedureId}`;
+    const formId = `${type}-form${procedureId}`;
+    const textId = `${type}-text${procedureId}`;
     const formData = new FormData(document.getElementById(formId));
     const XHR = new XMLHttpRequest();
     XHR.open("POST", path, true);
@@ -25,20 +26,20 @@ function commentPostTest(submit, manualId, procedureId, path) {
         alert(`Error ${XHR.status}: ${XHR.statusText}`);
         return null;
       };
-      const comment = XHR.response.comment;
+      const model = XHR.response.model;
       const user = XHR.response.user;
-      const listId = `list${procedureId}`;
+      const listId = `${type}-list${procedureId}`;
       const list = document.getElementById(listId);
-      const commentId = `${comment.id}`;
+      const modelId = `${model.id}`;
       const formText = document.getElementById(textId);
       const HTML = `
-        <div class="comment" style="" comment_id=${comment.id}>
-          <div class="comment-header">
+        <div class="${type}" style="" ${type}_id=${model.id}>
+          <div class="${type}-header">
             ${user.nickname}
-            <span class="comment-time">${comment.created_at}</span>
-            <a rel ="nofollow" data-method="delete" href="/manuals/${manualId}/procedures/${procedureId}/comments/${commentId}" id="comment-delete${comment.id}">削除</a>
+            <span class="${type}-time">${model.created_at}</span>
+            <a rel ="nofollow" data-method="delete" href="${path}/${modelId}" id="${type}-delete${model.id}">削除</a>
           </div>
-          <div class="comment-text">${comment.content}</div>
+          <div class="${type}-text">${model.content}</div>
         </div>`;
       list.insertAdjacentHTML("beforebegin", HTML);
       formText.value = "";

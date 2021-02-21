@@ -70,7 +70,7 @@
         <% procedure.comments.each do |comment| %>
           <%= render "shared/comment", {manual: @manual, procedure: procedure, model: comment, type: 'comment', path: manual_procedure_comment_path(@manual, procedure, comment)} %>
         <% end %>
-        <div id="list<%= procedure.id %>"></div>
+        <div id="comment-list<%= procedure.id %>"></div>
       </div>
       <%= render "shared/comment_form", {manual: @manual, procedure: procedure, model: @comment, type: 'comment', path: manual_procedure_comments_path(@manual, procedure), form_id: procedure.id} %>
     </div>
