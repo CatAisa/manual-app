@@ -3,12 +3,17 @@ function commentPostTitle() {
   submitCommentAll.forEach((submitComment) => {
     const manualId = submitComment.getAttribute("manual_id");
     const procedureId = submitComment.getAttribute("procedure_id");
-    const path = `/manuals/${manualId}/procedures/${procedureId}/comments`
-    const type = 'comment'
+    const path = `/manuals/${manualId}/procedures/${procedureId}/comments`;
+    const type = 'comment';
     commentPostTest(submitComment, procedureId, path, type);
   });
-  // commentPost();
-  reviewPost();
+
+  const submitReview = document.querySelector(".review-submit-btn");
+  const manualId = submitReview.getAttribute("manual_id");
+  const procedureId = '';
+  const path = `/manuals/${manualId}/reviews`;
+  const type = 'review';
+  commentPostTest(submitReview, procedureId, path, type);
 };
 
 function commentPostTest(submit, procedureId, path, type) {
