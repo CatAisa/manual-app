@@ -1,22 +1,23 @@
 function commentPostTitle() {
   const submitCommentAll = document.querySelectorAll(".comment-submit-btn");
   submitCommentAll.forEach((submitComment) => {
-    commentPostTest(submitComment);
+    const manualId = submitComment.getAttribute("manual_id");
+    const procedureId = submitComment.getAttribute("procedure_id");
+    const path = `/manuals/${manualId}/procedures/${procedureId}/comments`
+    commentPostTest(submitComment, manualId, procedureId, path);
   });
   // commentPost();
   reviewPost();
 };
 
-function commentPostTest(submit) {
+function commentPostTest(submit, manualId, procedureId, path) {
   submit.addEventListener("click", (e) => {
     e.preventDefault();
-    const manualId = submit.getAttribute("manual_id");
-    const procedureId = submit.getAttribute("procedure_id");
     const formId = `comment-form${procedureId}`;
     const textId = `comment-text${procedureId}`;
     const formData = new FormData(document.getElementById(formId));
     const XHR = new XMLHttpRequest();
-    XHR.open("POST", `/manuals/${manualId}/procedures/${procedureId}/comments`, true);
+    XHR.open("POST", path, true);
     XHR.responseType = "json";
     XHR.send(formData);
     XHR.onload = () => {
