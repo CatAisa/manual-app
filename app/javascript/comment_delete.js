@@ -1,6 +1,20 @@
 function commentDeleteTitle() {
-  commentDelete();
-  reviewDelete();
+  commentDeleteTest('comment')
+  commentDeleteTest('review')
+  // commentDelete();
+  // reviewDelete();
+};
+
+function commentDeleteTest(type) {
+  const models = document.querySelectorAll(`.${type}`);
+  models.forEach(function(model) {
+    const modelId = model.getAttribute(`${type}_id`);
+    const deleteId = `${type}-delete${modelId}`;
+    const deleteBtn = document.getElementById(deleteId);
+    deleteBtn.addEventListener("click", () => {
+      model.setAttribute("style", "display: none;");
+    });
+  });
 };
 
 function commentDelete() {
