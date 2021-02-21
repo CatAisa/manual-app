@@ -32,7 +32,6 @@
 }
 
 .user-item {
-  /* nickname：半角10文字以下 */
   text-decoration: none;
   font-size: 16px;
   margin-left: 10px;
