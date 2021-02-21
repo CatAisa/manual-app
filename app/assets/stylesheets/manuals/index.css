@@ -24,13 +24,3 @@
   border-radius: 20px;
   background-color: #dcdcdc;
 }
-
-.release-btn {
-  font-size: 15px;
-  text-decoration: none;
-  color: #000000;
-  border: 1px solid #000000;
-  background-color: #dcdcdc;
-  white-space: nowrap;
-  padding: 3px;
-}

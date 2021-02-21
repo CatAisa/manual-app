@@ -17,16 +17,6 @@
   font-size: 15px;
 }
 
-.show-release {
-  margin: 15px 5px 0 0;
-}
-
-.procedure-top-right {
-  font-size: 18px;
-  white-space: nowrap;
-  margin-right: 5px;
-}
-
 .procedure-top-contents {
   height: 330px;
   align-items: center;
