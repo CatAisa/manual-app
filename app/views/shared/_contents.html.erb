@@ -1,19 +1,8 @@
 <div class="mypage-item">
   <div class="mypage-item-header">
     <%= link_to manual.title, manual_path(manual), class: "mypage-title" %>
-    <% if user_signed_in? && manual.user.id == current_user.id %>
-      <div class="show-release">
-        <% if manual.release.blank? %>
-          <%= link_to '一般公開する', manual_releases_path(manual), method: :post, class: "release-btn", data: {confirm: "一般公開すると全ユーザーから情報が閲覧可能になります。\n本当によろしいですか？"} %>
-        <% else %>
-          <%= link_to '非公開にする', manual_release_path(manual, manual.release.id), method: :delete, class: "release-btn" %>
-        <% end %>
-      </div>
-      <ul class="procedure-top-right">
-        <li><%= link_to '編集', edit_manual_path(manual) %></li>
-        <li><%= link_to '削除', manual_path(manual), method: :delete, data: {confirm: "本当に削除しますか？"} %></li>
-      </ul>
-    <% end %>
+
+    <%= render "shared/manual_action", manual: manual %>
   </div>
 
   <div class="mypage-image-content">

@@ -4,7 +4,6 @@ class UsersController < ApplicationController
   before_action :user_judge, only: :show
 
   def show
-    @release = Release.new
   end
 
   private
