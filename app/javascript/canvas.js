@@ -9,7 +9,6 @@ function canvasTitle() {
   // Input image
   const cnvCrop = document.getElementById("crop-canvas");
   const ctxCrop = cnvCrop.getContext("2d");
-  const imgCrop = new Image();
 
   // Red border
   const cnvRed = document.getElementById("crop-area");
