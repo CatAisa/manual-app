@@ -1,5 +1,5 @@
 function reviewPost() {
-  const submitReview = document.getElementById("review-submit-btn");
+  const submitReview = document.querySelector(".review-submit-btn");
   submitReview.addEventListener("click", (e) => {
     e.preventDefault();
     const manualId = submitReview.getAttribute("manual_id");
