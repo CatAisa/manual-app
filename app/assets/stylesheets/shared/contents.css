@@ -24,6 +24,8 @@
   text-decoration: none;
   margin: 5px 0 0 5px;
   color: #000000;
+  background-color: #f0f8ff;
+  border-radius: 10px;
 }
 
 .mypage-item-header span {
@@ -72,4 +74,7 @@
 
 .mypage-category {
   font-size: 12px;
+  background-color: #7fffd4;
+  border-radius: 5px;
+  padding: 0 5px;
 }
