@@ -1,0 +1,19 @@
+.comment, .review {
+  margin-bottom: 5px;
+  background-color: #e6e6fa;
+  border-radius: 10px;
+  padding: 0 5px;
+}
+
+.comment-header, .review-header {
+  border-bottom: 1px solid #000000;
+}
+
+.comment-time, .review-time {
+  margin-left: 20px;
+  font-size: 12px;
+}
+
+.comment-text, .review-text {
+  word-wrap: break-word;
+}

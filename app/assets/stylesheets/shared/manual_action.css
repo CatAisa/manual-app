@@ -1,0 +1,19 @@
+.show-release {
+  margin: 15px 5px 0 0;
+}
+
+.release-btn {
+  font-size: 15px;
+  text-decoration: none;
+  color: #000000;
+  border: 1px solid #000000;
+  background-color: #dcdcdc;
+  white-space: nowrap;
+  padding: 3px;
+}
+
+.procedure-top-right {
+  font-size: 18px;
+  white-space: nowrap;
+  margin-right: 5px;
+}

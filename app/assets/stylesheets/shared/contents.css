@@ -1,0 +1,80 @@
+.mypage-contents {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.mypage-item {
+  width: 350px;
+  height: 455px;
+  background-color: skyblue;
+  margin-bottom: 10px;
+}
+
+.mypage-item-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.mypage-title {
+  height: 60px;
+  width: 200px;
+  font-size: 20px;
+  word-wrap: break-word;
+  text-decoration: none;
+  margin: 5px 0 0 5px;
+  color: #000000;
+  background-color: #f0f8ff;
+  border-radius: 10px;
+}
+
+.mypage-item-header span {
+  font-size: 12px;
+  margin: 0 5px 0 auto;
+  width: 90px;
+}
+
+.mypage-item-header li {
+  font-size: 15px;
+  margin-right: 5px;
+}
+
+.mypage-image-content {
+  width: 250px;
+  height: 250px;
+  margin: 5px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+}
+
+.mypage-description {
+  border: 1px solid #000000;
+  background-color: white;
+  margin: 0 auto;
+  padding: 0 5px;
+  width: 330px;
+  height: 80px;
+  word-wrap: break-word;
+  overflow: scroll;
+  white-space: pre-line;
+}
+
+.mypage-manual-user {
+  margin-left: 5px;
+}
+
+.mypage-content-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 5px;
+}
+
+.mypage-category {
+  font-size: 12px;
+  background-color: #7fffd4;
+  border-radius: 5px;
+  padding: 0 5px;
+}

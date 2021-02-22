@@ -7,19 +7,26 @@ class Procedure < ApplicationRecord
   validates :title, presence: true, length: { maximum: 30 }
   validates :description, length: { maximum: 400 }
 
-  def image_attach_local(procedure, decoded_url, filename)
-    File.open("#{Rails.root}/tmp/images/#{filename}", 'wb') do |f|
-      f.write(decoded_url)
+  def image_attach(converted_url)
+    decoded_url = Base64.decode64(converted_url)
+    filename = Time.zone.now.to_s + '.png'
+
+    if Rails.env == 'development'
+      # Local environment
+      file_path = "#{Rails.root}/tmp/images/#{filename}"
+      image_attach_process(decoded_url, filename, file_path)
+    elsif Rails.env == 'production'
+      # Production environment
+      file_path = "/tmp/#{filename}"
+      image_attach_process(decoded_url, filename, file_path)
     end
-    procedure.image.attach(io: File.open("#{Rails.root}/tmp/images/#{filename}"), filename: filename)
-    FileUtils.rm("#{Rails.root}/tmp/images/#{filename}")
   end
 
-  def image_attach_production(procedure, decoded_url, filename)
-    File.open("/tmp/#{filename}", 'wb') do |f|
+  def image_attach_process(decoded_url, filename, file_path)
+    File.open(file_path, 'wb') do |f|
       f.write(decoded_url)
     end
-    procedure.image.attach(io: File.open("/tmp/#{filename}"), filename: filename)
-    FileUtils.rm("/tmp/#{filename}")
+    image.attach(io: File.open(file_path), filename: filename)
+    FileUtils.rm(file_path)
   end
 end

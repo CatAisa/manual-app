@@ -6,7 +6,7 @@ class ReviewsController < ApplicationController
 
   def create
     @review = @manual.reviews.new(review_params)
-    render json: { review: @review, user: current_user } if @review.save
+    render json: { model: @review, user: current_user } if @review.save
   end
 
   def destroy

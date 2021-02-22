@@ -13,25 +13,15 @@ class ProceduresController < ApplicationController
     converted_url = url.sub %r/data:((image|application)\/.{3,}),/, ''
 
     if url.blank? || url == converted_url
-      procedure = @manual.procedures.new(procedure_params)
+      @procedure = @manual.procedures.new(procedure_params)
     else
-      procedure = @manual.procedures.new(procedure_params_no_image)
-      decoded_url = Base64.decode64(converted_url)
-      filename = Time.zone.now.to_s + '.png'
-
-      if Rails.env == 'development'
-        # Local environment
-        procedure.image_attach_local(procedure, decoded_url, filename)
-      elsif Rails.env == 'production'
-        # Production environment
-        procedure.image_attach_production(procedure, decoded_url, filename)
-      end
+      @procedure = @manual.procedures.new(procedure_params_no_image)
+      @procedure.image_attach(converted_url)
     end
 
-    if procedure.save
+    if @procedure.save
       redirect_to manual_path(@manual)
     else
-      @procedure = procedure
       render :new
     end
   end
@@ -40,32 +30,14 @@ class ProceduresController < ApplicationController
   end
 
   def update
-    procedure = @procedure
     url = params[:procedure][:image_url]
     converted_url = url.sub %r/data:((image|application)\/.{3,}),/, ''
 
     if url.blank? || url == converted_url
-      if procedure.update(procedure_params)
-        redirect_to manual_path(@manual)
-      else
-        redirect_to edit_manual_procedure_path(@manual, @procedure)
-      end
+      move_page(procedure_params)
     else
-      if procedure.update(procedure_params_no_image)
-        redirect_to manual_path(@manual)
-      else
-        redirect_to edit_manual_procedure_path(@manual, @procedure)
-      end
-      decoded_url = Base64.decode64(converted_url)
-      filename = Time.zone.now.to_s + '.png'
-
-      if Rails.env == 'development'
-        # Local environment
-        procedure.image_attach_local(procedure, decoded_url, filename)
-      elsif Rails.env == 'production'
-        # Production environment
-        procedure.image_attach_production(procedure, decoded_url, filename)
-      end
+      move_page(procedure_params_no_image)
+      @procedure.image_attach(converted_url)
     end
   end
 
@@ -94,5 +66,13 @@ class ProceduresController < ApplicationController
 
   def user_judge
     redirect_to root_path if current_user.id != @manual.user.id
+  end
+
+  def move_page(params_type)
+    if @procedure.update(params_type)
+      redirect_to manual_path(@manual)
+    else
+      redirect_to edit_manual_procedure_path(@manual, @procedure)
+    end
   end
 end

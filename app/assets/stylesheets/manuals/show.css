@@ -4,8 +4,10 @@
 }
 
 .procedure-top-title {
-  /* 全角20文字以下 */
   font-size: 30px;
+  background-color: #f0f8ff;
+  border-radius: 10px;
+  margin: 5px;
 }
 
 .procedure-top-middle {
@@ -14,18 +16,13 @@
 }
 
 .procedure-top-category {
+  display: inline-block;
   white-space: nowrap;
   font-size: 15px;
-}
-
-.show-release {
-  margin: 15px 5px 0 0;
-}
-
-.procedure-top-right {
-  font-size: 18px;
-  white-space: nowrap;
-  margin-right: 5px;
+  background-color: #7fffd4;
+  border-radius: 5px;
+  padding: 0 5px;
+  margin-bottom: 2px;
 }
 
 .procedure-top-contents {
@@ -58,7 +55,6 @@
 }
 
 .procedure-top-description {
-  /* 全角160文字以下 */
   border: 1px solid #000000;
   height: 270px;
   width: 300px;
@@ -74,6 +70,26 @@
   .procedure-top-description {
     width: 40vw;
   }
+}
+
+.comment-contents, .review-contents {
+  margin: 10px 0 0 20px;
+  width: 100%;
+  height: 100%;
+  overflow: scroll;
+}
+@media (max-width: 680px){
+  .comment-contents, .review-contents {
+    display: none;
+  }
+}
+
+.comment-index, .review-index {
+  width: 700px;
+  height: 290px;
+  background-color: white;
+  overflow: scroll;
+  padding: 5px;
 }
 
 .procedure-contents {
@@ -96,7 +112,6 @@
 }
 
 .procedure-title {
-  /* 全角30文字以下 */
   width: 250px;
   margin: 0 auto 0 0;
 }
@@ -106,7 +121,6 @@
 }
 
 .procedure-description {
-  /* 全角133文字以下(スクロールなしの表示、バリデーション：400文字以下) */
   height: 245px;
   width: 310px;
   overflow: scroll;
@@ -114,64 +128,6 @@
   border: 1px solid #000000;
   background-color: white;
   white-space: pre-line;
-}
-
-.procedure-comment-contents, .review-contents {
-  margin: 10px 0 0 20px;
-  width: 100%;
-  height: 100%;
-  overflow: scroll;
-}
-@media (max-width: 680px){
-  .procedure-comment-contents, .review-contents {
-    display: none;
-  }
-}
-
-.procedure-comments-index, .reviews-index {
-  width: 700px;
-  height: 290px;
-  background-color: white;
-  overflow: scroll;
-  padding: 5px;
-}
-
-.procedure-comment, .review {
-  margin-bottom: 5px;
-  background-color: #e6e6fa;
-  border-radius: 10px;
-  padding: 0 5px;
-}
-
-.pro-comment-header, .review-header {
-  border-bottom: 1px solid #000000;
-}
-
-.comment-time, .review-time {
-  margin-left: 20px;
-  font-size: 12px;
-}
-
-.pro-comment-text, .review-text {
-  word-wrap: break-word;
-}
-
-.pro-comment-form, .review-form {
-  display: flex;
-  margin-top: 3px;
-}
-
-.comment-submit, .review-submit {
-  width: 80%;
-}
-
-.field_with_errors {
-  display: contents;
-}
-
-.comment-submit-btn, .review-submit-btn {
-  padding: 0 3px;
-  margin-left: 3px;
 }
 
 .procedure-create {

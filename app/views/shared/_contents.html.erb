@@ -1,24 +1,8 @@
 <div class="mypage-item">
   <div class="mypage-item-header">
     <%= link_to manual.title, manual_path(manual), class: "mypage-title" %>
-    <ul>
-      <li>#<%= manual.category.name %></li>
-      <% if user_signed_in? && manual.user.id == current_user.id %>
-        <li class="show-release">
-          <% if manual.release.blank? %>
-            <%= link_to '一般公開する', manual_releases_path(manual), method: :post, class: "release-btn", data: {confirm: "一般公開すると全ユーザーから情報が閲覧可能になります。\n本当によろしいですか？"} %>
-          <% else %>
-            <%= link_to '非公開にする', manual_release_path(manual, manual.release.id), method: :delete, class: "release-btn" %>
-          <% end %>
-        </li>
-      <% end %>
-    </ul>
-    <% if user_signed_in? && manual.user.id == current_user.id %>
-      <ul>
-        <li><%= link_to '編集', edit_manual_path(manual) %></li>
-        <li><%= link_to '削除', manual_path(manual), method: :delete, data: {confirm: "本当に削除しますか？"} %></li>
-      </ul>
-    <% end %>
+
+    <%= render "shared/manual_action", manual: manual %>
   </div>
 
   <div class="mypage-image-content">
@@ -46,9 +30,13 @@
     <% end %>
   </div>
   <div class="mypage-description"><%= manual.description %></div>
-  <% if user_signed_in? && manual.user.id == current_user.id %>
-    <div class="mypage-manual-user">投稿者：あなたの投稿です</div>
-  <% else %>
-    <div class="mypage-manual-user">投稿者：<%= manual.user.nickname %></div>
-  <% end %>
+
+  <div class="mypage-content-footer">
+    <% if user_signed_in? && manual.user.id == current_user.id %>
+      <div class="mypage-manual-user">投稿者：あなたの投稿です</div>
+    <% else %>
+      <div class="mypage-manual-user">投稿者：<%= manual.user.nickname %></div>
+    <% end %>
+    <div class="mypage-category">#<%= manual.category.name %></div>
+  </div>
 </div>

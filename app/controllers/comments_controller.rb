@@ -7,7 +7,7 @@ class CommentsController < ApplicationController
   def create
     @procedure = @manual.procedures.find(params[:procedure_id])
     @comment = @procedure.comments.new(comment_params)
-    render json: { comment: @comment, user: current_user } if @comment.save
+    render json: { model: @comment, user: current_user } if @comment.save
   end
 
   def destroy

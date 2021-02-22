@@ -1,0 +1,12 @@
+<div class=<%= type %> style="" <%= type %>_id=<%= model.id %>>
+  <div class="<%= type %>-header">
+    <%= model.user.nickname %>
+    <span class="<%= type %>-time"><%= l model.created_at %></span>
+    <% if manual.user.id == current_user.id || model.user.id == current_user.id %>
+      <%= link_to '削除', path, method: :delete, id: "#{type}-delete#{model.id}" %>
+    <% else %>
+      <%= link_to '削除', path, method: :delete, id: "#{type}-delete#{model.id}", style: "display: none;" %>
+    <% end %>
+  </div>
+  <div class="<%= type %>-text"><%= model.content %></div>
+</div>

@@ -17,26 +17,16 @@ class ManualsController < ApplicationController
     converted_url = url.sub %r/data:((image|application)\/.{3,}),/, ''
 
     if url.blank? || url == converted_url
-      manual = Manual.new(manual_params)
+      @manual = Manual.new(manual_params)
     else
-      manual = Manual.new(manual_params_no_image)
-      decoded_url = Base64.decode64(converted_url)
-      filename = Time.zone.now.to_s + '.png'
-
-      if Rails.env == 'development'
-        # Local environment
-        manual.image_attach_local(manual, decoded_url, filename)
-      elsif Rails.env == 'production'
-        # Production environment
-        manual.image_attach_production(manual, decoded_url, filename)
-      end
+      @manual = Manual.new(manual_params_no_image)
+      @manual.image_attach(converted_url)
     end
 
-    if manual.save
+    if @manual.save
       @user = current_user
       redirect_to user_path(@user)
     else
-      @manual = manual
       render :new
     end
   end
@@ -52,32 +42,14 @@ class ManualsController < ApplicationController
   end
 
   def update
-    manual = @manual
     url = params[:manual][:image_url]
     converted_url = url.sub %r/data:((image|application)\/.{3,}),/, ''
 
     if url.blank? || url == converted_url
-      if manual.update(manual_params)
-        redirect_to manual_path(@manual)
-      else
-        redirect_to edit_manual_path(@manual)
-      end
+      move_page(manual_params)
     else
-      if manual.update(manual_params_no_image)
-        redirect_to manual_path(@manual)
-      else
-        redirect_to edit_manual_path(@manual)
-      end
-      decoded_url = Base64.decode64(converted_url)
-      filename = Time.zone.now.to_s + '.png'
-
-      if Rails.env == 'development'
-        # Local environment
-        manual.image_attach_local(manual, decoded_url, filename)
-      elsif Rails.env == 'production'
-        # Production environment
-        manual.image_attach_production(manual, decoded_url, filename)
-      end
+      move_page(manual_params_no_image)
+      @manual.image_attach(converted_url)
     end
   end
 
@@ -107,5 +79,13 @@ class ManualsController < ApplicationController
 
   def show_user_judge
     redirect_to root_path if @manual.release.blank? && (current_user.id != @manual.user.id)
+  end
+
+  def move_page(params_type)
+    if @manual.update(params_type)
+      redirect_to manual_path(@manual)
+    else
+      redirect_to edit_manual_path(@manual)
+    end
   end
 end

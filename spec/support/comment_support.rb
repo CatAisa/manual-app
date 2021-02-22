@@ -3,6 +3,7 @@ module CommentSupport
     # コメントに削除ボタンが存在する
     expect(page).to have_link('削除', href: manual_procedure_comment_path(manual, procedure, comment))
     # 削除ボタンをクリックすると、Commentモデルのカウントが1減少する
+    sleep 1
     expect {
       find_link('削除', href: manual_procedure_comment_path(manual, procedure, comment)).click
       sleep 1

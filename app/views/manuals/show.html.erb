@@ -8,19 +8,8 @@
       <li><%= link_to '手順を追加', new_manual_procedure_path(@manual), class: "procedure-create" %></li>
     <% end %>
   </ul>
-  <% if @manual.user.id == current_user.id %>
-    <div class="show-release">
-      <% if @manual.release.blank? %>
-        <%= link_to '一般公開する', manual_releases_path(@manual, @release), method: :post, class: "procedure-create", data: {confirm: "一般公開すると全ユーザーから情報が閲覧可能になります。\n本当によろしいですか？"} %>
-      <% else %>
-        <%= link_to '非公開にする', manual_release_path(@manual, @manual.release.id), method: :delete, class: "procedure-create" %>
-      <% end %>
-    </div>
-    <ul class="procedure-top-right">
-      <li><%= link_to '編集', edit_manual_path(@manual) %></li>
-      <li><%= link_to '削除', manual_path(@manual), method: :delete, data: {confirm: "本当に削除しますか？"} %></li>
-    </ul>
-  <% end %>
+
+  <%= render "shared/manual_action", manual: @manual %>
 </div>
 
 <div class="procedure-top-contents">
@@ -34,29 +23,13 @@
   </div>
 
   <div class="review-contents">
-    <div class="reviews-index">
+    <div class="review-index">
       <% @manual.reviews.each do |review| %>
-        <div class="review" style="" review_id=<%= review.id %>>
-          <div class="review-header">
-            <%= review.user.nickname %>
-            <span class="review-time"><%= l review.created_at %></span>
-            <% if @manual.user.id == current_user.id || review.user.id == current_user.id %>
-              <%= link_to '削除', manual_review_path(@manual, review), method: :delete, id: "review-delete#{review.id}" %>
-            <% else %>
-              <%= link_to '削除', manual_review_path(@manual, review), method: :delete, id: "review-delete#{review.id}", style: "display: none;" %>
-            <% end %>
-          </div>
-          <div class="review-text"><%= review.content %></div>
-        </div>
+        <%= render "shared/comment", {manual: @manual, model: review, type: 'review', path: manual_review_path(@manual, review)} %>
       <% end %>
       <div id="review-list"></div>
     </div>
-    <%= form_with model: @review, url: manual_reviews_path(@manual), id: "review-form", local: true do |f| %>
-      <div class="review-form">
-        <%= f.text_field :content, class: "review-submit", id: "review-text", placeholder: "  200文字以内" %>
-        <%= f.submit '送信', class: "review-submit-btn", id: "review-submit-btn", manual_id: @manual.id %>
-      </div>
-    <% end %>
+    <%= render "shared/comment_form", {manual: @manual, model: @review, type: 'review', path: manual_reviews_path(@manual), form_id: ''} %>
   </div>
 </div>
 
@@ -81,30 +54,14 @@
       <%= render "shared/image_content", model: procedure %>
     </div>
 
-    <div class="procedure-comment-contents">
-      <div class="procedure-comments-index">
+    <div class="comment-contents">
+      <div class="comment-index">
         <% procedure.comments.each do |comment| %>
-          <div class="procedure-comment" style="" comment_id=<%= comment.id %>>
-            <div class="pro-comment-header">
-              <%= comment.user.nickname %>
-              <span class="comment-time"><%= l comment.created_at %></span>
-              <% if @manual.user.id == current_user.id || comment.user.id == current_user.id %>
-                <%= link_to '削除', manual_procedure_comment_path(@manual, procedure, comment), method: :delete, id: "comment-delete#{comment.id}" %>
-              <% else %>
-                <%= link_to '削除', manual_procedure_comment_path(@manual, procedure, comment), method: :delete, id: "comment-delete#{comment.id}", style: "display: none;" %>
-              <% end %>
-            </div>
-            <div class="pro-comment-text"><%= comment.content %></div>
-          </div>
+          <%= render "shared/comment", {manual: @manual, procedure: procedure, model: comment, type: 'comment', path: manual_procedure_comment_path(@manual, procedure, comment)} %>
         <% end %>
-        <div id="list<%= procedure.id %>"></div>
+        <div id="comment-list<%= procedure.id %>"></div>
       </div>
-      <%= form_with model: @comment, url: manual_procedure_comments_path(@manual, procedure), id: "comment-form#{procedure.id}", local: true do |f| %>
-        <div class="pro-comment-form">
-          <%= f.text_field :content, class: "comment-submit", id: "comment-text#{procedure.id}", placeholder: "  200文字以内" %>
-          <%= f.submit '送信', class: "comment-submit-btn", manual_id: @manual.id, procedure_id: procedure.id %>
-        </div>
-      <% end %>
+      <%= render "shared/comment_form", {manual: @manual, procedure: procedure, model: @comment, type: 'comment', path: manual_procedure_comments_path(@manual, procedure), form_id: procedure.id} %>
     </div>
   </div>
 <% end %>

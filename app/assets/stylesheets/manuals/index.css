@@ -1,5 +1,4 @@
 .main-content {
-  /* height: calc(100vh - 120px - 80px); */
   display: flex;
   justify-content: center;
   padding: 30px;
@@ -24,14 +23,4 @@
   text-align: center;
   border-radius: 20px;
   background-color: #dcdcdc;
-}
-
-.release-btn {
-  font-size: 15px;
-  text-decoration: none;
-  color: #000000;
-  border: 1px solid #000000;
-  background-color: #dcdcdc;
-  white-space: nowrap;
-  padding: 3px;
 }

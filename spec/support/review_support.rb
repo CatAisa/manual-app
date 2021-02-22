@@ -3,6 +3,7 @@ module ReviewSupport
     # レビューに削除ボタンが存在する
     expect(page).to have_link('削除', href: manual_review_path(manual, review))
     # 削除ボタンをクリックすると、Reviewモデルのカウントが1減少する
+    sleep 1
     expect {
       find_link('削除', href: manual_review_path(manual, review)).click
       sleep 1
