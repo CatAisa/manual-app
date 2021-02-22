@@ -112,3 +112,70 @@ RSpec.describe 'ログイン、ログアウト', type: :system do
     end
   end
 end
+
+RSpec.describe 'ユーザー編集機能', type: :system do
+  before do
+    @user = FactoryBot.create(:user)
+    @another_nickname = '12345abcde'
+    @another_email = Faker::Internet.free_email
+    @another_password = '1234abcd'
+  end
+
+  context 'ユーザー編集ができるとき' do
+    it '正しい情報と現在のパスワードが入力されていれば編集できる' do
+      # ログインする
+      sign_in(@user)
+      # ユーザー編集画面に遷移するまで
+      move_useredit
+      # 正しい情報を入力する
+      input_user(@another_nickname, @another_email, @another_password)
+      # 現在のパスワードを入力する
+      fill_in 'user_current_password', with: @user.password
+      # 情報を送信しても、Userモデルのカウントは変化しない
+      expect {
+        find('input[name="commit"]').click
+      }.to change { User.count }.by(0)
+      # トップページに遷移する
+      expect(current_path).to eq(root_path)
+      # トップページに先ほど保存したユーザー名が表示されている
+      expect(page).to have_content('12345abcde')
+    end
+
+    it '変更予定のパスワードが空でも編集できる' do
+      # ログインする
+      sign_in(@user)
+      # ユーザー編集画面に遷移するまで
+      move_useredit
+      # 正しい情報を入力する
+      input_user(@another_nickname, @another_email, '')
+      # 現在のパスワードを入力する
+      fill_in 'user_current_password', with: @user.password
+      # 情報を送信しても、Userモデルのカウントは変化しない
+      expect {
+        find('input[name="commit"]').click
+      }.to change { User.count }.by(0)
+      # トップページに遷移する
+      expect(current_path).to eq(root_path)
+      # トップページに先ほど保存したユーザー名が表示されている
+      expect(page).to have_content('12345abcde')
+    end
+  end
+
+  context 'ユーザー編集ができないとき' do
+    it '誤った情報が入力されていると編集できない' do
+      
+    end
+
+    it '現在のパスワードが空だと編集できない' do
+      
+    end
+
+    it '変更後のパスワードが7文字以下だと保存できない' do
+      
+    end
+
+    it '変更後のパスワードが英数混合でないと保存できない' do
+      
+    end
+  end
+end

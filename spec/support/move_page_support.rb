@@ -38,4 +38,15 @@ module MovePageSupport
     # 遷移できずにトップページに戻ってくる
     expect(current_path).to eq(root_path)
   end
+
+  def move_useredit
+    # トップページにユーザー名が存在する
+    expect(page).to have_content('abcde12345')
+    # ユーザー編集画面へのリンクが存在する
+    expect(
+      find('span[class="user-item"]').hover
+    ).to have_link('編集', href: edit_user_registration_path)
+    # ユーザー編集画面に遷移する
+    visit edit_user_registration_path
+  end
 end
