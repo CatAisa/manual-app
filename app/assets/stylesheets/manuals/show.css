@@ -64,6 +64,26 @@
   }
 }
 
+.comment-contents, .review-contents {
+  margin: 10px 0 0 20px;
+  width: 100%;
+  height: 100%;
+  overflow: scroll;
+}
+@media (max-width: 680px){
+  .comment-contents, .review-contents {
+    display: none;
+  }
+}
+
+.comment-index, .review-index {
+  width: 700px;
+  height: 290px;
+  background-color: white;
+  overflow: scroll;
+  padding: 5px;
+}
+
 .procedure-contents {
   height: 330px;
   align-items: center;
