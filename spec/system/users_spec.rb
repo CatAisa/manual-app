@@ -183,15 +183,60 @@ RSpec.describe 'ユーザー編集機能', type: :system do
     end
 
     it '現在のパスワードが空だと編集できない' do
-      
+      # ログインする
+      sign_in(@user)
+      # ユーザー編集画面に遷移するまで
+      move_useredit
+      # 正しい情報を入力する
+      input_user(@another_nickname, @another_email, @another_password)
+      # 情報を送信しても、Userモデルのカウントは変化しない
+      expect {
+        find('input[name="commit"]').click
+      }.to change { User.count }.by(0)
+      # 編集ページに戻ってくる
+      expect(current_path).to eq('/users')
+      # 編集ページにエラー文が表示されている
+      expect(page).to have_content('現在のパスワードを入力してください')
     end
 
     it '変更後のパスワードが7文字以下だと保存できない' do
-      
+      # ログインする
+      sign_in(@user)
+      # ユーザー編集画面に遷移するまで
+      move_useredit
+      # 誤った情報を入力する
+      input_user(@another_nickname, @another_email, 'abc1234')
+      # 現在のパスワードを入力する
+      fill_in 'user_current_password', with: @user.password
+      # 情報を送信しても、Userモデルのカウントは変化しない
+      expect {
+        find('input[name="commit"]').click
+      }.to change { User.count }.by(0)
+      # 編集ページに戻ってくる
+      expect(current_path).to eq('/users')
+      # 編集ページにエラー文が表示されている
+      expect(page).to have_content('パスワードは8文字以上で入力してください')
+      expect(page).to have_no_content('パスワードは半角英字と半角数字の両方を含んでください')
     end
 
     it '変更後のパスワードが英数混合でないと保存できない' do
-      
+      # ログインする
+      sign_in(@user)
+      # ユーザー編集画面に遷移するまで
+      move_useredit
+      # 誤った情報を入力する
+      input_user(@another_nickname, @another_email, '12345678')
+      # 現在のパスワードを入力する
+      fill_in 'user_current_password', with: @user.password
+      # 情報を送信しても、Userモデルのカウントは変化しない
+      expect {
+        find('input[name="commit"]').click
+      }.to change { User.count }.by(0)
+      # 編集ページに戻ってくる
+      expect(current_path).to eq('/users')
+      # 編集ページにエラー文が表示されている
+      expect(page).to have_no_content('パスワードは8文字以上で入力してください')
+      expect(page).to have_content('パスワードは半角英字と半角数字の両方を含んでください')
     end
   end
 end
