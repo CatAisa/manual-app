@@ -163,7 +163,23 @@ RSpec.describe 'ユーザー編集機能', type: :system do
 
   context 'ユーザー編集ができないとき' do
     it '誤った情報が入力されていると編集できない' do
-      
+      # ログインする
+      sign_in(@user)
+      # ユーザー編集画面に遷移するまで
+      move_useredit
+      # 誤った情報を入力する
+      input_user('', '', '')
+      # 現在のパスワードを入力する
+      fill_in 'user_current_password', with: @user.password
+      # 情報を送信しても、Userモデルのカウントは変化しない
+      expect {
+        find('input[name="commit"]').click
+      }.to change { User.count }.by(0)
+      # 編集ページに戻ってくる
+      expect(current_path).to eq('/users')
+      # 編集ページにエラー文が表示されている
+      expect(page).to have_content('Eメールを入力してください')
+      expect(page).to have_content('ニックネームを入力してください')
     end
 
     it '現在のパスワードが空だと編集できない' do
