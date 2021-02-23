@@ -24,7 +24,11 @@ class ReviewsController < ApplicationController
   end
 
   def review_find
-    @review = Review.find(params[:id])
+    if Review.exists?(id: params[:id])
+      @review = Review.find(params[:id])
+    else
+      redirect_to manual_path(@manual)
+    end
   end
 
   def user_judge

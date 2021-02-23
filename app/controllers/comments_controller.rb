@@ -26,7 +26,11 @@ class CommentsController < ApplicationController
   end
 
   def comment_find
-    @comment = Comment.find(params[:id])
+    if Comment.exists?(id: params[:id])
+      @comment = Comment.find(params[:id])
+    else
+      redirect_to manual_path(@manual)
+    end
   end
 
   def user_judge
