@@ -37,11 +37,18 @@ function commentPost(submit, procedureId, path, type) {
       const list = document.getElementById(listId);
       const modelId = `${model.id}`;
       const formText = document.getElementById(textId);
+      const date = new Date();
+      const year = ('0' + date.getFullYear()).slice(-2);
+      const month = ('0' + (date.getMonth() + 1)).slice(-2);
+      const day = ('0' + date.getDate()).slice(-2);
+      const hours = ('0' + date.getHours()).slice(-2);
+      const minutes = ('0' + date.getMinutes()).slice(-2);
+
       const HTML = `
         <div class="${type}" style="" ${type}_id=${model.id}>
           <div class="${type}-header">
             ${user.nickname}
-            <span class="${type}-time">${model.created_at}</span>
+            <span class="${type}-time">'${year}.${month}.${day} ${hours}:${minutes}</span>
             <a rel ="nofollow" data-method="delete" href="${path}/${modelId}" id="${type}-delete${model.id}">削除</a>
           </div>
           <div class="${type}-text">${model.content}</div>
