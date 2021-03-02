@@ -23,4 +23,8 @@
       <%= f.submit "ユーザー情報送信", class: "new-submit-btn" %>
     </div>
   <% end %>
+
+  <div class="guest-border"></div>
+  <%= link_to 'ゲスト１でログイン', users_guest_sign_in_path(guest_id: 1), method: :post, class: "guest-user" %>
+  <%= link_to 'ゲスト２でログイン', users_guest_sign_in_path(guest_id: 2), method: :post, class: "guest-user" %>
 </div>
