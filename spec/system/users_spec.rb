@@ -69,12 +69,8 @@ RSpec.describe 'ログイン、ログアウト', type: :system do
 
   context 'ログインができるとき' do
     it '登録済みのユーザー情報ならばログインできて、トップページに遷移する' do
-      # トップページに遷移する
-      visit root_path
-      # ログインボタンが存在する
-      expect(page).to have_content('ログイン')
-      # ログインページに遷移する
-      visit new_user_session_path
+      # ログインページに移動するまで
+      move_login
       # 正しいユーザー情報を入力する
       fill_in 'user_email', with: @user.email
       fill_in 'user_password', with: @user.password

@@ -49,4 +49,13 @@ module MovePageSupport
     # ユーザー編集画面に遷移する
     visit edit_user_registration_path
   end
+
+  def move_login
+    # トップページに遷移する
+    visit root_path
+    # ログインボタンが存在する
+    expect(page).to have_content('ログイン')
+    # ログインページに遷移する
+    visit new_user_session_path
+  end
 end
