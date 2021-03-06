@@ -42,10 +42,20 @@ function canvasTitle() {
     image.onload = () => {
       const iw = image.width;
       const iv = image.height;
-      const apCrop = cw / iw;
-      const ap = ow / iw;
-      ctxCrop.drawImage(image, 0, 0, cw, apCrop*iv);
-      ctx.drawImage(image, 0, 0, ow, ap*iv);
+      let apCrop = 0;
+      let ap = 0;
+
+      if (iw >= iv) {
+        apCrop = cw / iw;
+        ap = ow / iw;
+        ctxCrop.drawImage(image, 0, 0, cw, apCrop*iv);
+        ctx.drawImage(image, 0, 0, ow, ap*iv);
+      } else {
+        apCrop = cv / iv;
+        ap = ov / iv;
+        ctxCrop.drawImage(image, 0, 0, apCrop*iw, cv);
+        ctx.drawImage(image, 0, 0, ap*iw, ov);
+      };
 
       cnvRed.addEventListener("mousedown", (e) => {
         clickFig = 1;
