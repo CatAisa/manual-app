@@ -51,8 +51,7 @@ URL(http://35.72.86.251/)
 - 画像加工機能（投稿時）
   - プレビュー表示
   - トリミング<br />
-<img width="300" alt="トリミング" src="https://user-images.githubusercontent.com/73692212/110199612-879ad000-7e9c-11eb-9389-292d06679405.png">
-
+<img width="300" alt="トリミング" src="https://user-images.githubusercontent.com/73692212/110199612-879ad000-7e9c-11eb-9389-292d06679405.png"><br />
   - お絵かき機能
 
 <img width="300" alt="お絵かき" src="https://user-images.githubusercontent.com/73692212/110199618-908ba180-7e9c-11eb-90a1-6f9bda14dac1.png">
